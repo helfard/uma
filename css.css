@@ -1,0 +1,12 @@
+th, .nowrap {
+    white-space: nowrap;
+}
+.border-top {
+    border-top: solid 2px #ddd;
+}
+.border-bottom {
+    border-bottom: solid 2px #ddd;
+}
+.fold {
+    display: none;
+}

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <link rel="stylesheet" href="bulma.min.css">
+    <link rel="stylesheet" href="css.css">
+    <script src="vue.min.js"></script>
+</head>
+
+<body>
+
+<section class="container" id="list">
+    <section class="box id-narrow">
+        <h2 class="subtitle"><a @click="fold('search')">検索条件</a></h2>
+        <table v-show="!foldOptions.search" class="table is-narrow is-striped">
+            <tr>
+                <th class="has-text-right">
+                    <a @click="checkAll('grades')">グレード</a>
+                </th>
+                <td>
+                    <label v-for="value in grades" class="checkbox">
+                        <input type="checkbox" :value="value" v-model="checkedButtons.grades"> {{ value }}　
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th class="has-text-right">
+                    <a @click="checkAll('locations')">競技場</a>
+                </th>
+                <td>
+                    <label v-for="value in locations" class="checkbox">
+                        <input type="checkbox" :value="value" v-model="checkedButtons.locations"> {{ value }}　
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th class="has-text-right">
+                    <a @click="checkAll('grounds')">地面</a>
+                </th>
+                <td>
+                    <label v-for="value in grounds" class="checkbox">
+                        <input type="checkbox" :value="value" v-model="checkedButtons.grounds"> {{ value }}　
+                    </label>            
+                </td>
+            </tr>
+            <tr>
+                <th class="has-text-right">
+                    <a @click="checkAll('ranges')">距離</a>
+                </th>
+                <td>
+                    <label v-for="value in ranges" class="checkbox">
+                        <input type="checkbox" :value="value" v-model="checkedButtons.ranges"> {{ value }}　
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th class="has-text-right">
+                    <a @click="checkAll('rotations')">左右</a>
+                </th>
+                <td>
+                    <label v-for="value in rotations" class="checkbox">
+                        <input type="checkbox" :value="value" v-model="checkedButtons.rotations"> {{ value }}　
+                    </label>
+                </td>
+            </tr>
+        </table>
+    </section>
+
+    <section class="box">
+        <h2 class="subtitle"><a @click="fold('result')">表示項目</a></h2>
+        <table v-show="!foldOptions.result" class="table is-narrow is-striped">
+            <tr>
+                <th class="has-text-right">
+                    <a @click="changeDisplayMode('classes')">ターン</a>
+                </th>
+                <td>
+                    <label v-for="(value, index) in displayOptions.turns" class="radio">
+                        <input type="radio" :value="index" v-model="displayMode.turns"> {{ value }}　
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th class="has-text-right">
+                    <a @click="changeDisplayMode('classes')">級</a>
+                </th>
+                <td>
+                    <label v-for="(value, index) in displayOptions.classes" class="radio">
+                        <input type="radio" :value="index" v-model="displayMode.classes"> {{ value }}　
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th class="has-text-right">
+                    <a @click="changeDisplayMode('months')">月</a>
+                </th>
+                <td>
+                    <label v-for="(value, index) in displayOptions.months" class="radio">
+                        <input type="radio" :value="index" v-model="displayMode.months"> {{ value }}　
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th class="has-text-right">
+                    <a @click="changeDisplayMode('names')">名前</a>
+                </th>
+                <td>
+                    <label v-for="(value, index) in displayOptions.names" class="radio">
+                        <input type="radio" :value="index" v-model="displayMode.names"> {{ value }}　
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th class="has-text-right">
+                    <a @click="changeDisplayMode('grades')">グレード</a>
+                </th>
+                <td>
+                    <label v-for="(value, index) in displayOptions.grades" class="radio">
+                        <input type="radio" :value="index" v-model="displayMode.grades"> {{ value }}　
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th class="has-text-right">
+                    <a @click="changeDisplayMode('locations')">競技場</a>
+                </th>
+                <td>
+                    <label v-for="(value, index) in displayOptions.locations" class="radio">
+                        <input type="radio" :value="index" v-model="displayMode.locations"> {{ value }}　
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th class="has-text-right">
+                    <a @click="changeDisplayMode('grounds')">地面</a>
+                </th>
+                <td>
+                    <label v-for="(value, index) in displayOptions.grounds" class="radio">
+                        <input type="radio" :value="index" v-model="displayMode.grounds"> {{ value }}　
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th class="has-text-right">
+                    <a @click="changeDisplayMode('distanses')">距離</a>
+                </th>
+                <td>
+                    <label v-for="(value, index) in displayOptions.distanses" class="radio">
+                        <input type="radio" :value="index" v-model="displayMode.distanses"> {{ value }}　
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th class="has-text-right">
+                    <a @click="changeDisplayMode('rotations')">左右</a>
+                </th>
+                <td>
+                    <label v-for="(value, index) in displayOptions.rotations" class="radio">
+                        <input type="radio" :value="index" v-model="displayMode.rotations"> {{ value }}　
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th class="has-text-right">
+                    <a @click="changeDisplayMode('fullgates')">枠</a>
+                </th>
+                <td>
+                    <label v-for="(value, index) in displayOptions.fullgates" class="radio">
+                        <input type="radio" :value="index" v-model="displayMode.fullgates"> {{ value }}　
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th class="has-text-right">
+                    <a @click="changeDisplayMode('requires')">出走条件</a>
+                </th>
+                <td>
+                    <label v-for="(value, index) in displayOptions.requires" class="radio">
+                        <input type="radio" :value="index" v-model="displayMode.requires"> {{ value }}　
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th class="has-text-right">
+                    <a @click="changeDisplayMode('rewardss')">ファン獲得数</a>
+                </th>
+                <td>
+                    <label v-for="(value, index) in displayOptions.rewardss" class="radio">
+                        <input type="radio" :value="index" v-model="displayMode.rewardss"> {{ value }}　
+                    </label>
+                </td>
+            </tr>
+        </table>
+    </section>
+
+    <section class="box">
+        <h2 class="subtitle"><a @click="fold('config')">その他設定</a></h2>
+        <table v-show="!foldOptions.config" class="table is-narrow is-striped">
+            <tr>
+                <th class="has-text-right">
+                    ウマ娘
+                </th>
+                <td>
+                    <label class="checkbox">
+                        <input type="checkbox" v-model="displayOptions.objective"> 
+                        <select v-model="displayOptions.character">
+                            <option>ダイワスカーレット</option>
+                            <option>シンボリルドルフ</option>
+                            <option>サクラバクシンオー</option>
+                            <option>マヤノトップガン</option>
+                        </select>
+                        の目標レース・推奨レースを強調表示<br>
+                        　→ <a @click="">予定表に一括入力</a>
+                    </label>
+        
+                </td>
+            </tr>
+            <tr>
+                <th class="has-text-right">
+                    その他
+                </th>
+                <td>
+                    <label class="checkbox">
+                        <input type="checkbox" v-model="displayOptions.colorful"> レースのグレード・距離に応じて文字色を変更
+                    </label><br>
+                    <label class="checkbox">
+                        <input type="checkbox" v-model="displayOptions.smart"> 級・月をすっきり表示
+                    </label>        
+                </td>
+            </tr>
+        </table>
+    </section>
+
+
+    <section class="box">
+        <h2 class="subtitle"><a @click="fold('schedule')">予定表</a></h2>
+        <div v-show="!foldOptions.schedule">
+
+            <label>
+                <input type="checkbox" v-model="displayOptions.empty">レースが無い月も空行を表示
+            </label><br>
+            <div class="table-container nowrap">
+                <table class="table is-narrow is-hoverable">
+                    <thead>
+                        <tr>
+                            <th class="has-text-centered" v-show="DEBUG">ID</th>
+                            <th class="has-text-centered" v-show="!displayMode.turns">ｔ</th>
+                            <th class="has-text-centered" v-show="races[0].classes[displayMode.classes]">
+                                <span v-if="displayMode.classes <= 2">級</span>
+                                <span v-else>年</span>
+                            </th>
+                            <th class="has-text-centered" v-show="races[0].months[displayMode.months]">月</th>
+                            <th class="has-text-centered" v-show="races[0].names[displayMode.names]">名前</th>
+                            <th class="has-text-centered" v-show="races[0].grades[displayMode.grades]">
+                                <span v-if="displayMode.grades === 0">グレード</span>
+                                <span v-else>Ｇ</span>
+                            </th>
+                            <th class="has-text-centered" v-show="races[0].locations[displayMode.locations]">
+                                <span v-if="displayMode.locations === 0">競技場</span>
+                                <span v-else>会場</span>
+                            </th>
+                            <th class="has-text-centered" v-show="races[0].grounds[displayMode.grounds]">
+                                <span v-if="displayMode.grounds <= 1">地面</span>
+                                <span v-else>地</span>
+                            </th>
+                            <th class="has-text-centered" v-show="races[0].distanses[displayMode.distanses]">
+                                <span v-if="displayMode.distanses <= 3">距離</span>
+                                <span v-else>距</span>
+                            </th>
+                            <th class="has-text-centered" v-show="races[0].rotations[displayMode.rotations]">
+                                <span v-if="displayMode.rotations === 0">左右</span>
+                                <span v-else>向</span>
+                            </th>
+                            <th class="has-text-centered" v-show="races[0].fullgates[displayMode.fullgates]">枠</th>
+                            <th class="has-text-centered" v-show="races[0].requires[displayMode.requires]">条件</th>
+                            <th class="has-text-centered" v-show="races[0].rewardss[displayMode.rewardss][0]">1位</th>
+                            <th class="has-text-centered" v-show="races[0].rewardss[displayMode.rewardss][1]">2位</th>
+                            <th class="has-text-centered" v-show="races[0].rewardss[displayMode.rewardss][2]">3位</th>
+                            <th class="has-text-centered" v-show="races[0].rewardss[displayMode.rewardss][3]">4位</th>
+                            <th class="has-text-centered" v-show="races[0].rewardss[displayMode.rewardss][4]">5位</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td :colspan="colspans[0]" class="has-text-centered" v-show="!checkedRaces.length">
+                                レース一覧からクリックすると予定表に入ります。
+                            </td>
+                        </tr>
+                        <template v-for="(months, mindex) in calendar">
+                            <template v-for="(periods, pindex) in months">
+                                <tr v-for="(id, iindex) in periods" :class="{
+                                    'border-top': iindex === 0,
+                                    'border-bottom': iindex === periods.length - 1
+                                }" v-show="checkedRaces.includes(id)" @click="uncheckRace(id)">
+                                    <td class="has-text-right" v-show="DEBUG">{{ id }}</td>
+                                    <td class="has-text-right" v-show="!displayMode.turns">
+                                        <span v-show="!(displayOptions.smart
+                                            && checkedRaces.indexOf(id) > 0
+                                            && races[id].months[displayMode.months] === races[checkedRaces[checkedRaces.indexOf(id) - 1]].months[displayMode.months])
+                                        ">{{ mindex * 2 + pindex + 1 }}</span>
+                                    </td>
+                                    <td class="has-text-centered" v-show="races[0].classes[displayMode.classes]">
+                                        <span v-show="!(displayOptions.smart
+                                        && checkedRaces.indexOf(id) > 0
+                                        && races[id].months[displayMode.months] === races[checkedRaces[checkedRaces.indexOf(id) - 1]].months[displayMode.months])
+                                    ">{{ races[id].classes[displayMode.classes] }}</span>
+                                    </td>
+                                    <td class="has-text-right" v-show="races[0].months[displayMode.months]">
+                                        <span v-show="!(displayOptions.smart
+                                        && checkedRaces.indexOf(id) > 0
+                                        && races[id].months[displayMode.months] === races[checkedRaces[checkedRaces.indexOf(id) - 1]].months[displayMode.months])
+                                    ">{{ races[id].months[displayMode.months] }}</span>
+                                    </td>
+                                    <td class="has-text-centered" v-show="races[0].names[displayMode.names]">{{ races[id].names[displayMode.names] }}</td>
+                                    <td class="has-text-centered" v-show="races[0].grades[displayMode.grades]">{{ races[id].grades[displayMode.grades] }}</td>
+                                    <td class="has-text-centered" v-show="races[0].locations[displayMode.locations]">{{ races[id].locations[displayMode.locations] }}</td>
+                                    <td class="has-text-centered" v-show="races[0].grounds[displayMode.grounds]">{{ races[id].grounds[displayMode.grounds] }}</td>
+                                    <td :class="{
+                                        'has-text-right': displayMode.distanses < 3,
+                                        'has-text-centered': displayMode.distanses >= 3
+                                    }" v-show="races[0].distanses[displayMode.distanses]">{{ races[id].distanses[displayMode.distanses] }}</td>
+                                    <td class="has-text-centered" v-show="races[0].rotations[displayMode.rotations]">{{ races[id].rotations[displayMode.rotations] }}</td>
+                                    <td class="has-text-right" v-show="races[0].fullgates[displayMode.fullgates]">{{ races[id].fullgates[displayMode.fullgates] }}</td>
+                                    <td class="has-text-right" v-show="races[0].requires[displayMode.requires]">{{ races[id].requires[displayMode.requires] }}</td>
+                                    <td class="has-text-right" v-show="races[0].rewardss[displayMode.rewardss][0]">{{ races[id].rewardss[displayMode.rewardss][0] }}</td>
+                                    <td class="has-text-right" v-show="races[0].rewardss[displayMode.rewardss][1]">{{ races[id].rewardss[displayMode.rewardss][1] }}</td>
+                                    <td class="has-text-right" v-show="races[0].rewardss[displayMode.rewardss][2]">{{ races[id].rewardss[displayMode.rewardss][2] }}</td>
+                                    <td class="has-text-right" v-show="races[0].rewardss[displayMode.rewardss][3]">{{ races[id].rewardss[displayMode.rewardss][3] }}</td>
+                                    <td class="has-text-right" v-show="races[0].rewardss[displayMode.rewardss][4]">{{ races[id].rewardss[displayMode.rewardss][4] }}</td>
+                                </tr>
+                                <tr class="border-top border-bottom" v-show="displayOptions.empty && !periods.some(id => checkedRaces.includes(id))">
+                                    <td v-show="DEBUG"></td>
+                                    <td class="has-text-right" v-show="!displayMode.turns">{{ mindex * 2 + pindex + 1 }}</td>
+                                    <td class="has-text-centered" v-show="races[0].classes[displayMode.classes] && mindex < 6">
+                                        <span v-show="displayMode.classes === 0">ジュニア</span>
+                                        <span v-show="displayMode.classes === 1">ｼﾞｭﾆｱ</span>
+                                        <span v-show="displayMode.classes === 2">J</span>
+                                    </td>
+                                    <td class="has-text-centered" v-show="races[0].classes[displayMode.classes]  && 6 <= mindex && mindex < 18">
+                                        <span v-show="displayMode.classes === 0">クラシック</span>
+                                        <span v-show="displayMode.classes === 1">ｸﾗｼｯｸ</span>
+                                        <span v-show="displayMode.classes === 2">C</span>
+                                    </td>
+                                    <td class="has-text-centered" v-show="races[0].classes[displayMode.classes] && 18 <= mindex">
+                                        <span v-show="displayMode.classes === 0">シニア</span>
+                                        <span v-show="displayMode.classes === 1">ｼﾆｱ</span>
+                                        <span v-show="displayMode.classes === 2">S</span>
+                                    </td>
+                                    <td class="has-text-right" v-show="races[0].months[displayMode.months] && mindex < 6">
+                                        {{ mindex + 7 }}<span v-show="displayMode.months === 0">月</span>
+                                        {{ !pindex ? '前' : '後' }}<span v-show="displayMode.months === 0">半</span>
+                                    </td>
+                                    <td class="has-text-right" v-show="races[0].months[displayMode.months] && 6 <= mindex && mindex < 18">
+                                        {{ mindex - 5 }}<span v-show="displayMode.months === 0">月</span>
+                                        {{ !pindex ? '前' : '後' }}<span v-show="displayMode.months === 0">半</span>
+                                    </td>
+                                    <td class="has-text-right" v-show="races[0].months[displayMode.months] && 18 <= mindex">
+                                        {{ mindex - 17 }}<span v-show="displayMode.months === 0">月</span>
+                                        {{ !pindex ? '前' : '後' }}<span v-show="displayMode.months === 0">半</span>
+                                    </td>
+                                    <td :colspan="colspans[1]" v-show="colspans[1]"></td>
+                                </tr>
+                            </template>
+                        </template>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th class="has-text-centered" v-show="DEBUG">ID</th>
+                            <th class="has-text-centered" v-show="!displayMode.turns">ｔ</th>
+                            <th class="has-text-centered" v-show="races[0].classes[displayMode.classes]">
+                                <span v-if="displayMode.classes <= 2">級</span>
+                                <span v-else>年</span>
+                            </th>
+                            <th class="has-text-centered" v-show="races[0].months[displayMode.months]">月</th>
+                            <th class="has-text-centered" v-show="races[0].names[displayMode.names]">名前</th>
+                            <th class="has-text-centered" v-show="races[0].grades[displayMode.grades]">
+                                <span v-if="displayMode.grades === 0">グレード</span>
+                                <span v-else>Ｇ</span>
+                            </th>
+                            <th class="has-text-centered" v-show="races[0].locations[displayMode.locations]">
+                                <span v-if="displayMode.locations === 0">競技場</span>
+                                <span v-else>会場</span>
+                            </th>
+                            <th class="has-text-centered" v-show="races[0].grounds[displayMode.grounds]">
+                                <span v-if="displayMode.grounds <= 1">地面</span>
+                                <span v-else>地</span>
+                            </th>
+                            <th class="has-text-centered" v-show="races[0].distanses[displayMode.distanses]">
+                                <span v-if="displayMode.distanses <= 3">距離</span>
+                                <span v-else>距</span>
+                            </th>
+                            <th class="has-text-centered" v-show="races[0].rotations[displayMode.rotations]">
+                                <span v-if="displayMode.rotations === 0">左右</span>
+                                <span v-else>向</span>
+                            </th>
+                            <th class="has-text-centered" v-show="races[0].fullgates[displayMode.fullgates]">枠</th>
+                            <th class="has-text-centered" v-show="races[0].requires[displayMode.requires]">条件</th>
+                            <th class="has-text-centered" v-show="races[0].rewardss[displayMode.rewardss][0]">1位</th>
+                            <th class="has-text-centered" v-show="races[0].rewardss[displayMode.rewardss][1]">2位</th>
+                            <th class="has-text-centered" v-show="races[0].rewardss[displayMode.rewardss][2]">3位</th>
+                            <th class="has-text-centered" v-show="races[0].rewardss[displayMode.rewardss][3]">4位</th>
+                            <th class="has-text-centered" v-show="races[0].rewardss[displayMode.rewardss][4]">5位</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="box">
+        <h2 class="subtitle"><a @click="fold('list')">レース一覧</a></h2>
+        <div class="table-container nowrap">
+            <table class="table is-narrow is-hoverable" v-show="!foldOptions.list">
+                <thead>
+                    <tr>
+                        <th class="has-text-centered" v-show="DEBUG">ID</th>
+                        <th class="has-text-centered" v-show="!displayMode.turns">ｔ</th>
+                        <th class="has-text-centered" v-show="races[0].classes[displayMode.classes]">
+                            <span v-if="displayMode.classes <= 2">級</span>
+                            <span v-else>年</span>
+                        </th>
+                        <th class="has-text-centered" v-show="races[0].months[displayMode.months]">月</th>
+                        <th class="has-text-centered" v-show="races[0].names[displayMode.names]">名前</th>
+                        <th class="has-text-centered" v-show="races[0].grades[displayMode.grades]">
+                            <span v-if="displayMode.grades === 0">グレード</span>
+                            <span v-else>Ｇ</span>
+                        </th>
+                        <th class="has-text-centered" v-show="races[0].locations[displayMode.locations]">
+                            <span v-if="displayMode.locations === 0">競技場</span>
+                            <span v-else>会場</span>
+                        </th>
+                        <th class="has-text-centered" v-show="races[0].grounds[displayMode.grounds]">
+                            <span v-if="displayMode.grounds <= 1">地面</span>
+                            <span v-else>地</span>
+                        </th>
+                        <th class="has-text-centered" v-show="races[0].distanses[displayMode.distanses]">
+                            <span v-if="displayMode.distanses <= 3">距離</span>
+                            <span v-else>距</span>
+                        </th>
+                        <th class="has-text-centered" v-show="races[0].rotations[displayMode.rotations]">
+                            <span v-if="displayMode.rotations === 0">左右</span>
+                            <span v-else>向</span>
+                        </th>
+                        <th class="has-text-centered" v-show="races[0].fullgates[displayMode.fullgates]">枠</th>
+                        <th class="has-text-centered" v-show="races[0].requires[displayMode.requires]">条件</th>
+                        <th class="has-text-centered" v-show="races[0].rewardss[displayMode.rewardss][0]">1位</th>
+                        <th class="has-text-centered" v-show="races[0].rewardss[displayMode.rewardss][1]">2位</th>
+                        <th class="has-text-centered" v-show="races[0].rewardss[displayMode.rewardss][2]">3位</th>
+                        <th class="has-text-centered" v-show="races[0].rewardss[displayMode.rewardss][3]">4位</th>
+                        <th class="has-text-centered" v-show="races[0].rewardss[displayMode.rewardss][4]">5位</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template v-for="(months, mindex) in results">
+                        <template v-for="(periods, pindex) in months">
+                            <tr v-for="(id, iindex) in periods" :class="{
+                                'border-top': iindex === 0,
+                                'border-bottom': iindex === periods.length - 1
+                            }" v-show="1" @click="checkRace(id)">
+                                <td class="has-text-right" v-show="DEBUG">{{ id }}</td>
+                                <td class="has-text-right" v-show="!displayMode.turns">
+                                    <span v-show="!(displayOptions.smart && iindex)">{{ mindex * 2 + pindex + 1 }}</span>
+                                </td>
+                                <td class="has-text-centered" v-show="races[0].classes[displayMode.classes]">
+                                    <span v-show="!(displayOptions.smart && iindex)">{{ races[id].classes[displayMode.classes] }}</span>
+                                </td>
+                                <td class="has-text-right" v-show="races[0].months[displayMode.months]">
+                                    <span v-show="!(displayOptions.smart && iindex)">{{ races[id].months[displayMode.months] }}</span>
+                                </td>
+                                <td class="has-text-centered" v-show="races[0].names[displayMode.names]">{{ races[id].names[displayMode.names] }}</td>
+                                <td class="has-text-centered" v-show="races[0].grades[displayMode.grades]">{{ races[id].grades[displayMode.grades] }}</td>
+                                <td class="has-text-centered" v-show="races[0].locations[displayMode.locations]">{{ races[id].locations[displayMode.locations] }}</td>
+                                <td class="has-text-centered" v-show="races[0].grounds[displayMode.grounds]">{{ races[id].grounds[displayMode.grounds] }}</td>
+                                <td :class="{
+                                    'has-text-right': displayMode.distanses < 3,
+                                    'has-text-centered': displayMode.distanses >= 3
+                                }" v-show="races[0].distanses[displayMode.distanses]">{{ races[id].distanses[displayMode.distanses] }}</td>
+                                <td class="has-text-centered" v-show="races[0].rotations[displayMode.rotations]">{{ races[id].rotations[displayMode.rotations] }}</td>
+                                <td class="has-text-right" v-show="races[0].fullgates[displayMode.fullgates]">{{ races[id].fullgates[displayMode.fullgates] }}</td>
+                                <td class="has-text-right" v-show="races[0].requires[displayMode.requires]">{{ races[id].requires[displayMode.requires] }}</td>
+                                <td class="has-text-right" v-show="races[0].rewardss[displayMode.rewardss][0]">{{ races[id].rewardss[displayMode.rewardss][0] }}</td>
+                                <td class="has-text-right" v-show="races[0].rewardss[displayMode.rewardss][1]">{{ races[id].rewardss[displayMode.rewardss][1] }}</td>
+                                <td class="has-text-right" v-show="races[0].rewardss[displayMode.rewardss][2]">{{ races[id].rewardss[displayMode.rewardss][2] }}</td>
+                                <td class="has-text-right" v-show="races[0].rewardss[displayMode.rewardss][3]">{{ races[id].rewardss[displayMode.rewardss][3] }}</td>
+                                <td class="has-text-right" v-show="races[0].rewardss[displayMode.rewardss][4]">{{ races[id].rewardss[displayMode.rewardss][4] }}</td>
+                            </tr>
+                        </template>
+                    </template>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th class="has-text-centered" v-show="DEBUG">ID</th>
+                        <th class="has-text-centered" v-show="!displayMode.turns">ｔ</th>
+                        <th class="has-text-centered" v-show="races[0].classes[displayMode.classes]">
+                            <span v-if="displayMode.classes <= 2">級</span>
+                            <span v-else>年</span>
+                        </th>
+                        <th class="has-text-centered" v-show="races[0].months[displayMode.months]">月</th>
+                        <th class="has-text-centered" v-show="races[0].names[displayMode.names]">名前</th>
+                        <th class="has-text-centered" v-show="races[0].grades[displayMode.grades]">
+                            <span v-if="displayMode.grades === 0">グレード</span>
+                            <span v-else>Ｇ</span>
+                        </th>
+                        <th class="has-text-centered" v-show="races[0].locations[displayMode.locations]">
+                            <span v-if="displayMode.locations === 0">競技場</span>
+                            <span v-else>会場</span>
+                        </th>
+                        <th class="has-text-centered" v-show="races[0].grounds[displayMode.grounds]">
+                            <span v-if="displayMode.grounds <= 1">地面</span>
+                            <span v-else>地</span>
+                        </th>
+                        <th class="has-text-centered" v-show="races[0].distanses[displayMode.distanses]">
+                            <span v-if="displayMode.distanses <= 3">距離</span>
+                            <span v-else>距</span>
+                        </th>
+                        <th class="has-text-centered" v-show="races[0].rotations[displayMode.rotations]">
+                            <span v-if="displayMode.rotations === 0">左右</span>
+                            <span v-else>向</span>
+                        </th>
+                        <th class="has-text-centered" v-show="races[0].fullgates[displayMode.fullgates]">枠</th>
+                        <th class="has-text-centered" v-show="races[0].requires[displayMode.requires]">条件</th>
+                        <th class="has-text-centered" v-show="races[0].rewardss[displayMode.rewardss][0]">1位</th>
+                        <th class="has-text-centered" v-show="races[0].rewardss[displayMode.rewardss][1]">2位</th>
+                        <th class="has-text-centered" v-show="races[0].rewardss[displayMode.rewardss][2]">3位</th>
+                        <th class="has-text-centered" v-show="races[0].rewardss[displayMode.rewardss][3]">4位</th>
+                        <th class="has-text-centered" v-show="races[0].rewardss[displayMode.rewardss][4]">5位</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </section>
+
+</section>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>

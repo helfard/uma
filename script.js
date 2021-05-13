@@ -1,5 +1,23 @@
 const DEBUG = true;
 
+const execCopy = string => {
+    // 任意の文字列ををクリップボードにコピー
+    // https://qiita.com/simiraaaa/items/2e7478d72f365aa48356 からパクった
+    let tmp = document.createElement('div');
+    let pre = document.createElement('pre');
+    pre.style.webkitUserSelect = 'auto';
+    pre.style.userSelect = 'auto';
+    tmp.appendChild(pre).textContent = string;
+    let s = tmp.style;
+    s.position = 'fixed';
+    s.right = '200%';
+    document.body.appendChild(tmp);
+    document.getSelection().selectAllChildren(tmp);
+    let result = document.execCommand("copy");
+    document.body.removeChild(tmp);
+    return result;
+}
+
 const CLASS_INITIAL_MAPS = {
     'ジュニア': 'J',
     'クラシック': 'C',
@@ -120,18 +138,25 @@ races.forEach((race, id) => {
 const list = new Vue({
     el: '#list',
     data: {
-        checkedButtons: [], // 表示条件
+        checkedButtons: {
+            grades: [],
+            locations: [],
+            grounds: [],
+            ranges: [],
+            rotations: [],
+        }, // 表示条件
         checkedRaces: [], // チェックしたレース
         grades: ['GI', 'GII', 'GIII', 'OP', 'Pre-OP'],
         locations: ['札幌', '函館', '福島', '中山', '東京', '大井', '新潟', '中京', '京都', '阪神', '小倉'],
         grounds: ['芝', 'ダート'],
-        distanses: ['短距離', 'マイル', '中距離', '長距離'],
+        ranges: ['短距離', 'マイル', '中距離', '長距離'],
         rotations: ['左', '右', '直線'],
         foldOptions: {
             search: false,
+            result: true,
             config: true,
-            schedule: true,
-            list: true,
+            schedule: false,
+            list: false,
         },
         displayOptions: {
             turns: ['表示', '非表示'],
@@ -148,9 +173,8 @@ const list = new Vue({
             rewardss: ['全表示', '1位のみ', '非表示'],
             dropss: ['全表示', '省略', '非表示'],
             objective: true,
-            charge: 'ダイワスカーレット',
-            colorfulGrade: false,
-            colorfulDistanse: false,
+            character: 'ダイワスカーレット',
+            colorful: true,
             empty: false,
             event: true,
             smart: true,
@@ -180,11 +204,11 @@ const list = new Vue({
                 if (!results[mindex]) results[mindex] = [[], []];
                 months.forEach((periods, pindex) => {
                     periods.forEach((id, iindex) => {
-                        if (checkedButtons.includes(races[id].grade)
-                            && checkedButtons.includes(races[id].location)
-                            && checkedButtons.includes(races[id].ground)
-                            && checkedButtons.includes(races[id].range)
-                            && checkedButtons.includes(races[id].rotation)) { results[mindex][pindex].push(id); }
+                        if (checkedButtons.grades.includes(races[id].grade)
+                            && checkedButtons.locations.includes(races[id].location)
+                            && checkedButtons.grounds.includes(races[id].ground)
+                            && checkedButtons.ranges.includes(races[id].range)
+                            && checkedButtons.rotations.includes(races[id].rotation)) { results[mindex][pindex].push(id); }
                         });
                     });
                 });
@@ -216,9 +240,9 @@ const list = new Vue({
     watch: {
     },
     methods: {
-        checkAll: function (orders) {
-            let ary = orders.filter(i => !this.checkedButtons.includes(i));
-            this.checkedButtons = ary.length ? this.checkedButtons.concat(ary) : this.checkedButtons.filter(i => !orders.includes(i));
+        checkAll: function (order) {
+            let ary = order.filter(i => !this.checkedButtons[order].includes(i));
+            this.checkedButtons[order] = ary.length ? this.checkedButtons[order].concat(ary) : this.checkedButtons[orders].filter(i => !orders.includes(i));
         },
         changeDisplayMode: function (item) {
             let mode = this.displayMode[item];
@@ -237,12 +261,13 @@ const list = new Vue({
         }
     },
     mounted: function () {
-        let checkedButtons = [];
-        Array.prototype.push.apply(checkedButtons, this.grades.slice(0, 3));
-        Array.prototype.push.apply(checkedButtons, this.locations);
-        Array.prototype.push.apply(checkedButtons, this.grounds);
-        Array.prototype.push.apply(checkedButtons, this.distanses);
-        Array.prototype.push.apply(checkedButtons, this.rotations.slice(2));
-        this.checkedButtons = checkedButtons;
+        let checkedButtons = {...this.checkedButtons};
+        Array.prototype.push.apply(checkedButtons.grades, this.grades.slice(0, 3));
+        Array.prototype.push.apply(checkedButtons.locations, this.locations);
+        Array.prototype.push.apply(checkedButtons.grounds, this.grounds);
+        Array.prototype.push.apply(checkedButtons.ranges, this.ranges);
+        Array.prototype.push.apply(checkedButtons.rotations, this.rotations.slice(2));
+        this.checkedButtons = {...checkedButtons};
     }
 });
+

@@ -10,3 +10,41 @@ th, .nowrap {
 .fold {
     display: none;
 }
+.emphasis1::before, .emphasis1::after {
+    content: '★';
+}
+.emphasis2::before, .emphasis2::after {
+    content: '☆';
+}
+.gi {
+    color:#33f;
+    font-weight: bold;
+}
+.gii {
+    color:#f30;
+    font-weight: bold;
+}
+.giii {
+    color:#090;
+    font-weight: bold;
+}
+.op, .po {
+    color:#f90;
+    font-weight: bold;
+}
+.short {
+    color:#f30;
+    font-weight: bold;
+}
+.mile {
+    color:#090;
+    font-weight: bold;
+}
+.middle {
+    color:#f90;
+    font-weight: bold;
+}
+.long {
+    color:#33f;
+    font-weight: bold;
+}

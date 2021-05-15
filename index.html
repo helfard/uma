@@ -273,7 +273,7 @@
                 <span v-show="DEBUG">（{{ sharedState.markedRaces.length }}）</span>
             </h2>
             <div class="table-container" v-show="!foldFlag">
-                <table class="table is-narrow is-hoverable">
+                <table class="table is-narrow is-hoverable nowrap">
                     <thead>
                         <tr>
                             <th class="has-text-centered" v-show="DEBUG">ID</th>
@@ -506,7 +506,7 @@
                 → <a @click="clear()">リセット</a>
             </div>
             <div class="table-container" v-show="!foldFlag">
-                <table class="table is-narrow is-hoverable">
+                <table class="table is-narrow is-hoverable nowrap">
                     <thead>
                         <tr>
                             <th class="has-text-centered" v-show="DEBUG">ID</th>

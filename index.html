@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
     <link rel="stylesheet" href="bulma.min.css">
     <link rel="stylesheet" href="css.css">
-    <script src="https://unpkg.com/vue@next"></script>
+    <script src="vue.global.prod.js"></script>
 </head>
 
 <body>
 
     <header class="hero is-primary is-bold">
         <div class="hero-body">
-            <h1 class="title">たいとる</h1>
+            <h1 class="title">あとでかんがえる</h1>
         </div>
     </header>
 
@@ -22,7 +22,7 @@
         <section class="box" id="search">
             <h2 class="subtitle">
                 <a @click="fold()">検索条件</a>
-                <span v-show="DEBUG">（{{ dummy }}）</span>
+                <span v-show="DEBUG">（{{ dummy }}）{{ foldFlag }}</span>
             </h2>
             <table v-show="!foldFlag" class="table is-narrow is-striped">
                 <tr>
@@ -215,7 +215,7 @@
 
         <section class="box" id="config">
             <h2 class="subtitle">
-                <a @click="fold()">その他設定</a>
+                <a @click="fold()">その他</a>
                 <span v-show="DEBUG">（{{ dummy + dummy2 }}）</span>
             </h2>
             <table v-show="!foldFlag" class="table is-narrow is-striped">
@@ -224,14 +224,28 @@
                         ウマ娘
                     </th>
                     <td>
+                        <select v-model="config.character">
+                            <option v-for="name in CHARACTERS">{{ name }}</option>
+                        </select><br>
                         <label class="checkbox">
-                            <input type="checkbox" v-model="config.emphasis"> 
-                            <select v-model="config.character">
-                                <option v-for="name in CHARACTERS">{{ name }}</option>
-                            </select>
-                            の目標レース・推奨レースを強調表示
+                                <input type="checkbox" v-model="config.emphasis"> ↑の目標レース・推奨レースを強調表示<br>
+                            （目標レース：出走が必須なレース。候補が複数ある場合はそれらの全て）<br>
+                            （推奨レース：出走すると特殊なイベントがあるレース）
                         </label><br>
-                        　→ <a @click="markMainRaces()">予定表に目標レース・推奨レースを一括入力</a>
+                        　→ <a @click="markMainRaces()">予定表に目標レース・推奨レースを一括登録</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="has-text-right">
+                        一括登録
+                    </th>
+                    <td>
+                        <template v-for="sets in raceSets">
+                            <template v-for="(races, name) in sets">
+                                <a @click="markRaces(races)">{{ name }}</a>　
+                            </template><br>
+                        </template>
+                        （注 同一年内に勝たないと称号の条件は満たしません）
                     </td>
                 </tr>
                 <tr>
@@ -290,10 +304,10 @@
                             <th class="has-text-centered" v-show="display.fullgate">枠</th>
                             <th class="has-text-centered" v-show="display.require">条件</th>
                             <th class="has-text-centered" v-show="display.rewardss">1着</th>
-                            <th class="has-text-centered" v-show="display.rewardss === 2">2着</th>
-                            <th class="has-text-centered" v-show="display.rewardss === 2">3着</th>
-                            <th class="has-text-centered" v-show="display.rewardss === 2">4着</th>
-                            <th class="has-text-centered" v-show="display.rewardss === 2">5着</th>
+                            <th class="has-text-centered" v-show="display.rewardss === 1">2着</th>
+                            <th class="has-text-centered" v-show="display.rewardss === 1">3着</th>
+                            <th class="has-text-centered" v-show="display.rewardss === 1">4着</th>
+                            <th class="has-text-centered" v-show="display.rewardss === 1">5着</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -346,10 +360,10 @@
                                     <td class="has-text-right" v-show="display.fullgate">{{ races[id].fullgate }}</td>
                                     <td class="has-text-right" v-show="display.require">{{ races[id].require }}</td>
                                     <td class="has-text-right" v-show="display.rewardss">{{ races[id].rewardss[display.rewardss][0] }}</td>
-                                    <td class="has-text-right" v-show="display.rewardss > 1">{{ races[id].rewardss[display.rewardss][1] }}</td>
-                                    <td class="has-text-right" v-show="display.rewardss > 1">{{ races[id].rewardss[display.rewardss][2] }}</td>
-                                    <td class="has-text-right" v-show="display.rewardss > 1">{{ races[id].rewardss[display.rewardss][3] }}</td>
-                                    <td class="has-text-right" v-show="display.rewardss > 1">{{ races[id].rewardss[display.rewardss][4] }}</td>
+                                    <td class="has-text-right" v-show="display.rewardss === 1">{{ races[id].rewardss[display.rewardss][1] }}</td>
+                                    <td class="has-text-right" v-show="display.rewardss === 1">{{ races[id].rewardss[display.rewardss][2] }}</td>
+                                    <td class="has-text-right" v-show="display.rewardss === 1">{{ races[id].rewardss[display.rewardss][3] }}</td>
+                                    <td class="has-text-right" v-show="display.rewardss === 1">{{ races[id].rewardss[display.rewardss][4] }}</td>
                                 </tr>
                             </template>
                         </template>
@@ -384,10 +398,10 @@
                             <th class="has-text-centered" v-show="display.fullgate">枠</th>
                             <th class="has-text-centered" v-show="display.require">条件</th>
                             <th class="has-text-centered" v-show="display.rewardss">1着</th>
-                            <th class="has-text-centered" v-show="display.rewardss === 2">2着</th>
-                            <th class="has-text-centered" v-show="display.rewardss === 2">3着</th>
-                            <th class="has-text-centered" v-show="display.rewardss === 2">4着</th>
-                            <th class="has-text-centered" v-show="display.rewardss === 2">5着</th>
+                            <th class="has-text-centered" v-show="display.rewardss === 1">2着</th>
+                            <th class="has-text-centered" v-show="display.rewardss === 1">3着</th>
+                            <th class="has-text-centered" v-show="display.rewardss === 1">4着</th>
+                            <th class="has-text-centered" v-show="display.rewardss === 1">5着</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -399,82 +413,97 @@
 
         <section class="box" id="schedule">
             <h2 class="subtitle">
-                <a @click="fold()">予定表</a>
+                <a @click="fold()">出走予定表</a>
                 <span v-show="DEBUG">（{{ sharedState.markedRaces.length }}）</span>
             </h2>
-            <div class="block" v-show="totalData.number">
-                <table v-show="!foldFlag" class="table is-narrow is-striped">
-                    <tr>
-                        <th class="has-text-right">
-                            レース数
-                        </th>
-                        <td>
-                            {{ totalData.number }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="has-text-right">
-                            レース場
-                        </th>
-                        <td>
-                            <span v-for="(number, key) in totalData.locations" v-show="number">
-                                {{ key }}：{{ number }}　
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="has-text-right">
-                            バ場
-                        </th>
-                        <td>
-                            <span v-for="(number, key) in totalData.grounds" v-show="number">
-                                {{ key }}：{{ number }}　
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="has-text-right">
-                            距離
-                        </th>
-                        <td>
-                            <span v-for="(number, key) in totalData.ranges" v-show="number">
-                                {{ key }}：{{ number }}　
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="has-text-right">
-                            総バクシン距離
-                        </th>
-                        <td>
-                            {{ totalData.distance }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="has-text-right">
-                            コース
-                        </th>
-                        <td>
-                            <span v-for="(number, key) in totalData.rotations" v-show="number">
-                                {{ key }}：{{ number }}　
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="has-text-right">
-                            総ファン獲得数
-                        </th>
-                        <td>
-                            {{ totalData.reward }}（※ 全て1着の場合）
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="block">
+            <table v-show="!foldFlag && totalData.number" class="table is-narrow is-striped">
+                <tr>
+                    <th class="has-text-right">
+                        レース数
+                    </th>
+                    <td>
+                        {{ totalData.number }}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="has-text-right">
+                        グレード
+                    </th>
+                    <td>
+                        <span v-for="(number, key) in totalData.grades" v-show="number">
+                            {{ key }}：{{ number }}　
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="has-text-right">
+                        レース場
+                    </th>
+                    <td>
+                        <span v-for="(number, key) in totalData.locations" v-show="number">
+                            {{ key }}：{{ number }}　
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="has-text-right">
+                        バ場
+                    </th>
+                    <td>
+                        <span v-for="(number, key) in totalData.grounds" v-show="number">
+                            {{ key }}：{{ number }}　
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="has-text-right">
+                        距離
+                    </th>
+                    <td>
+                        <span v-for="(number, key) in totalData.ranges" v-show="number">
+                            {{ key }}：{{ number }}　
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="has-text-right">
+                        総バクシン距離
+                    </th>
+                    <td>
+                        {{ totalData.distance }}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="has-text-right">
+                        コース
+                    </th>
+                    <td>
+                        <span v-for="(number, key) in totalData.rotations" v-show="number">
+                            {{ key }}：{{ number }}　
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="has-text-right">
+                        総ファン獲得数
+                    </th>
+                    <td>
+                        {{ totalData.reward }}<br>
+                        （注1 全て1着の場合の合計値）<br>
+                        （注2 実際はこれに更にサポカ補正がかかる）<br>
+                        （注3 物理的に全てに出走可能とは限りません）
+                    </td>
+                </tr>
+            </table>
+            <div class="block" v-show="!foldFlag">
                 <label class="checkbox">
                     <input type="checkbox" v-model="calendarMode"> カレンダーモード（何も無いターンに空行を表示）
                 </label><br>
-                　→ <a @click="copy()">タブ区切りテキストをコピー</a>
+                → <a @click="copyTab()">タブ区切りテキストをコピー</a><br>
+                　Googleスプレッドシートなどにコピペできます。<br>
+                （ペーストが上手く行かない時は一度メモ帳などにペーストしてから改めてコピペし直すと上手くいくようです。何でか知らんけど）<br>
+                <span v-show="DEBUG">→ <a @click="copyAddress()">逆引き辞書用テキストをコピー</a><br></span>
+                → <a @click="clear()">リセット</a>
             </div>
             <div class="table-container" v-show="!foldFlag">
                 <table class="table is-narrow is-hoverable">
@@ -508,10 +537,10 @@
                             <th class="has-text-centered" v-show="display.fullgate">枠</th>
                             <th class="has-text-centered" v-show="display.require">条件</th>
                             <th class="has-text-centered" v-show="display.rewardss">1着</th>
-                            <th class="has-text-centered" v-show="display.rewardss === 2">2着</th>
-                            <th class="has-text-centered" v-show="display.rewardss === 2">3着</th>
-                            <th class="has-text-centered" v-show="display.rewardss === 2">4着</th>
-                            <th class="has-text-centered" v-show="display.rewardss === 2">5着</th>
+                            <th class="has-text-centered" v-show="display.rewardss === 1">2着</th>
+                            <th class="has-text-centered" v-show="display.rewardss === 1">3着</th>
+                            <th class="has-text-centered" v-show="display.rewardss === 1">4着</th>
+                            <th class="has-text-centered" v-show="display.rewardss === 1">5着</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -579,10 +608,10 @@
                                     <td class="has-text-right" v-show="display.fullgate">{{ races[id].fullgate }}</td>
                                     <td class="has-text-right" v-show="display.require">{{ races[id].require }}</td>
                                     <td class="has-text-right" v-show="display.rewardss">{{ races[id].rewardss[display.rewardss][0] }}</td>
-                                    <td class="has-text-right" v-show="display.rewardss > 1">{{ races[id].rewardss[display.rewardss][1] }}</td>
-                                    <td class="has-text-right" v-show="display.rewardss > 1">{{ races[id].rewardss[display.rewardss][2] }}</td>
-                                    <td class="has-text-right" v-show="display.rewardss > 1">{{ races[id].rewardss[display.rewardss][3] }}</td>
-                                    <td class="has-text-right" v-show="display.rewardss > 1">{{ races[id].rewardss[display.rewardss][4] }}</td>
+                                    <td class="has-text-right" v-show="display.rewardss === 1">{{ races[id].rewardss[display.rewardss][1] }}</td>
+                                    <td class="has-text-right" v-show="display.rewardss === 1">{{ races[id].rewardss[display.rewardss][2] }}</td>
+                                    <td class="has-text-right" v-show="display.rewardss === 1">{{ races[id].rewardss[display.rewardss][3] }}</td>
+                                    <td class="has-text-right" v-show="display.rewardss === 1">{{ races[id].rewardss[display.rewardss][4] }}</td>
                                 </tr>
                                 <tr class="border-top border-bottom" v-show="calendarMode && checkEmpty(periods)">
                                     <td v-show="DEBUG"></td>
@@ -630,10 +659,10 @@
                             <th class="has-text-centered" v-show="display.fullgate">枠</th>
                             <th class="has-text-centered" v-show="display.require">条件</th>
                             <th class="has-text-centered" v-show="display.rewardss">1着</th>
-                            <th class="has-text-centered" v-show="display.rewardss === 2">2着</th>
-                            <th class="has-text-centered" v-show="display.rewardss === 2">3着</th>
-                            <th class="has-text-centered" v-show="display.rewardss === 2">4着</th>
-                            <th class="has-text-centered" v-show="display.rewardss === 2">5着</th>
+                            <th class="has-text-centered" v-show="display.rewardss === 1">2着</th>
+                            <th class="has-text-centered" v-show="display.rewardss === 1">3着</th>
+                            <th class="has-text-centered" v-show="display.rewardss === 1">4着</th>
+                            <th class="has-text-centered" v-show="display.rewardss === 1">5着</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -650,7 +679,8 @@
 
     <footer class="footer">
         <address v-once class="content has-text-centered">
-            ここになんかかく
+            ふんにゃかハッピー はんにゃかラッキー センキューシラオキ！<br>
+            Lastupdate: 2021/05/15
         </address>
     </footer>
 

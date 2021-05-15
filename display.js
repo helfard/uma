@@ -2,7 +2,7 @@ const display = Vue.createApp({
     data() {
         return {
             DEBUG: DEBUG, // デバッグモードのフラグ
-            foldFlag: true, // 折り畳みのフラグ
+            foldFlag: localStorage.getItem('displayFoldFlag') !== null ? JSON.parse(localStorage.getItem('displayFoldFlag')) : true, // 折り畳みのフラグ
             radio: {
                 turn: ['非表示', '表示'],
                 classes: ['非表示', '全角表示', '半角表示', '省略表示'],
@@ -18,7 +18,7 @@ const display = Vue.createApp({
                 rewardss: ['非表示', '全表示', '1位のみ'],
                 dropss: ['非表示', '全表示', '省略表示'],
             },
-            checked: {
+            checked: localStorage.getItem('display') ? JSON.parse(localStorage.getItem('display')) : {
                 turn: 1,
                 classes: 1,
                 months: 1,
@@ -28,9 +28,9 @@ const display = Vue.createApp({
                 grounds: 1,
                 distances: 1,
                 courses: 1,
-                fullgate: 1,
-                require: 1,
-                rewardss: 1,
+                fullgate: 0,
+                require: 0,
+                rewardss: 2,
                 dropss: 0,
             },
         }
@@ -40,6 +40,7 @@ const display = Vue.createApp({
             let number = 0;
             let checked = this.checked;
             Object.keys(checked).forEach(key => number += checked[key]);
+            localStorage.setItem('display', JSON.stringify(this.checked));
             log('Display -> Result');
             result.setDisplay(checked);
             log('Display -> Schedule');
@@ -56,8 +57,7 @@ const display = Vue.createApp({
         fold: function () {
             // 折り畳み
             this.foldFlag = !this.foldFlag;
+            localStorage.setItem('displayFoldFlag', JSON.stringify(this.foldFlag));
         },
-    },
-    mounted: function () {
     },
 }).mount('#display');

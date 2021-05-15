@@ -2,7 +2,7 @@ const result = Vue.createApp({
     data() {
         return {
             DEBUG: DEBUG, // デバッグモードのフラグ
-            foldFlag: false, // 折り畳みのフラグ
+            foldFlag: localStorage.getItem('resultFoldFlag') !== null ? JSON.parse(localStorage.getItem('resultFoldFlag')) : false, // 折り畳みのフラグ
             races: races,
             calendar: calendar,
             search: {
@@ -88,6 +88,7 @@ const result = Vue.createApp({
         fold: function () {
             // 折り畳み
             this.foldFlag = !this.foldFlag;
+            localStorage.setItem('resultFoldFlag', JSON.stringify(this.foldFlag));
         },
         markRace: function (id) {
             // 予定表に追加
@@ -103,7 +104,5 @@ const result = Vue.createApp({
         setConfig: function (config) {
             this.config = config;
         },
-    },
-    mounted: function () {
     },
 }).mount('#result');

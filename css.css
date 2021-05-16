@@ -1,3 +1,6 @@
+dt {
+    font-weight: bold;
+}
 th, .nowrap {
     white-space: nowrap;
 }

@@ -1,4 +1,4 @@
-const DEBUG = false;
+const DEBUG = location.hostname === 'localhost' ? true : false; // ローカル実行時はデバッグモード
 const log = msg => {
     // デバッグ用のメッセージの表示
     const SEC = new Date().getSeconds();
@@ -338,9 +338,6 @@ const MAIN_RACES = {
     ], []],
     /*
     '': [[], []],
-    '': [[], []],
-    '': [[], []],
-    '': [[], []],
     */
 }
 
@@ -393,7 +390,7 @@ const raceSets = [
             'シニア フェブラリーステークス',
             'シニア チャンピオンズカップ',
         ],
-    },
+    }
 ];
 
 const shortenString = (string, option = null) => {

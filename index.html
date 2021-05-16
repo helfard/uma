@@ -13,11 +13,51 @@
 
     <header class="hero is-primary is-bold">
         <div class="hero-body">
-            <h1 class="title">あとでかんがえる</h1>
+            <h1 class="title">ドロップキック予告メーカー</h1>
         </div>
     </header>
 
     <section class="container">
+
+        <section class="box" id="howto">
+            <h2 class="subtitle">
+                <a @click="fold()">使い方</a>
+                <span v-show="DEBUG">（{{ index }}）</span>
+            </h2>
+            <dl v-show="!foldFlag">
+                <dt>短い説明：</dt>
+                <dd>
+                    　見れば分かるよ！
+                </dd>
+                <hr>
+                <dt>普通の説明：</dt>
+                <dd>
+                    　これは育成中のウマ娘を出走させるレースの予定表をお手軽に作るためのツールです。<br>
+                    　設定した条件に合うレースの一覧から適当に抜き出して、作ったリストを閲覧したりコピペしたりできます。<br>
+                    　他の似たような機能のツールとの最大の違いは、タブ区切りテキストをコピーできるということと、PCでもスマホでも使えるということです。<br>
+                    （ただし、ファイル容量が諸々合わせて550KBほどあるので、うっかりギガが死んだりしないように気を付けましょう）
+                </dd>
+                <hr>
+                <dt>長い説明：</dt>
+                <dd>『検索条件』でレース一覧に表示する条件を設定する。</dd>
+                <dd>　　　↓</dd>
+                <dd>『表示設定』でリストに表示する項目をカスタマイズ（任意）。</dd>
+                <dd>　　　↓</dd>
+                <dd>『その他』で適当に色々する（任意）。</dd>
+                <dd>　　　↓</dd>
+                <dd>『レース一覧』から抜き出したいレースを選ぶ。<br>　ちなみにレースをクリックすると抜き出せます。</dd>
+                <dd>　　　↓</dd>
+                <dd>『出走予定表』を眺めてﾆﾖﾆﾖしたりコピペしたりする。<br>　ちなみにレースをクリックすると消せます。</dd>
+                <dd>　　　↓</dd>
+                <dd v-html="messages[index]"></dd>
+                <dd>　　　↓</dd>
+                <dd>　重賞制覇してゴルシに蹴られる。</dd>
+
+            </dl>
+            <p v-show="foldFlag">
+                <a @click="fold()">　クリックで展開</a>
+            </p>
+        </section>
 
         <section class="box" id="search">
             <h2 class="subtitle">
@@ -228,9 +268,9 @@
                             <option v-for="name in CHARACTERS">{{ name }}</option>
                         </select><br>
                         <label class="checkbox">
-                                <input type="checkbox" v-model="config.emphasis"> ↑の目標レース・推奨レースを強調表示<br>
-                            （目標レース：出走が必須なレース。候補が複数ある場合はそれらの全て）<br>
-                            （推奨レース：出走すると特殊なイベントがあるレース）
+                                <input type="checkbox" v-model="config.emphasis"> ↑の<span :class="{ emphasis1: config.emphasis }">目標レース</span>と<span :class="{ emphasis2: config.emphasis }">推奨レース</span>を強調表示<br>
+                            （<span :class="{ emphasis1: config.emphasis }">目標レース</span>：出走が必須なレース。候補が複数ある場合はそれらの全て）<br>
+                            （<span :class="{ emphasis2: config.emphasis }">推奨レース</span>：出走すると特殊なイベントがあるとされるレース）
                         </label><br>
                         　→ <a @click="markMainRaces()">予定表に目標レース・推奨レースを一括登録</a>
                     </td>
@@ -245,7 +285,7 @@
                                 <a @click="markRaces(races)">{{ name }}</a>　
                             </template><br>
                         </template>
-                        （注 同一年内に勝たないと称号の条件は満たしません）
+                        （注 春秋○○は同一年内に勝たないと称号の条件を満たしません）
                     </td>
                 </tr>
                 <tr>
@@ -672,15 +712,13 @@
             </p>
         </section>
 
-
-
-
     </section>
 
     <footer class="footer">
         <address v-once class="content has-text-centered">
             ふんにゃかハッピー はんにゃかラッキー センキューシラオキ！<br>
-            Lastupdate: 2021/05/15
+            作った人のID：<a onclick="javascript: alert(execCopy('403195428') ? 'コピーしました！' : 'コピーできませんでした！')">403 195 428</a><br>
+            Lastupdate: 2021/05/16
         </address>
     </footer>
 
@@ -691,6 +729,7 @@
     <script src="config.js"></script>
     <script src="display.js"></script>
     <script src="search.js"></script>
+    <script src="howto.js"></script>
 
 </body>
 

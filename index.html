@@ -20,10 +20,57 @@
 
     <section class="container">
 
+        <section class="box" id="memo">
+            <h2 class="subtitle">
+                <a @click="fold()">作者のメモ
+                <span v-show="foldFlag">（クリックで展開）</span></a>
+            </h2>
+            <div v-show="!foldFlag">
+                <p class="block">
+                    　個人的に良く見に行く他サイトへのリンクとかを置いておきます。<br>
+                    　多分下に行くほどマニアック。
+                </p>
+                <dl>
+                    <dt><a href="https://inshi.org">ウマ娘因子サーチ</a></dt>
+                    <dd>　欲しい因子を指定してフレンドを探せるサイト。検索性が良くてとても便利。</dd>
+                    <dd>　ただし、スクショからの自動登録機能は認識の精度がやや悪いことがあるようで、登録された内容が間違っていることがある（私の場合は親のウマ娘が別人として認識された）。</dd>
+                    <dd>　余談だけど因子目当てにフレンドを探すなら、使い勝手が良いのは因子サーチ≧Twitter検索＞GameWithのフレンド募集掲示板＞＞＞その他の企業系攻略Wikiのフレンド募集掲示板だと思います。Discordとかはどうなんじゃろな？</dd>
+                    <hr>
+                    <dt><a href="https://anond.hatelabo.jp/20210308133811">俺がお前を勝たせてやる - はてな匿名ダイアリー</a></dt>
+                    <dd>　はてな匿名ダイアリー、通称『増田』に投稿された伝説級の初心者指南。書いたのはJunchangchang氏らしい。</dd>
+                    <dd>　これを読むだけでURAファイナルズに勝てないレベルの初心者が勝てるようになる。と言うか、なった。</dd>
+                    <hr>
+                    <dt><a href="https://aqm.hatenablog.jp/entry/2021/03/07/235900">#ウマ娘 攻略メモ（随時更新）- AQM</a></dt>
+                    <dd>　恐らくはてな界隈で最<s>狂</s>強のウマ娘プレイヤーであるAQM氏の攻略メモ。</dd>
+                    <dd>　1記事でウマ娘の攻略の大体全てがまとめられているので、URAファイナルズに勝てるようになったら大いに参考にしよう。</dd>
+                    <hr>
+                    <dt><a href="https://gamewith.jp/uma-musume/article/show/259587">【ウマ娘】イベント選択肢チェッカー（逆引き検索ツール）- GameWith</a></dt>
+                    <dd>　GameWithの攻略Wikiによるゲーム中のイベントの選択肢の検索ツール。</dd>
+                    <dd>　PC/スマホを問わず、他の類似のツールと比べても圧倒的に使いやすいと思う。</dd>
+                    <dd>　育成を周回しすぎて選択肢の効果を丸暗記するようになるまでは大いにお世話になる。</dd>
+                    <hr>
+                    <dt><a href="https://umasagashi.pages.dev/">umasagashi</a></dt>
+                    <dd>　いわゆる『因子ループ』と呼ばれる育成手法（相性の良いウマ娘を組み合わせて継承を繰り返すことにより、有用な白因子を受け継ぎやすくするという育成法）を効率良く実践するためのツールが公開されている。</dd>
+                    <dd>　<s>でも正直、因子ループって良く分かんないんだよね。</s></dd>
+                    <hr>
+                    <dt><a href="https://umamusustation.com">ウマ娘攻略データステーション</a></dt>
+                    <dd>　チーム競技場のランキングから確認できるウマ娘のデータで統計を取っているサイト。つまりチーム競技場のランカーの使っているウマ娘のパラメータやスキルやサポートカードの傾向が分かる。</dd>
+                    <dd>　ついでにウマ娘のパラメータと☆3青因子の獲得率との相関について検定していたりして、とても<s>絶望できる</s>参考になる。</dd>
+                    <dd>　読んでいると<s>もう無理たすけて</s>よーし育成がんばるぞー！という気分になってくる。</dd>
+                    <hr>
+                    <dt><a href="https://docs.google.com/spreadsheets/d/18BriEn0-OQjSkJWHx5Yv8ycN1b4NMDXHDCFM98v5xXk/edit?usp=sharing">ウマ娘レース一覧（Googleスプレッドシート）</a></dt>
+                    <dd>　このサイトで使っているレース一覧の元データ。</dd>
+                    <dd>　全部私が一人で調べて打ち込んだので、何か間違ってるかも知れません。</dd>
+                    <dd>　誰でも自由にコピーして持って帰れるようにしてあるつもりだけど、ちゃんとできてるのかな？</dd>
+                </dl>
+            </div>
+        </section>
+
         <section class="box" id="howto">
             <h2 class="subtitle">
-                <a @click="fold()">使い方</a>
-                <span v-show="DEBUG">（{{ index }}）</span>
+                <a @click="fold()">使い方
+                <span v-show="foldFlag">（クリックで展開）</span></a>
+                <span v-show="DEBUG">（{{ dice }}）</span>
             </h2>
             <dl v-show="!foldFlag">
                 <dt>短い説明：</dt>
@@ -49,7 +96,7 @@
                 <dd>　　　↓</dd>
                 <dd>『出走予定表』を眺めてﾆﾖﾆﾖしたりコピペしたりする。<br>　ちなみにレースをクリックすると消せます。</dd>
                 <dd>　　　↓</dd>
-                <dd v-html="messages[index]"></dd>
+                <dd v-html="messages[dice]"></dd>
                 <dd>　　　↓</dd>
                 <dd>　GI制覇してゴルシに蹴られる。</dd>
                 <hr>
@@ -57,14 +104,12 @@
                 <dd>　レースのデータは全部私が一人で調べて打ち込んだので、どこかが間違ってるかも知れません。</dd>
                 <dd>　目標レースと推奨レースは<a href="https://gamewith.jp/uma-musume/article/show/261552">GameWithのウマ娘攻略wikiの記事</a>や<a onclick="javascript: alert('「このWikiを広めるのやめろ」って書いてあったのでリンクしません。\n気になる人はググれば出てくるよ！')">ｽｯﾍﾟﾝﾍﾟﾝ Wiki*の記事</a>を参考にしました。</dd>
             </dl>
-            <p v-show="foldFlag">
-                <a @click="fold()">　クリックで展開</a>
-            </p>
         </section>
 
         <section class="box" id="search">
             <h2 class="subtitle">
-                <a @click="fold()">検索条件</a>
+                <a @click="fold()">検索条件
+                <span v-show="foldFlag">（クリックで展開）</span></a>
                 <span v-show="DEBUG">（{{ dummy }}）{{ foldFlag }}</span>
             </h2>
             <table v-show="!foldFlag" class="table is-narrow is-striped">
@@ -119,14 +164,12 @@
                     </td>
                 </tr>
             </table>
-            <p v-show="foldFlag">
-                <a @click="fold()">　クリックで展開</a>
-            </p>
         </section>
 
         <section class="box" id="display">
             <h2 class="subtitle">
-                <a @click="fold()">表示項目</a>
+                <a @click="fold()">表示項目
+                <span v-show="foldFlag">（クリックで展開）</span></a>
                 <span v-show="DEBUG">（{{ dummy }}）</span>
             </h2>
             <table v-show="!foldFlag" class="table is-narrow is-striped">
@@ -251,14 +294,12 @@
                     </td>
                 </tr>
             </table>
-            <p v-show="foldFlag">
-                <a @click="fold()">　クリックで展開</a>
-            </p>
         </section>
 
         <section class="box" id="config">
             <h2 class="subtitle">
-                <a @click="fold()">その他</a>
+                <a @click="fold()">その他
+                <span v-show="foldFlag">（クリックで展開）</span></a>
                 <span v-show="DEBUG">（{{ dummy + dummy2 }}）</span>
             </h2>
             <table v-show="!foldFlag" class="table is-narrow is-striped">
@@ -305,14 +346,12 @@
                     </td>
                 </tr>
             </table>
-            <p v-show="foldFlag">
-                <a @click="fold()">　クリックで展開</a>
-            </p>
         </section>
 
         <section class="box" id="result">
             <h2 class="subtitle">
-                <a @click="fold()">レース一覧</a>
+                <a @click="fold()">レース一覧
+                <span v-show="foldFlag">（クリックで展開）</span></a>
                 <span v-show="DEBUG">（{{ sharedState.markedRaces.length }}）</span>
             </h2>
             <div class="table-container" v-show="!foldFlag">
@@ -449,14 +488,12 @@
                     </tfoot>
                 </table>
             </div>
-            <p v-show="foldFlag">
-                <a @click="fold()">　クリックで展開</a>
-            </p>
         </section>
 
         <section class="box" id="schedule">
             <h2 class="subtitle">
-                <a @click="fold()">出走予定表</a>
+                <a @click="fold()">出走予定表
+                <span v-show="foldFlag">（クリックで展開）</span></a>
                 <span v-show="DEBUG">（{{ sharedState.markedRaces.length }}）</span>
             </h2>
             <table v-show="!foldFlag && totalData.number" class="table is-narrow is-striped">
@@ -710,9 +747,6 @@
                     </tfoot>
                 </table>
             </div>
-            <p v-show="foldFlag">
-                <a @click="fold()">　クリックで展開</a>
-            </p>
         </section>
 
     </section>
@@ -721,7 +755,7 @@
         <address v-once class="content has-text-centered">
             ふんにゃかハッピー はんにゃかラッキー センキューシラオキ！<br>
             作った人のID：<a onclick="javascript: alert(execCopy('403195428') ? 'コピーしました！' : 'コピーできませんでした！')">403 195 428</a><br>
-            Lastupdate: 2021/05/17
+            Lastupdate: 2021/05/18
         </address>
     </footer>
 
@@ -733,6 +767,7 @@
     <script src="display.js"></script>
     <script src="search.js"></script>
     <script src="howto.js"></script>
+    <script src="memo.js"></script>
 
 </body>
 

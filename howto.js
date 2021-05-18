@@ -2,8 +2,7 @@ const howto = Vue.createApp({
     data() {
         return {
             DEBUG: DEBUG, // デバッグモードのフラグ
-            foldFlag: true, // 折り畳みのフラグ
-            // foldFlag: localStorage.getItem('howtoFoldFlag') !== null ? JSON.parse(localStorage.getItem('howtoFoldFlag')) : true, // 折り畳みのフラグ
+            foldFlag: localStorage.getItem('howtoFoldFlag') !== null ? JSON.parse(localStorage.getItem('howtoFoldFlag')) : true, // 折り畳みのフラグ
             messages: [
                 '　部屋の中を左回りでぐるぐるする。',
                 '　華麗なステップで踊る。',
@@ -23,11 +22,10 @@ const howto = Vue.createApp({
                 '　えい、えい、むん！',
                 // '',
             ],
-
         }
     },
     computed: {
-        index: function () {
+        dice: function () {
             return new Date().getTime() % this.messages.length;
         },
     },
@@ -35,7 +33,7 @@ const howto = Vue.createApp({
         fold: function () {
             // 折り畳み
             this.foldFlag = !this.foldFlag;
-            // localStorage.setItem('howtoFoldFlag', JSON.stringify(this.foldFlag));
+            localStorage.setItem('howtoFoldFlag', JSON.stringify(this.foldFlag));
         },
     },
 }).mount('#howto');

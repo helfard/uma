@@ -1,3 +1,5 @@
+const VERSION = 20220219;
+
 let races = [
     {
         name: '函館ジュニアステークス',

@@ -4,6 +4,16 @@ const log = msg => {
     const SEC = new Date().getSeconds();
     if (DEBUG) console.log(SEC + ' ' + msg);
 }
+if(DEBUG) log('================================');
+
+// バージョンが違ったらローカルストレージを一旦消去
+let version = localStorage.getItem('version') ? JSON.parse(localStorage.getItem('version')) : null;
+if (version !== VERSION) {
+    localStorage.clear();
+    version = VERSION;
+    log('Vresion Check -> Cleared Local Storage');
+}
+localStorage.setItem('version', JSON.stringify(version));
 
 const shortenString = (string, option = null) => {
     // フルネームから省略形への変換処理

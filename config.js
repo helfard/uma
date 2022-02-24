@@ -37,6 +37,7 @@ const config = Vue.createApp({
             let addresses = this.addresses;
             log('Config -> Store');
             store.setMainRaces(character);
+            // Make a new track!!ではこの辺どうなるんだろうか？
             if (['ナリタタイシン', 'ビワハヤヒデ'].includes(character)) {
                 // この連中は天皇賞（春）が阪神だった
                 races[addresses['シニア 天皇賞 春']].location = '阪神';

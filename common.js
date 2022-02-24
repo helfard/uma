@@ -4,7 +4,6 @@ const log = msg => {
     const SEC = new Date().getSeconds();
     if (DEBUG) console.log(SEC + ' ' + msg);
 }
-if(DEBUG) log('================================');
 
 // バージョンが違ったらローカルストレージを一旦消去
 let version = localStorage.getItem('version') ? JSON.parse(localStorage.getItem('version')) : null;

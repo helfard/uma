@@ -63,6 +63,19 @@ const config = Vue.createApp({
                 races[addresses['シニア 宝塚記念']].side = '内';
                 races[addresses['シニア 宝塚記念']].courses = ['', '右 内', '右'];
             }
+            if (['ヤエノムテキ'].includes(character)) {
+                // クラシックの皐月賞が東京だった
+                // オグリ・クリーク・チヨノオー・アルダンも要確認
+                races[addresses['クラシック 皐月賞']].location = '東京';
+                races[addresses['クラシック 皐月賞']].locations = ['', '東京', '東京'];
+                races[addresses['クラシック 皐月賞']].side = '';
+                races[addresses['クラシック 皐月賞']].courses = ['', '左', '左'];
+            } else {
+                races[addresses['クラシック 皐月賞']].location = '中山';
+                races[addresses['クラシック 皐月賞']].locations = ['', '中山', '中山'];
+                races[addresses['クラシック 皐月賞']].side = '内';
+                races[addresses['クラシック 皐月賞']].courses = ['', '右 内', '右'];
+            }
             return number;
         },
     },

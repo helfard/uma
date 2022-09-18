@@ -5,14 +5,14 @@ const search = Vue.createApp({
             foldFlag: localStorage.getItem('searchFoldFlag') !== null ? JSON.parse(localStorage.getItem('searchFoldFlag')) : false, // 折り畳みのフラグ
             checkbox: {
                 grades: ['GI', 'GII', 'GIII', 'OP', 'Pre-OP'],
-                locations: ['札幌', '函館', '福島', '中山', '東京', '大井', '新潟', '中京', '京都', '阪神', '小倉'],
+                locations: ['札幌', '函館', '福島', '中山', '東京', '大井', '新潟', '中京', '京都', '阪神', '小倉', '川崎', '船橋', '盛岡'],
                 grounds: ['芝', 'ダート'],
                 ranges: ['短距離', 'マイル', '中距離', '長距離'],
                 rotations: ['左', '右', '直線'],
             },
             checked: localStorage.getItem('search') ? JSON.parse(localStorage.getItem('search')) : {
                 grades: [],
-                locations: ['札幌', '函館', '福島', '中山', '東京', '大井', '新潟', '中京', '京都', '阪神', '小倉'],
+                locations: ['札幌', '函館', '福島', '中山', '東京', '大井', '新潟', '中京', '京都', '阪神', '小倉', '川崎', '船橋', '盛岡'],
                 grounds: ['芝', 'ダート'],
                 ranges: ['短距離', 'マイル', '中距離', '長距離'],
                 rotations: ['左', '右', '直線'],

@@ -314,7 +314,8 @@
                         <label class="checkbox">
                                 <input type="checkbox" v-model="config.emphasis"> ↑の<span :class="{ emphasis1: config.emphasis }">目標レース</span>と<span :class="{ emphasis2: config.emphasis }">推奨レース</span>を強調表示<br>
                             （<span :class="{ emphasis1: config.emphasis }">目標レース</span>：出走が必須なレース。候補が複数ある場合はそれらの全て）<br>
-                            （<span :class="{ emphasis2: config.emphasis }">推奨レース</span>：出走すると特殊なイベントがあるとされるレース）
+                            （<span :class="{ emphasis2: config.emphasis }">推奨レース</span>：出走すると特殊なイベントがあるとされるレース）<br>
+                            （これにチェックしているとストーリー中で会場が変更されるレースにも対応します）
                         </label><br>
                         　→ <a @click="markMainRaces()">予定表に目標レース・推奨レースを一括登録</a>
                     </td>
@@ -758,7 +759,7 @@
         <address v-once class="content has-text-centered">
             ふんにゃかハッピー はんにゃかラッキー センキューシラオキ！<br>
             作った人のID：<a onclick="javascript: alert(execCopy('403195428') ? 'コピーしました！' : 'コピーできませんでした！')">403 195 428</a><br>
-            Lastupdate: 2022/04/24
+            Lastupdate: 2022/09/18
         </address>
     </footer>
 

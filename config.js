@@ -32,26 +32,28 @@ const config = Vue.createApp({
         },
         dummy2: function () {
             let character = this.config.character;
+            let emphasis = this.config.emphasis;
             let number = character.length;
             let races = this.races;
             let addresses = this.addresses;
             log('Config -> Store');
             store.setMainRaces(character);
-            // Make a new track!!ではこの辺どうなるんだろうか？
-            if (['ナリタタイシン', 'ビワハヤヒデ'].includes(character)) {
+/*
+            // Make a new track!!では変更されない
+            if (['ナリタタイシン', 'ビワハヤヒデ'].includes(character) && emphasis) {
                 // この連中は天皇賞（春）が阪神だった
-                races[addresses['シニア 天皇賞（春）']].location = '阪神';
-                races[addresses['シニア 天皇賞（春）']].locations = ['', '阪神', '阪神'];
-                races[addresses['シニア 天皇賞（春）']].side = '外内';
-                races[addresses['シニア 天皇賞（春）']].courses = ['', '右 外内', '右'];
+                races[addresses['シニア 天皇賞 春']].location = '阪神';
+                races[addresses['シニア 天皇賞 春']].locations = ['', '阪神', '阪神'];
+                races[addresses['シニア 天皇賞 春']].side = '外内';
+                races[addresses['シニア 天皇賞 春']].courses = ['', '右 外内', '右'];
             } else {
                 // でもチケゾーだと京都になるの納得行かない
-                races[addresses['シニア 天皇賞（春）']].location = '京都';
-                races[addresses['シニア 天皇賞（春）']].locations = ['', '京都', '京都'];
-                races[addresses['シニア 天皇賞（春）']].side = '外';
-                races[addresses['シニア 天皇賞（春）']].courses = ['', '右 外', '右'];
+                races[addresses['シニア 天皇賞 春']].location = '京都';
+                races[addresses['シニア 天皇賞 春']].locations = ['', '京都', '京都'];
+                races[addresses['シニア 天皇賞 春']].side = '外';
+                races[addresses['シニア 天皇賞 春']].courses = ['', '右 外', '右'];
             }
-            if (['メジロライアン', 'ライスシャワー'].includes(character)) {
+            if (['アイネスフウジン', 'メジロライアン', 'ライスシャワー'].includes(character) && emphasis) {
                 // この連中はシニアの宝塚記念が京都だった
                 races[addresses['シニア 宝塚記念']].location = '京都';
                 races[addresses['シニア 宝塚記念']].locations = ['', '京都', '京都'];
@@ -63,19 +65,21 @@ const config = Vue.createApp({
                 races[addresses['シニア 宝塚記念']].side = '内';
                 races[addresses['シニア 宝塚記念']].courses = ['', '右 内', '右'];
             }
-            if (['ヤエノムテキ'].includes(character)) {
-                // クラシックの皐月賞が東京だった
-                // オグリ・クリーク・チヨノオー・アルダンも要確認
+            if (['ヤエノムテキ'].includes(character) && emphasis) {
+                // ヤエノムテキ・サクラチヨノオーはクラシックの皐月賞が東京だった
+                // アルダンも要確認
                 races[addresses['クラシック 皐月賞']].location = '東京';
                 races[addresses['クラシック 皐月賞']].locations = ['', '東京', '東京'];
                 races[addresses['クラシック 皐月賞']].side = '';
                 races[addresses['クラシック 皐月賞']].courses = ['', '左', '左'];
             } else {
+                // オグリ・クリークは違った（目標ではないから？）
                 races[addresses['クラシック 皐月賞']].location = '中山';
                 races[addresses['クラシック 皐月賞']].locations = ['', '中山', '中山'];
                 races[addresses['クラシック 皐月賞']].side = '内';
                 races[addresses['クラシック 皐月賞']].courses = ['', '右 内', '右'];
             }
+*/
             return number;
         },
     },

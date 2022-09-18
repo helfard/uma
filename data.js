@@ -1,5662 +1,539 @@
 const VERSION = 20220409;
 
-let races = [
-    {
-        name: '函館ジュニアステークス',
-        class: 'ジュニア',
-        month: 7,
-        period: '後半',
-        grade: 'GIII',
-        location: '函館',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [3100, 1240, 775, 465, 310],
-        drops: ['']
-    }, {
-        name: '中京ジュニアステークス',
-        class: 'ジュニア',
-        month: 7,
-        period: '後半',
-        grade: 'OP',
-        location: '中京',
-        ground: '芝',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [1600, 640, 400, 240, 160],
-        drops: ['']
-    }, {
-        name: 'ダリア賞',
-        class: 'ジュニア',
-        month: 8,
-        period: '前半',
-        grade: 'OP',
-        location: '新潟',
-        ground: '芝',
-        length: 1400,
-        rotation: '左',
-        side: '内',
-        fullgate: 18,
-        require: 350,
-        rewards: [1600, 640, 400, 240, 160],
-        drops: ['']
-    }, {
-        name: 'フェニックス賞',
-        class: 'ジュニア',
-        month: 8,
-        period: '前半',
-        grade: 'OP',
-        location: '小倉',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 18,
-        require: 350,
-        rewards: [1600, 640, 400, 240, 160],
-        drops: ['']
-    }, {
-        name: 'コスモス賞',
-        class: 'ジュニア',
-        month: 8,
-        period: '前半',
-        grade: 'OP',
-        location: '札幌',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 14,
-        require: 350,
-        rewards: [1600, 640, 400, 240, 160],
-        drops: ['']
-    }, {
-        name: '新潟ジュニアステークス',
-        class: 'ジュニア',
-        month: 8,
-        period: '後半',
-        grade: 'GIII',
-        location: '新潟',
-        ground: '芝',
-        length: 1600,
-        rotation: '左',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [3100, 1240, 775, 465, 310],
-        drops: ['']
-    }, {
-        name: 'クローバー賞',
-        class: 'ジュニア',
-        month: 8,
-        period: '後半',
-        grade: 'OP',
-        location: '札幌',
-        ground: '芝',
-        length: 1500,
-        rotation: '右',
-        side: '',
-        fullgate: 14,
-        require: 350,
-        rewards: [1600, 640, 400, 240, 160],
-        drops: ['']
-    }, {
-        name: '札幌ジュニアステークス',
-        class: 'ジュニア',
-        month: 9,
-        period: '前半',
-        grade: 'GIII',
-        location: '札幌',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 14,
-        require: 350,
-        rewards: [3100, 1240, 775, 465, 310],
-        drops: ['']
-    }, {
-        name: '小倉ジュニアステークス',
-        class: 'ジュニア',
-        month: 9,
-        period: '前半',
-        grade: 'GIII',
-        location: '小倉',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 18,
-        require: 350,
-        rewards: [3100, 1240, 775, 465, 310],
-        drops: ['']
-    }, {
-        name: 'すずらん賞',
-        class: 'ジュニア',
-        month: 9,
-        period: '前半',
-        grade: 'OP',
-        location: '札幌',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [1600, 640, 400, 240, 160],
-        drops: ['']
-    }, {
-        name: '野路菊ステークス',
-        class: 'ジュニア',
-        month: 9,
-        period: '前半',
-        grade: 'OP',
-        location: '阪神',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [1600, 640, 400, 240, 160],
-        drops: ['']
-    }, {
-        name: 'アスター賞',
-        class: 'ジュニア',
-        month: 9,
-        period: '前半',
-        grade: 'Pre-OP',
-        location: '中山',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 16,
-        require: 350,
-        rewards: [1000, 400, 250, 150, 100],
-        drops: ['']
-    }, {
-        name: 'ききょうステークス',
-        class: 'ジュニア',
-        month: 9,
-        period: '後半',
-        grade: 'OP',
-        location: '阪神',
-        ground: '芝',
-        length: 1400,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 350,
-        rewards: [1600, 640, 400, 240, 160],
-        drops: ['']
-    }, {
-        name: '芙蓉ステークス',
-        class: 'ジュニア',
-        month: 9,
-        period: '後半',
-        grade: 'OP',
-        location: '中山',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 350,
-        rewards: [1600, 640, 400, 240, 160],
-        drops: ['']
-    }, {
-        name: 'カンナステークス',
-        class: 'ジュニア',
-        month: 9,
-        period: '後半',
-        grade: 'OP',
-        location: '中山',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '外',
-        fullgate: 16,
-        require: 350,
-        rewards: [1600, 640, 400, 240, 160],
-        drops: ['']
-    }, {
-        name: 'サフラン賞',
-        class: 'ジュニア',
-        month: 9,
-        period: '後半',
-        grade: 'Pre-OP',
-        location: '中山',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 16,
-        require: 350,
-        rewards: [1000, 400, 250, 150, 100],
-        drops: ['']
-    }, {
-        name: 'サウジアラビアロイヤルカップ',
-        class: 'ジュニア',
-        month: 10,
-        period: '前半',
-        grade: 'GIII',
-        location: '東京',
-        ground: '芝',
-        length: 1800,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 350,
-        rewards: [3300, 1320, 825, 495, 330],
-        drops: ['']
-    }, {
-        name: 'もみじステークス',
-        class: 'ジュニア',
-        month: 10,
-        period: '前半',
-        grade: 'OP',
-        location: '京都',
-        ground: '芝',
-        length: 1400,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [1600, 640, 400, 240, 160],
-        drops: ['']
-    }, {
-        name: 'りんどう賞',
-        class: 'ジュニア',
-        month: 10,
-        period: '前半',
-        grade: 'Pre-OP',
-        location: '京都',
-        ground: '芝',
-        length: 1400,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [1000, 400, 250, 150, 100],
-        drops: ['']
-    }, {
-        name: '紫菊賞',
-        class: 'ジュニア',
-        month: 10,
-        period: '前半',
-        grade: 'Pre-OP',
-        location: '京都',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 350,
-        rewards: [1000, 400, 250, 150, 100],
-        drops: ['']
-    }, {
-        name: 'プラタナス賞',
-        class: 'ジュニア',
-        month: 10,
-        period: '前半',
-        grade: 'Pre-OP',
-        location: '東京',
-        ground: 'ダート',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [1000, 400, 250, 150, 100],
-        drops: ['']
-    }, {
-        name: 'アルテミスステークス',
-        class: 'ジュニア',
-        month: 10,
-        period: '後半',
-        grade: 'GIII',
-        location: '東京',
-        ground: '芝',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 350,
-        rewards: [2900, 1160, 725, 435, 290],
-        drops: ['']
-    }, {
-        name: 'アイビーステークス',
-        class: 'ジュニア',
-        month: 10,
-        period: '後半',
-        grade: 'OP',
-        location: '東京',
-        ground: '芝',
-        length: 1800,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 350,
-        rewards: [1700, 680, 425, 255, 170],
-        drops: ['']
-    }, {
-        name: '萩ステークス',
-        class: 'ジュニア',
-        month: 10,
-        period: '後半',
-        grade: 'OP',
-        location: '京都',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [1700, 680, 425, 255, 170],
-        drops: ['']
-    }, {
-        name: 'なでしこ賞',
-        class: 'ジュニア',
-        month: 10,
-        period: '後半',
-        grade: 'Pre-OP',
-        location: '京都',
-        ground: 'ダート',
-        length: 1400,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [1000, 400, 250, 150, 100],
-        drops: ['']
-    }, {
-        name: '京王杯ジュニアステークス',
-        class: 'ジュニア',
-        month: 11,
-        period: '前半',
-        grade: 'GII',
-        location: '東京',
-        ground: '芝',
-        length: 1400,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 375,
-        rewards: [3800, 1520, 950, 570, 380],
-        drops: ['']
-    }, {
-        name: 'デイリー杯ジュニアステークス',
-        class: 'ジュニア',
-        month: 11,
-        period: '前半',
-        grade: 'GII',
-        location: '京都',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 375,
-        rewards: [3800, 1520, 950, 570, 380],
-        drops: ['']
-    }, {
-        name: 'ファンタジーステークス',
-        class: 'ジュニア',
-        month: 11,
-        period: '前半',
-        grade: 'GIII',
-        location: '京都',
-        ground: '芝',
-        length: 1400,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [2900, 1160, 725, 435, 290],
-        drops: ['']
-    }, {
-        name: '福島ジュニアステークス',
-        class: 'ジュニア',
-        month: 11,
-        period: '前半',
-        grade: 'OP',
-        location: '福島',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 14,
-        require: 350,
-        rewards: [1600, 640, 400, 240, 160],
-        drops: ['']
-    }, {
-        name: '百日草特別',
-        class: 'ジュニア',
-        month: 11,
-        period: '前半',
-        grade: 'Pre-OP',
-        location: '東京',
-        ground: '芝',
-        length: 2000,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 350,
-        rewards: [1000, 400, 250, 150, 100],
-        drops: ['']
-    }, {
-        name: 'きんもくせい特別',
-        class: 'ジュニア',
-        month: 11,
-        period: '前半',
-        grade: 'Pre-OP',
-        location: '福島',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [1000, 400, 250, 150, 100],
-        drops: ['']
-    }, {
-        name: 'オキザリス賞',
-        class: 'ジュニア',
-        month: 11,
-        period: '前半',
-        grade: 'Pre-OP',
-        location: '東京',
-        ground: 'ダート',
-        length: 1400,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [1000, 400, 250, 150, 100],
-        drops: ['']
-    }, {
-        name: '黄菊賞',
-        class: 'ジュニア',
-        month: 11,
-        period: '前半',
-        grade: 'Pre-OP',
-        location: '東京',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 350,
-        rewards: [1000, 400, 250, 150, 100],
-        drops: ['']
-    }, {
-        name: '東京スポーツ杯ジュニアステークス',
-        class: 'ジュニア',
-        month: 11,
-        period: '後半',
-        grade: 'GIII',
-        location: '東京',
-        ground: '芝',
-        length: 1800,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 350,
-        rewards: [3300, 1320, 825, 495, 330],
-        drops: ['']
-    }, {
-        name: '京都ジュニアステークス',
-        class: 'ジュニア',
-        month: 11,
-        period: '後半',
-        grade: 'GIII',
-        location: '京都',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 350,
-        rewards: [3300, 1320, 825, 495, 330],
-        drops: ['']
-    }, {
-        name: 'もちの木賞',
-        class: 'ジュニア',
-        month: 11,
-        period: '後半',
-        grade: 'Pre-OP',
-        location: '京都',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [1000, 400, 250, 150, 100],
-        drops: ['']
-    }, {
-        name: '赤松賞',
-        class: 'ジュニア',
-        month: 11,
-        period: '後半',
-        grade: 'Pre-OP',
-        location: '東京',
-        ground: '芝',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 350,
-        rewards: [1000, 400, 250, 150, 100],
-        drops: ['']
-    }, {
-        name: '秋明菊賞',
-        class: 'ジュニア',
-        month: 11,
-        period: '後半',
-        grade: 'Pre-OP',
-        location: '京都',
-        ground: '芝',
-        length: 1400,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [1000, 400, 250, 150, 100],
-        drops: ['']
-    }, {
-        name: 'カトレア賞',
-        class: 'ジュニア',
-        month: 11,
-        period: '後半',
-        grade: 'Pre-OP',
-        location: '東京',
-        ground: 'ダート',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [1000, 400, 250, 150, 100],
-        drops: ['']
-    }, {
-        name: 'ベゴニア賞',
-        class: 'ジュニア',
-        month: 11,
-        period: '後半',
-        grade: 'Pre-OP',
-        location: '東京',
-        ground: '芝',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 350,
-        rewards: [1000, 400, 250, 150, 100],
-        drops: ['']
-    }, {
-        name: '白菊賞',
-        class: 'ジュニア',
-        month: 11,
-        period: '後半',
-        grade: 'Pre-OP',
-        location: '京都',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [1000, 400, 250, 150, 100],
-        drops: ['']
-    }, {
-        name: '葉牡丹賞',
-        class: 'ジュニア',
-        month: 11,
-        period: '後半',
-        grade: 'Pre-OP',
-        location: '中山',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 350,
-        rewards: [1000, 400, 250, 150, 100],
-        drops: ['']
-    }, {
-        name: 'こうやまき賞',
-        class: 'ジュニア',
-        month: 11,
-        period: '後半',
-        grade: 'Pre-OP',
-        location: '中京',
-        ground: '芝',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [1000, 400, 250, 150, 100],
-        drops: ['']
-    }, {
-        name: '阪神ジュベナイルフィリーズ',
-        class: 'ジュニア',
-        month: 12,
-        period: '前半',
-        grade: 'GI',
-        location: '阪神',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 1000,
-        rewards: [6500, 2600, 1625, 975, 650],
-        drops: ['阪神JF優勝レイ']
-    }, {
-        name: '朝日杯フューチュリティステークス',
-        class: 'ジュニア',
-        month: 12,
-        period: '前半',
-        grade: 'GI',
-        location: '阪神',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 1000,
-        rewards: [7000, 2800, 1750, 1050, 700],
-        drops: ['朝日杯FS優勝レイ']
-    }, {
-        name: '万両賞',
-        class: 'ジュニア',
-        month: 12,
-        period: '前半',
-        grade: 'Pre-OP',
-        location: '阪神',
-        ground: '芝',
-        length: 1400,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 350,
-        rewards: [1000, 400, 250, 150, 100],
-        drops: ['']
-    }, {
-        name: '黒松賞',
-        class: 'ジュニア',
-        month: 12,
-        period: '前半',
-        grade: 'Pre-OP',
-        location: '中山',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '外',
-        fullgate: 16,
-        require: 350,
-        rewards: [1000, 400, 250, 150, 100],
-        drops: ['']
-    }, {
-        name: 'エリカ賞',
-        class: 'ジュニア',
-        month: 12,
-        period: '前半',
-        grade: 'Pre-OP',
-        location: '阪神',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 350,
-        rewards: [1000, 400, 250, 150, 100],
-        drops: ['']
-    }, {
-        name: 'つわぶき賞',
-        class: 'ジュニア',
-        month: 12,
-        period: '前半',
-        grade: 'Pre-OP',
-        location: '中京',
-        ground: '芝',
-        length: 1400,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 350,
-        rewards: [1000, 400, 250, 150, 100],
-        drops: ['']
-    }, {
-        name: 'ひいらぎ賞',
-        class: 'ジュニア',
-        month: 12,
-        period: '前半',
-        grade: 'Pre-OP',
-        location: '中山',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 16,
-        require: 350,
-        rewards: [1000, 400, 250, 150, 100],
-        drops: ['']
-    }, {
-        name: 'さざんか賞',
-        class: 'ジュニア',
-        month: 12,
-        period: '前半',
-        grade: 'Pre-OP',
-        location: '阪神',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 350,
-        rewards: [1000, 400, 250, 150, 100],
-        drops: ['']
-    }, {
-        name: '寒椿賞',
-        class: 'ジュニア',
-        month: 12,
-        period: '前半',
-        grade: 'Pre-OP',
-        location: '中京',
-        ground: 'ダート',
-        length: 1400,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [1000, 400, 250, 150, 100],
-        drops: ['']
-    }, {
-        name: 'ホープフルステークス',
-        class: 'ジュニア',
-        month: 12,
-        period: '後半',
-        grade: 'GI',
-        location: '中山',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 1000,
-        rewards: [7000, 2800, 1750, 1050, 700],
-        drops: ['ホープフルS優勝レイ']
-    }, {
-        name: 'クリスマスローズステークス',
-        class: 'ジュニア',
-        month: 12,
-        period: '後半',
-        grade: 'OP',
-        location: '中山',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '外',
-        fullgate: 16,
-        require: 350,
-        rewards: [1600, 640, 400, 240, 160],
-        drops: ['']
-    }, {
-        name: '千両賞',
-        class: 'ジュニア',
-        month: 12,
-        period: '後半',
-        grade: 'Pre-OP',
-        location: '阪神',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [1000, 400, 250, 150, 100],
-        drops: ['']
-    }, {
-        name: 'シンザン記念',
-        class: 'クラシック',
-        month: 1,
-        period: '前半',
-        grade: 'GIII',
-        location: '京都',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 1000,
-        rewards: [3800, 1520, 950, 570, 380],
-        drops: ['']
-    }, {
-        name: 'フェアリーステークス',
-        class: 'クラシック',
-        month: 1,
-        period: '前半',
-        grade: 'GIII',
-        location: '中山',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 16,
-        require: 750,
-        rewards: [3500, 1400, 875, 525, 350],
-        drops: ['']
-    }, {
-        name: '京成杯',
-        class: 'クラシック',
-        month: 1,
-        period: '前半',
-        grade: 'GIII',
-        location: '中山',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 1000,
-        rewards: [3800, 1520, 950, 570, 380],
-        drops: ['']
-    }, {
-        name: 'ジュニアカップ',
-        class: 'クラシック',
-        month: 1,
-        period: '前半',
-        grade: 'OP',
-        location: '中山',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 16,
-        require: 350,
-        rewards: [2000, 800, 500, 300, 200],
-        drops: ['']
-    }, {
-        name: '紅梅ステークス',
-        class: 'クラシック',
-        month: 1,
-        period: '前半',
-        grade: 'OP',
-        location: '京都',
-        ground: '芝',
-        length: 1400,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [2000, 800, 500, 300, 200],
-        drops: ['']
-    }, {
-        name: '若駒ステークス',
-        class: 'クラシック',
-        month: 1,
-        period: '後半',
-        grade: 'OP',
-        location: '京都',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 350,
-        rewards: [2000, 800, 500, 300, 200],
-        drops: ['']
-    }, {
-        name: 'クロッカスステークス',
-        class: 'クラシック',
-        month: 1,
-        period: '後半',
-        grade: 'OP',
-        location: '東京',
-        ground: '芝',
-        length: 1400,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 350,
-        rewards: [2000, 800, 500, 300, 200],
-        drops: ['']
-    }, {
-        name: 'きさらぎ賞',
-        class: 'クラシック',
-        month: 2,
-        period: '前半',
-        grade: 'GIII',
-        location: '京都',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 1000,
-        rewards: [3800, 1520, 950, 570, 380],
-        drops: ['']
-    }, {
-        name: 'クイーンカップ',
-        class: 'クラシック',
-        month: 2,
-        period: '前半',
-        grade: 'GIII',
-        location: '東京',
-        ground: '芝',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 750,
-        rewards: [3500, 1400, 875, 525, 350],
-        drops: ['']
-    }, {
-        name: '共同通信杯',
-        class: 'クラシック',
-        month: 2,
-        period: '前半',
-        grade: 'GIII',
-        location: '東京',
-        ground: '芝',
-        length: 1800,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 1000,
-        rewards: [3800, 1520, 950, 570, 380],
-        drops: ['']
-    }, {
-        name: 'エルフィンステークス',
-        class: 'クラシック',
-        month: 2,
-        period: '前半',
-        grade: 'OP',
-        location: '京都',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [2000, 800, 500, 300, 200],
-        drops: ['']
-    }, {
-        name: 'ヒヤシンスステークス',
-        class: 'クラシック',
-        month: 2,
-        period: '後半',
-        grade: 'OP',
-        location: '東京',
-        ground: 'ダート',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [1900, 760, 475, 285, 190],
-        drops: ['']
-    }, {
-        name: 'すみれステークス',
-        class: 'クラシック',
-        month: 2,
-        period: '後半',
-        grade: 'OP',
-        location: '阪神',
-        ground: '芝',
-        length: 2200,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 350,
-        rewards: [2000, 800, 500, 300, 200],
-        drops: ['']
-    }, {
-        name: 'マーガレットステークス',
-        class: 'クラシック',
-        month: 2,
-        period: '後半',
-        grade: 'OP',
-        location: '阪神',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 350,
-        rewards: [2000, 800, 500, 300, 200],
-        drops: ['']
-    }, {
-        name: 'フィリーズレビュー',
-        class: 'クラシック',
-        month: 3,
-        period: '前半',
-        grade: 'GII',
-        location: '阪神',
-        ground: '芝',
-        length: 1400,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 1750,
-        rewards: [5200, 2080, 1300, 780, 520],
-        drops: ['']
-    }, {
-        name: '弥生賞',
-        class: 'クラシック',
-        month: 3,
-        period: '前半',
-        grade: 'GII',
-        location: '中山',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 1750,
-        rewards: [5400, 2160, 1350, 810, 540],
-        drops: ['']
-    }, {
-        name: 'チューリップ賞',
-        class: 'クラシック',
-        month: 3,
-        period: '前半',
-        grade: 'GII',
-        location: '阪神',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 1750,
-        rewards: [5200, 2080, 1300, 780, 520],
-        drops: ['']
-    }, {
-        name: 'アネモネステークス',
-        class: 'クラシック',
-        month: 3,
-        period: '前半',
-        grade: 'OP',
-        location: '中山',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 16,
-        require: 350,
-        rewards: [2000, 800, 500, 300, 200],
-        drops: ['']
-    }, {
-        name: '昇竜ステークス',
-        class: 'クラシック',
-        month: 3,
-        period: '前半',
-        grade: 'OP',
-        location: '中京',
-        ground: 'ダート',
-        length: 1400,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [1800, 720, 450, 270, 180],
-        drops: ['']
-    }, {
-        name: 'スプリングステークス',
-        class: 'クラシック',
-        month: 3,
-        period: '後半',
-        grade: 'GII',
-        location: '中山',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 1750,
-        rewards: [5400, 2160, 1350, 810, 540],
-        drops: ['']
-    }, {
-        name: 'ファルコンステークス',
-        class: 'クラシック',
-        month: 3,
-        period: '後半',
-        grade: 'GIII',
-        location: '中京',
-        ground: '芝',
-        length: 1400,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 1250,
-        rewards: [3800, 1520, 950, 570, 380],
-        drops: ['']
-    }, {
-        name: 'フラワーカップ',
-        class: 'クラシック',
-        month: 3,
-        period: '後半',
-        grade: 'GIII',
-        location: '中山',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 750,
-        rewards: [3500, 1400, 875, 525, 350],
-        drops: ['']
-    }, {
-        name: '毎日杯',
-        class: 'クラシック',
-        month: 3,
-        period: '後半',
-        grade: 'GIII',
-        location: '阪神',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 1250,
-        rewards: [3800, 1520, 950, 570, 380],
-        drops: ['']
-    }, {
-        name: '若葉ステークス',
-        class: 'クラシック',
-        month: 3,
-        period: '後半',
-        grade: 'OP',
-        location: '阪神',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 350,
-        rewards: [2000, 800, 500, 300, 200],
-        drops: ['']
-    }, {
-        name: '桜花賞',
-        class: 'クラシック',
-        month: 4,
-        period: '前半',
-        grade: 'GI',
-        location: '阪神',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 4500,
-        rewards: [10500, 4200, 2625, 1575, 1050],
-        drops: ['桜花賞優勝レイ']
-    }, {
-        name: '皐月賞',
-        class: 'クラシック',
-        month: 4,
-        period: '前半',
-        grade: 'GI',
-        location: '中山',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 4500,
-        rewards: [11000, 4400, 2750, 1650, 1100],
-        drops: ['皐月賞優勝レイ']
-    }, {
-        name: 'ニュージーランドトロフィー',
-        class: 'クラシック',
-        month: 4,
-        period: '前半',
-        grade: 'GII',
-        location: '中山',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 16,
-        require: 1750,
-        rewards: [5400, 2160, 1350, 810, 540],
-        drops: ['']
-    }, {
-        name: 'アーリントンカップ',
-        class: 'クラシック',
-        month: 4,
-        period: '前半',
-        grade: 'GIII',
-        location: '阪神',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 1250,
-        rewards: [3800, 1520, 950, 570, 380],
-        drops: ['']
-    }, {
-        name: '伏竜ステークス',
-        class: 'クラシック',
-        month: 4,
-        period: '前半',
-        grade: 'OP',
-        location: '中山',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [1800, 720, 450, 270, 180],
-        drops: ['']
-    }, {
-        name: '忘れな草賞',
-        class: 'クラシック',
-        month: 4,
-        period: '前半',
-        grade: 'OP',
-        location: '阪神',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 350,
-        rewards: [2000, 800, 500, 300, 200],
-        drops: ['']
-    }, {
-        name: 'フローラステークス',
-        class: 'クラシック',
-        month: 4,
-        period: '後半',
-        grade: 'GII',
-        location: '東京',
-        ground: '芝',
-        length: 2000,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 1750,
-        rewards: [5200, 2080, 1300, 780, 520],
-        drops: ['']
-    }, {
-        name: '青葉賞',
-        class: 'クラシック',
-        month: 4,
-        period: '後半',
-        grade: 'GII',
-        location: '東京',
-        ground: '芝',
-        length: 2400,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 1800,
-        rewards: [5400, 2160, 1350, 810, 540],
-        drops: ['']
-    }, {
-        name: '橘ステークス',
-        class: 'クラシック',
-        month: 4,
-        period: '後半',
-        grade: 'OP',
-        location: '京都',
-        ground: '芝',
-        length: 1400,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [2000, 800, 500, 300, 200],
-        drops: ['']
-    }, {
-        name: '端午ステークス',
-        class: 'クラシック',
-        month: 4,
-        period: '後半',
-        grade: 'OP',
-        location: '京都',
-        ground: 'ダート',
-        length: 1400,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [1800, 720, 450, 270, 180],
-        drops: ['']
-    }, {
-        name: 'スイートピーステークス',
-        class: 'クラシック',
-        month: 4,
-        period: '後半',
-        grade: 'OP',
-        location: '東京',
-        ground: '芝',
-        length: 1800,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 350,
-        rewards: [2000, 800, 500, 300, 200],
-        drops: ['']
-    }, {
-        name: 'NHKマイルカップ',
-        class: 'クラシック',
-        month: 5,
-        period: '前半',
-        grade: 'GI',
-        location: '東京',
-        ground: '芝',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 5000,
-        rewards: [10500, 4200, 2625, 1575, 1050],
-        drops: ['NHKマイルC優勝レイ']
-    }, {
-        name: '京都新聞杯',
-        class: 'クラシック',
-        month: 5,
-        period: '前半',
-        grade: 'GII',
-        location: '京都',
-        ground: '芝',
-        length: 2200,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 1750,
-        rewards: [5400, 2160, 1350, 810, 540],
-        drops: ['']
-    }, {
-        name: 'プリンシパルステークス',
-        class: 'クラシック',
-        month: 5,
-        period: '前半',
-        grade: 'OP',
-        location: '東京',
-        ground: '芝',
-        length: 2000,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 350,
-        rewards: [2000, 800, 500, 300, 200],
-        drops: ['']
-    }, {
-        name: '青竜ステークス',
-        class: 'クラシック',
-        month: 5,
-        period: '前半',
-        grade: 'OP',
-        location: '東京',
-        ground: 'ダート',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [1800, 720, 450, 270, 180],
-        drops: ['']
-    }, {
-        name: 'オークス',
-        class: 'クラシック',
-        month: 5,
-        period: '後半',
-        grade: 'GI',
-        location: '東京',
-        ground: '芝',
-        length: 2400,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 6000,
-        rewards: [11000, 4400, 2750, 1650, 1100],
-        drops: ['オークス優勝レイ']
-    }, {
-        name: '日本ダービー 東京優駿',
-        class: 'クラシック',
-        month: 5,
-        period: '後半',
-        grade: 'GI',
-        location: '東京',
-        ground: '芝',
-        length: 2400,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 6000,
-        rewards: [20000, 8000, 5000, 3000, 2000],
-        drops: ['日本ダービー優勝レイ']
-    }, {
-        name: '葵ステークス',
-        class: 'クラシック',
-        month: 5,
-        period: '後半',
-        grade: 'GIII',
-        location: '京都',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 1250,
-        rewards: [3800, 1520, 950, 570, 380],
-        drops: ['']
-    }, {
-        name: '鳳雛ステークス',
-        class: 'クラシック',
-        month: 5,
-        period: '後半',
-        grade: 'OP',
-        location: '京都',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [1900, 760, 475, 285, 190],
-        drops: ['']
-    }, {
-        name: '白百合ステークス',
-        class: 'クラシック',
-        month: 5,
-        period: '後半',
-        grade: 'OP',
-        location: '京都',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [2000, 800, 500, 300, 200],
-        drops: ['']
-    }, {
-        name: '安田記念',
-        class: 'クラシック',
-        month: 6,
-        period: '前半',
-        grade: 'GI',
-        location: '東京',
-        ground: '芝',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 15000,
-        rewards: [13000, 5200, 3250, 1950, 1300],
-        drops: ['安田記念優勝レイ']
-    }, {
-        name: '鳴尾記念',
-        class: 'クラシック',
-        month: 6,
-        period: '前半',
-        grade: 'GIII',
-        location: '阪神',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 1500,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['']
-    }, {
-        name: 'マーメイドステークス',
-        class: 'クラシック',
-        month: 6,
-        period: '前半',
-        grade: 'GIII',
-        location: '阪神',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 1000,
-        rewards: [3600, 1440, 900, 540, 360],
-        drops: ['']
-    }, {
-        name: 'エプソムカップ',
-        class: 'クラシック',
-        month: 6,
-        period: '前半',
-        grade: 'GIII',
-        location: '東京',
-        ground: '芝',
-        length: 1800,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 1500,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['']
-    }, {
-        name: '天保山ステークス',
-        class: 'クラシック',
-        month: 6,
-        period: '前半',
-        grade: 'OP',
-        location: '阪神',
-        ground: 'ダート',
-        length: 1400,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: 'ステイプニルステークス',
-        class: 'クラシック',
-        month: 6,
-        period: '前半',
-        grade: 'OP',
-        location: '東京',
-        ground: 'ダート',
-        length: 2100,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: '宝塚記念',
-        class: 'クラシック',
-        month: 6,
-        period: '後半',
-        grade: 'GI',
-        location: '阪神',
-        ground: '芝',
-        length: 2200,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 20000,
-        rewards: [15000, 6000, 3750, 2250, 1500],
-        drops: ['宝塚記念優勝レイ']
-    }, {
-        name: '函館スプリントステークス',
-        class: 'クラシック',
-        month: 6,
-        period: '後半',
-        grade: 'GIII',
-        location: '函館',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 1250,
-        rewards: [3900, 1560, 975, 585, 390],
-        drops: ['']
-    }, {
-        name: 'ユニコーンステークス',
-        class: 'クラシック',
-        month: 6,
-        period: '後半',
-        grade: 'GIII',
-        location: '東京',
-        ground: 'ダート',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 750,
-        rewards: [3500, 1400, 875, 525, 350],
-        drops: ['']
-    }, {
-        name: 'アハルテケステークス',
-        class: 'クラシック',
-        month: 6,
-        period: '後半',
-        grade: 'OP',
-        location: '東京',
-        ground: 'ダート',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: '米子ステークス',
-        class: 'クラシック',
-        month: 6,
-        period: '後半',
-        grade: 'OP',
-        location: '阪神',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: '大沼ステークス',
-        class: 'クラシック',
-        month: 6,
-        period: '後半',
-        grade: 'OP',
-        location: '函館',
-        ground: 'ダート',
-        length: 1700,
-        rotation: '右',
-        side: '',
-        fullgate: 14,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: 'パラダイスステークス',
-        class: 'クラシック',
-        month: 6,
-        period: '後半',
-        grade: 'OP',
-        location: '東京',
-        ground: '芝',
-        length: 1400,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: '三宮ステークス',
-        class: 'クラシック',
-        month: 6,
-        period: '後半',
-        grade: 'OP',
-        location: '阪神',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: 'ジャパンダートダービー',
-        class: 'クラシック',
-        month: 7,
-        period: '前半',
-        grade: 'GI',
-        location: '大井',
-        ground: 'ダート',
-        length: 2000,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 4000,
-        rewards: [4500, 1800, 1125, 675, 450],
-        drops: ['ジャパンダートダービー優勝レイ']
-    }, {
-        name: 'CBC賞',
-        class: 'クラシック',
-        month: 7,
-        period: '前半',
-        grade: 'GIII',
-        location: '中京',
-        ground: '芝',
-        length: 1200,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 1250,
-        rewards: [3900, 1560, 975, 585, 390],
-        drops: ['']
-    }, {
-        name: 'プロキオンステークス',
-        class: 'クラシック',
-        month: 7,
-        period: '前半',
-        grade: 'GIII',
-        location: '中京',
-        ground: 'ダート',
-        length: 1400,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 1000,
-        rewards: [3600, 1440, 900, 540, 360],
-        drops: ['']
-    }, {
-        name: '七夕賞',
-        class: 'クラシック',
-        month: 7,
-        period: '前半',
-        grade: 'GIII',
-        location: '福島',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 1500,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['']
-    }, {
-        name: '函館記念',
-        class: 'クラシック',
-        month: 7,
-        period: '前半',
-        grade: 'GIII',
-        location: '函館',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 1500,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['']
-    }, {
-        name: 'ラジオNIKKEI賞',
-        class: 'クラシック',
-        month: 7,
-        period: '前半',
-        grade: 'GIII',
-        location: '福島',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 1250,
-        rewards: [3800, 1520, 950, 570, 380],
-        drops: ['']
-    }, {
-        name: '巴賞',
-        class: 'クラシック',
-        month: 7,
-        period: '前半',
-        grade: 'OP',
-        location: '函館',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2400, 960, 600, 360, 240],
-        drops: ['']
-    }, {
-        name: 'マリーンステークス',
-        class: 'クラシック',
-        month: 7,
-        period: '前半',
-        grade: 'OP',
-        location: '函館',
-        ground: 'ダート',
-        length: 1700,
-        rotation: '右',
-        side: '',
-        fullgate: 14,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: '名鉄杯',
-        class: 'クラシック',
-        month: 7,
-        period: '前半',
-        grade: 'OP',
-        location: '中京',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: '中京記念',
-        class: 'クラシック',
-        month: 7,
-        period: '後半',
-        grade: 'GIII',
-        location: '中京',
-        ground: '芝',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 1250,
-        rewards: [3900, 1560, 975, 585, 390],
-        drops: ['']
-    }, {
-        name: 'アイビスサマーダッシュ',
-        class: 'クラシック',
-        month: 7,
-        period: '後半',
-        grade: 'GIII',
-        location: '新潟',
-        ground: '芝',
-        length: 1000,
-        rotation: '直線',
-        side: '',
-        fullgate: 18,
-        require: 1250,
-        rewards: [3900, 1560, 975, 585, 390],
-        drops: ['']
-    }, {
-        name: 'クイーンステークス',
-        class: 'クラシック',
-        month: 7,
-        period: '後半',
-        grade: 'GIII',
-        location: '札幌',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 14,
-        require: 1000,
-        rewards: [3600, 1440, 900, 540, 360],
-        drops: ['']
-    }, {
-        name: '福岡テレビオープン',
-        class: 'クラシック',
-        month: 7,
-        period: '後半',
-        grade: 'OP',
-        location: '福岡',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 14,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: '小倉記念',
-        class: 'クラシック',
-        month: 8,
-        period: '前半',
-        grade: 'GIII',
-        location: '小倉',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '',
-        fullgate: 18,
-        require: 1500,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['']
-    }, {
-        name: '関屋記念',
-        class: 'クラシック',
-        month: 8,
-        period: '前半',
-        grade: 'GIII',
-        location: '新潟',
-        ground: '芝',
-        length: 1600,
-        rotation: '左',
-        side: '外',
-        fullgate: 18,
-        require: 1250,
-        rewards: [3900, 1560, 975, 585, 390],
-        drops: ['']
-    }, {
-        name: 'エルムステークス',
-        class: 'クラシック',
-        month: 8,
-        period: '前半',
-        grade: 'GIII',
-        location: '札幌',
-        ground: 'ダート',
-        length: 1700,
-        rotation: '右',
-        side: '',
-        fullgate: 14,
-        require: 1000,
-        rewards: [3600, 1440, 900, 540, 360],
-        drops: ['']
-    }, {
-        name: 'レパードステークス',
-        class: 'クラシック',
-        month: 8,
-        period: '前半',
-        grade: 'GIII',
-        location: '新潟',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '左',
-        side: '',
-        fullgate: 15,
-        require: 1250,
-        rewards: [4000, 1600, 1000, 600, 400],
-        drops: ['']
-    }, {
-        name: '札幌日経オープン',
-        class: 'クラシック',
-        month: 8,
-        period: '前半',
-        grade: 'OP',
-        location: '札幌',
-        ground: '芝',
-        length: 2600,
-        rotation: '右',
-        side: '',
-        fullgate: 14,
-        require: 350,
-        rewards: [2600, 1040, 650, 390, 260],
-        drops: ['']
-    }, {
-        name: 'UHB賞',
-        class: 'クラシック',
-        month: 8,
-        period: '前半',
-        grade: 'OP',
-        location: '札幌',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: '阿蘇ステークス',
-        class: 'クラシック',
-        month: 8,
-        period: '前半',
-        grade: 'OP',
-        location: '小倉',
-        ground: 'ダート',
-        length: 1700,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: '関越ステークス',
-        class: 'クラシック',
-        month: 8,
-        period: '前半',
-        grade: 'OP',
-        location: '新潟',
-        ground: '芝',
-        length: 1800,
-        rotation: '左',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [2400, 960, 600, 360, 240],
-        drops: ['']
-    }, {
-        name: '札幌記念',
-        class: 'クラシック',
-        month: 8,
-        period: '後半',
-        grade: 'GII',
-        location: '札幌',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 2000,
-        rewards: [7000, 2800, 1750, 1050, 700],
-        drops: ['']
-    }, {
-        name: '北九州記念',
-        class: 'クラシック',
-        month: 8,
-        period: '後半',
-        grade: 'GIII',
-        location: '小倉',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 18,
-        require: 1250,
-        rewards: [3900, 1560, 975, 585, 390],
-        drops: ['']
-    }, {
-        name: 'キーンランドカップ',
-        class: 'クラシック',
-        month: 8,
-        period: '後半',
-        grade: 'GIII',
-        location: '札幌',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 1500,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['']
-    }, {
-        name: 'NST賞',
-        class: 'クラシック',
-        month: 8,
-        period: '後半',
-        grade: 'OP',
-        location: '新潟',
-        ground: 'ダート',
-        length: 1200,
-        rotation: '左',
-        side: '',
-        fullgate: 15,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: 'BSN賞',
-        class: 'クラシック',
-        month: 8,
-        period: '後半',
-        grade: 'OP',
-        location: '新潟',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '左',
-        side: '',
-        fullgate: 15,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: '小倉日経オープン',
-        class: 'クラシック',
-        month: 8,
-        period: '後半',
-        grade: 'OP',
-        location: '小倉',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2400, 960, 600, 360, 240],
-        drops: ['']
-    }, {
-        name: '朱鷺ステークス',
-        class: 'クラシック',
-        month: 8,
-        period: '後半',
-        grade: 'OP',
-        location: '新潟',
-        ground: '芝',
-        length: 1400,
-        rotation: '左',
-        side: '内',
-        fullgate: 18,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: 'セントウルステークス',
-        class: 'クラシック',
-        month: 9,
-        period: '前半',
-        grade: 'GII',
-        location: '阪神',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 1900,
-        rewards: [5900, 2360, 1475, 885, 590],
-        drops: ['']
-    }, {
-        name: 'ローズステークス',
-        class: 'クラシック',
-        month: 9,
-        period: '前半',
-        grade: 'GII',
-        location: '阪神',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 1750,
-        rewards: [5200, 2080, 1300, 780, 520],
-        drops: ['']
-    }, {
-        name: '新潟記念',
-        class: 'クラシック',
-        month: 9,
-        period: '前半',
-        grade: 'GIII',
-        location: '新潟',
-        ground: '芝',
-        length: 2000,
-        rotation: '左',
-        side: '外',
-        fullgate: 18,
-        require: 1500,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['']
-    }, {
-        name: '京成杯オータムハンデキャップ',
-        class: 'クラシック',
-        month: 9,
-        period: '前半',
-        grade: 'GIII',
-        location: '中山',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 16,
-        require: 1250,
-        rewards: [3900, 1560, 975, 585, 390],
-        drops: ['']
-    }, {
-        name: '紫苑ステークス',
-        class: 'クラシック',
-        month: 9,
-        period: '前半',
-        grade: 'GIII',
-        location: '中山',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 1000,
-        rewards: [3500, 1400, 875, 525, 350],
-        drops: ['']
-    }, {
-        name: '丹頂ステークス',
-        class: 'クラシック',
-        month: 9,
-        period: '前半',
-        grade: 'OP',
-        location: '札幌',
-        ground: '芝',
-        length: 2600,
-        rotation: '右',
-        side: '',
-        fullgate: 14,
-        require: 350,
-        rewards: [2400, 960, 600, 360, 240],
-        drops: ['']
-    }, {
-        name: 'エニフステークス',
-        class: 'クラシック',
-        month: 9,
-        period: '前半',
-        grade: 'OP',
-        location: '阪神',
-        ground: 'ダート',
-        length: 1400,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: 'ラジオ日本賞',
-        class: 'クラシック',
-        month: 9,
-        period: '前半',
-        grade: 'OP',
-        location: '中山',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: 'スプリンターズステークス',
-        class: 'クラシック',
-        month: 9,
-        period: '後半',
-        grade: 'GI',
-        location: '中山',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '外',
-        fullgate: 16,
-        require: 15000,
-        rewards: [13000, 5200, 3250, 1950, 1300],
-        drops: ['スプリンターズS優勝レイ']
-    }, {
-        name: '神戸新聞杯',
-        class: 'クラシック',
-        month: 9,
-        period: '後半',
-        grade: 'GII',
-        location: '阪神',
-        ground: '芝',
-        length: 2400,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 1750,
-        rewards: [5400, 2160, 1350, 810, 540],
-        drops: ['']
-    }, {
-        name: 'オールカマー',
-        class: 'クラシック',
-        month: 9,
-        period: '後半',
-        grade: 'GII',
-        location: '中山',
-        ground: '芝',
-        length: 2200,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 2000,
-        rewards: [6700, 2680, 1675, 1005, 670],
-        drops: ['']
-    }, {
-        name: 'セントライト記念',
-        class: 'クラシック',
-        month: 9,
-        period: '後半',
-        grade: 'GII',
-        location: '中山',
-        ground: '芝',
-        length: 2200,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 1750,
-        rewards: [5400, 2160, 1350, 810, 540],
-        drops: ['']
-    }, {
-        name: 'シリウスステークス',
-        class: 'クラシック',
-        month: 9,
-        period: '後半',
-        grade: 'GIII',
-        location: '阪神',
-        ground: 'ダート',
-        length: 2000,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 1000,
-        rewards: [3600, 1440, 900, 540, 360],
-        drops: ['']
-    }, {
-        name: 'ポートアイランドステークス',
-        class: 'クラシック',
-        month: 9,
-        period: '後半',
-        grade: 'OP',
-        location: '阪神',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: 'ながつきステークス',
-        class: 'クラシック',
-        month: 9,
-        period: '後半',
-        grade: 'OP',
-        location: '中山',
-        ground: 'ダート',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: '毎日王冠',
-        class: 'クラシック',
-        month: 10,
-        period: '前半',
-        grade: 'GII',
-        location: '東京',
-        ground: '芝',
-        length: 1800,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 2000,
-        rewards: [6700, 2680, 1675, 1005, 670],
-        drops: ['']
-    }, {
-        name: '京都大賞典',
-        class: 'クラシック',
-        month: 10,
-        period: '前半',
-        grade: 'GII',
-        location: '京都',
-        ground: '芝',
-        length: 2400,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 2000,
-        rewards: [6700, 2680, 1675, 1005, 670],
-        drops: ['']
-    }, {
-        name: '府中ウマ娘ステークス',
-        class: 'クラシック',
-        month: 10,
-        period: '前半',
-        grade: 'GII',
-        location: '東京',
-        ground: '芝',
-        length: 1800,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 1800,
-        rewards: [5500, 2200, 1375, 825, 550],
-        drops: ['']
-    }, {
-        name: 'オパールステークス',
-        class: 'クラシック',
-        month: 10,
-        period: '前半',
-        grade: 'OP',
-        location: '京都',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: 'グリーンチャンネルカップ',
-        class: 'クラシック',
-        month: 10,
-        period: '前半',
-        grade: 'OP',
-        location: '東京',
-        ground: 'ダート',
-        length: 1400,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: 'オクトーバーステークス',
-        class: 'クラシック',
-        month: 10,
-        period: '前半',
-        grade: 'OP',
-        location: '東京',
-        ground: '芝',
-        length: 2000,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 350,
-        rewards: [2600, 1040, 650, 390, 260],
-        drops: ['']
-    }, {
-        name: '信越ステークス',
-        class: 'クラシック',
-        month: 10,
-        period: '前半',
-        grade: 'OP',
-        location: '新潟',
-        ground: '芝',
-        length: 1400,
-        rotation: '左',
-        side: '内',
-        fullgate: 18,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: '太秦ステークス',
-        class: 'クラシック',
-        month: 10,
-        period: '前半',
-        grade: 'OP',
-        location: '京都',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: '天皇賞（秋）',
-        class: 'クラシック',
-        month: 10,
-        period: '後半',
-        grade: 'GI',
-        location: '東京',
-        ground: '芝',
-        length: 2000,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 20000,
-        rewards: [15000, 6000, 3750, 2250, 1500],
-        drops: ['天皇賞（秋）勝利レイ']
-    }, {
-        name: '秋華賞',
-        class: 'クラシック',
-        month: 10,
-        period: '後半',
-        grade: 'GI',
-        location: '京都',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 7500,
-        rewards: [10000, 4000, 2500, 1500, 1000],
-        drops: ['秋華賞優勝レイ']
-    }, {
-        name: '菊花賞',
-        class: 'クラシック',
-        month: 10,
-        period: '後半',
-        grade: 'GI',
-        location: '京都',
-        ground: '芝',
-        length: 3000,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 7500,
-        rewards: [12000, 4800, 3000, 1800, 1200],
-        drops: ['菊花賞優勝レイ']
-    }, {
-        name: 'スワンステークス',
-        class: 'クラシック',
-        month: 10,
-        period: '後半',
-        grade: 'GII',
-        location: '京都',
-        ground: '芝',
-        length: 1400,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 1900,
-        rewards: [5900, 2360, 1475, 885, 590],
-        drops: ['']
-    }, {
-        name: '富士ステークス',
-        class: 'クラシック',
-        month: 10,
-        period: '後半',
-        grade: 'GII',
-        location: '東京',
-        ground: '芝',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 1900,
-        rewards: [5900, 2360, 1475, 885, 590],
-        drops: ['']
-    }, {
-        name: '室町ステークス',
-        class: 'クラシック',
-        month: 10,
-        period: '後半',
-        grade: 'OP',
-        location: '京都',
-        ground: 'ダート',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: 'ブラジルカップ',
-        class: 'クラシック',
-        month: 10,
-        period: '後半',
-        grade: 'OP',
-        location: '東京',
-        ground: 'ダート',
-        length: 2100,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: 'カシオペアステークス',
-        class: 'クラシック',
-        month: 10,
-        period: '後半',
-        grade: 'OP',
-        location: '京都',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [2600, 1040, 650, 390, 260],
-        drops: ['']
-    }, {
-        name: 'ルミエールオータムダッシュ',
-        class: 'クラシック',
-        month: 10,
-        period: '後半',
-        grade: 'OP',
-        location: '新潟',
-        ground: '芝',
-        length: 1000,
-        rotation: '直線',
-        side: '',
-        fullgate: 18,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: 'エリザベス女王杯',
-        class: 'クラシック',
-        month: 11,
-        period: '前半',
-        grade: 'GI',
-        location: '京都',
-        ground: '芝',
-        length: 2200,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 10000,
-        rewards: [10500, 4200, 2625, 1575, 1050],
-        drops: ['エリザベス女王杯優勝レイ']
-    }, {
-        name: 'JBCレディスクラシック',
-        class: 'クラシック',
-        month: 11,
-        period: '前半',
-        grade: 'GI',
-        location: '大井',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 12000,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['JBCレディスクラシック優勝レイ']
-    }, {
-        name: 'JBCスプリント',
-        class: 'クラシック',
-        month: 11,
-        period: '前半',
-        grade: 'GI',
-        location: '大井',
-        ground: 'ダート',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 12000,
-        rewards: [6000, 2400, 1500, 900, 600],
-        drops: ['JBCスプリント優勝レイ']
-    }, {
-        name: 'JBCクラシック',
-        class: 'クラシック',
-        month: 11,
-        period: '前半',
-        grade: 'GI',
-        location: '大井',
-        ground: 'ダート',
-        length: 2000,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 12000,
-        rewards: [8000, 3200, 2000, 1200, 800],
-        drops: ['JBCクラシック優勝レイ']
-    }, {
-        name: 'アルゼンチン共和国杯',
-        class: 'クラシック',
-        month: 11,
-        period: '前半',
-        grade: 'GII',
-        location: '東京',
-        ground: '芝',
-        length: 2500,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 1900,
-        rewards: [5700, 2280, 1425, 855, 570],
-        drops: ['']
-    }, {
-        name: 'みやこステークス',
-        class: 'クラシック',
-        month: 11,
-        period: '前半',
-        grade: 'GIII',
-        location: '京都',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 750,
-        rewards: [3800, 1520, 950, 570, 380],
-        drops: ['']
-    }, {
-        name: '武蔵野ステークス',
-        class: 'クラシック',
-        month: 11,
-        period: '前半',
-        grade: 'GIII',
-        location: '東京',
-        ground: 'ダート',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 1250,
-        rewards: [3800, 1520, 950, 570, 380],
-        drops: ['']
-    }, {
-        name: '福島記念',
-        class: 'クラシック',
-        month: 11,
-        period: '前半',
-        grade: 'GIII',
-        location: '福島',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 1500,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['']
-    }, {
-        name: 'オーロラカップ',
-        class: 'クラシック',
-        month: 11,
-        period: '前半',
-        grade: 'OP',
-        location: '東京',
-        ground: '芝',
-        length: 1400,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: 'ジャパンカップ',
-        class: 'クラシック',
-        month: 11,
-        period: '後半',
-        grade: 'GI',
-        location: '東京',
-        ground: '芝',
-        length: 2400,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 25000,
-        rewards: [30000, 12000, 7500, 4500, 3000],
-        drops: ['ジャパンカップ優勝レイ']
-    }, {
-        name: 'マイルチャンピオンシップ',
-        class: 'クラシック',
-        month: 11,
-        period: '後半',
-        grade: 'GI',
-        location: '京都',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 15000,
-        rewards: [11000, 4400, 2750, 1650, 1100],
-        drops: ['マイルCS優勝レイ']
-    }, {
-        name: '京阪杯',
-        class: 'クラシック',
-        month: 11,
-        period: '後半',
-        grade: 'GIII',
-        location: '京都',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 1250,
-        rewards: [3900, 1560, 975, 575, 390],
-        drops: ['']
-    }, {
-        name: 'アンドロメダステークス',
-        class: 'クラシック',
-        month: 11,
-        period: '後半',
-        grade: 'OP',
-        location: '京都',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 350,
-        rewards: [2600, 1040, 650, 390, 260],
-        drops: ['']
-    }, {
-        name: '霜月ステークス',
-        class: 'クラシック',
-        month: 11,
-        period: '後半',
-        grade: 'OP',
-        location: '東京',
-        ground: 'ダート',
-        length: 1400,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: '福島民友カップ',
-        class: 'クラシック',
-        month: 11,
-        period: '後半',
-        grade: 'OP',
-        location: '福島',
-        ground: 'ダート',
-        length: 1700,
-        rotation: '右',
-        side: '',
-        fullgate: 15,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: 'キャピタルステークス',
-        class: 'クラシック',
-        month: 11,
-        period: '後半',
-        grade: 'OP',
-        location: '東京',
-        ground: '芝',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: 'オータムリーフステークス',
-        class: 'クラシック',
-        month: 11,
-        period: '後半',
-        grade: 'OP',
-        location: '京都',
-        ground: 'ダート',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: 'チャンピオンズカップ',
-        class: 'クラシック',
-        month: 12,
-        period: '前半',
-        grade: 'GI',
-        location: '中京',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 12000,
-        rewards: [10000, 4000, 2500, 1500, 1000],
-        drops: ['チャンピオンズカップ優勝レイ']
-    }, {
-        name: 'ステイヤーズステークス',
-        class: 'クラシック',
-        month: 12,
-        period: '前半',
-        grade: 'GII',
-        location: '中山',
-        ground: '芝',
-        length: 3600,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 2000,
-        rewards: [6200, 2480, 1550, 930, 620],
-        drops: ['']
-    }, {
-        name: 'チャレンジカップ',
-        class: 'クラシック',
-        month: 12,
-        period: '前半',
-        grade: 'GIII',
-        location: '阪神',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 1500,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['']
-    }, {
-        name: '中日新聞杯',
-        class: 'クラシック',
-        month: 12,
-        period: '前半',
-        grade: 'GIII',
-        location: '中京',
-        ground: '芝',
-        length: 2000,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 1500,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['']
-    }, {
-        name: 'カペラステークス',
-        class: 'クラシック',
-        month: 12,
-        period: '前半',
-        grade: 'GIII',
-        location: '中山',
-        ground: 'ダート',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 1000,
-        rewards: [3600, 1440, 900, 540, 360],
-        drops: ['']
-    }, {
-        name: 'ターコイズステークス',
-        class: 'クラシック',
-        month: 12,
-        period: '前半',
-        grade: 'GIII',
-        location: '中山',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 16,
-        require: 1000,
-        rewards: [3600, 1440, 900, 540, 360],
-        drops: ['']
-    }, {
-        name: 'ラピスラズリステークス',
-        class: 'クラシック',
-        month: 12,
-        period: '前半',
-        grade: 'OP',
-        location: '中山',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '外',
-        fullgate: 16,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: '師走ステークス',
-        class: 'クラシック',
-        month: 12,
-        period: '前半',
-        grade: 'OP',
-        location: '中山',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: 'リゲルステークス',
-        class: 'クラシック',
-        month: 12,
-        period: '前半',
-        grade: 'OP',
-        location: '阪神',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: 'タンザナイトステークス',
-        class: 'クラシック',
-        month: 12,
-        period: '前半',
-        grade: 'OP',
-        location: '阪神',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: 'ディセンバーステークス',
-        class: 'クラシック',
-        month: 12,
-        period: '前半',
-        grade: 'OP',
-        location: '中山',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 350,
-        rewards: [1600, 1040, 650, 390, 260],
-        drops: ['']
-    }, {
-        name: '有馬記念',
-        class: 'クラシック',
-        month: 12,
-        period: '後半',
-        grade: 'GI',
-        location: '中山',
-        ground: '芝',
-        length: 2500,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 25000,
-        rewards: [30000, 12000, 7500, 4500, 3000],
-        drops: ['有馬記念優勝レイ']
-    }, {
-        name: '東京大賞典',
-        class: 'クラシック',
-        month: 12,
-        period: '後半',
-        grade: 'GI',
-        location: '大井',
-        ground: 'ダート',
-        length: 2000,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 12000,
-        rewards: [8000, 3200, 2000, 1200, 800],
-        drops: ['東京大賞典優勝レイ']
-    }, {
-        name: '阪神カップ',
-        class: 'クラシック',
-        month: 12,
-        period: '後半',
-        grade: 'GII',
-        location: '阪神',
-        ground: '芝',
-        length: 1400,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 2000,
-        rewards: [6700, 2680, 1675, 1005, 670],
-        drops: ['']
-    }, {
-        name: 'ギャラクシーステークス',
-        class: 'クラシック',
-        month: 12,
-        period: '後半',
-        grade: 'OP',
-        location: '阪神',
-        ground: 'ダート',
-        length: 1400,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: 'ベテルギウスステークス',
-        class: 'クラシック',
-        month: 12,
-        period: '後半',
-        grade: 'OP',
-        location: '阪神',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: '日経新春杯',
-        class: 'シニア',
-        month: 1,
-        period: '前半',
-        grade: 'GII',
-        location: '京都',
-        ground: '芝',
-        length: 2400,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 1800,
-        rewards: [5700, 2280, 1425, 855, 570],
-        drops: ['']
-    }, {
-        name: '京都金杯',
-        class: 'シニア',
-        month: 1,
-        period: '前半',
-        grade: 'GIII',
-        location: '京都',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 1500,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['']
-    }, {
-        name: '中山金杯',
-        class: 'シニア',
-        month: 1,
-        period: '前半',
-        grade: 'GIII',
-        location: '中山',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 1500,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['']
-    }, {
-        name: '愛知杯',
-        class: 'シニア',
-        month: 1,
-        period: '前半',
-        grade: 'GIII',
-        location: '中京',
-        ground: '芝',
-        length: 2000,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 750,
-        rewards: [3600, 1440, 900, 540, 360],
-        drops: ['']
-    }, {
-        name: '万葉ステークス',
-        class: 'シニア',
-        month: 1,
-        period: '前半',
-        grade: 'OP',
-        location: '京都',
-        ground: '芝',
-        length: 3000,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [2400, 960, 600, 360, 240],
-        drops: ['']
-    }, {
-        name: '淀短距離ステークス',
-        class: 'シニア',
-        month: 1,
-        period: '前半',
-        grade: 'OP',
-        location: '京都',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: 'ポルックスステークス',
-        class: 'シニア',
-        month: 1,
-        period: '前半',
-        grade: 'OP',
-        location: '中山',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: 'ジャニュアリーステークス',
-        class: 'シニア',
-        month: 1,
-        period: '前半',
-        grade: 'OP',
-        location: '中山',
-        ground: 'ダート',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: 'ニューイヤーステークス',
-        class: 'シニア',
-        month: 1,
-        period: '前半',
-        grade: 'OP',
-        location: '中山',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 16,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: 'カーバンクルステークス',
-        class: 'シニア',
-        month: 1,
-        period: '前半',
-        grade: 'OP',
-        location: '中山',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '外',
-        fullgate: 16,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: '東海ステークス',
-        class: 'シニア',
-        month: 1,
-        period: '後半',
-        grade: 'GII',
-        location: '中京',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 1800,
-        rewards: [5500, 2200, 1375, 825, 550],
-        drops: ['']
-    }, {
-        name: 'アメリカJCC',
-        class: 'シニア',
-        month: 1,
-        period: '後半',
-        grade: 'GII',
-        location: '中山',
-        ground: '芝',
-        length: 2200,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 1900,
-        rewards: [6200, 2480, 1550, 930, 620],
-        drops: ['']
-    }, {
-        name: 'シルクロードステークス',
-        class: 'シニア',
-        month: 1,
-        period: '後半',
-        grade: 'GIII',
-        location: '京都',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 1250,
-        rewards: [3900, 1560, 975, 585, 390],
-        drops: ['']
-    }, {
-        name: '根岸ステークス',
-        class: 'シニア',
-        month: 1,
-        period: '後半',
-        grade: 'GIII',
-        location: '東京',
-        ground: 'ダート',
-        length: 1400,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 1000,
-        rewards: [3800, 1520, 950, 570, 380],
-        drops: ['']
-    }, {
-        name: 'すばるステークス',
-        class: 'シニア',
-        month: 1,
-        period: '後半',
-        grade: 'OP',
-        location: '京都',
-        ground: 'ダート',
-        length: 1400,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: '白富士ステークス',
-        class: 'シニア',
-        month: 1,
-        period: '後半',
-        grade: 'OP',
-        location: '東京',
-        ground: '芝',
-        length: 2000,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: '京都記念',
-        class: 'シニア',
-        month: 2,
-        period: '前半',
-        grade: 'GII',
-        location: '京都',
-        ground: '芝',
-        length: 2200,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 1900,
-        rewards: [6200, 2480, 1550, 930, 620],
-        drops: ['']
-    }, {
-        name: '東京新聞杯',
-        class: 'シニア',
-        month: 2,
-        period: '前半',
-        grade: 'GIII',
-        location: '東京',
-        ground: '芝',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 1250,
-        rewards: [3900, 1560, 975, 585, 390],
-        drops: ['']
-    }, {
-        name: '大和ステークス',
-        class: 'シニア',
-        month: 2,
-        period: '前半',
-        grade: 'OP',
-        location: '京都',
-        ground: 'ダート',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: '洛陽ステークス',
-        class: 'シニア',
-        month: 2,
-        period: '前半',
-        grade: 'OP',
-        location: '京都',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: 'アルデバランステークス',
-        class: 'シニア',
-        month: 2,
-        period: '前半',
-        grade: 'OP',
-        location: '京都',
-        ground: 'ダート',
-        length: 1900,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: 'バレンタインステークス',
-        class: 'シニア',
-        month: 2,
-        period: '前半',
-        grade: 'OP',
-        location: '京都',
-        ground: 'ダート',
-        length: 1400,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: 'フェブラリーステークス',
-        class: 'シニア',
-        month: 2,
-        period: '後半',
-        grade: 'GI',
-        location: '東京',
-        ground: 'ダート',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 12000,
-        rewards: [10000, 4000, 2500, 1500, 1000],
-        drops: ['']
-    }, {
-        name: '中山記念',
-        class: 'シニア',
-        month: 2,
-        period: '後半',
-        grade: 'GII',
-        location: '中山',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 1900,
-        rewards: [6700, 2680, 1675, 1005, 670],
-        drops: ['']
-    }, {
-        name: '京都ウマ娘ステークス',
-        class: 'シニア',
-        month: 2,
-        period: '後半',
-        grade: 'GIII',
-        location: '京都',
-        ground: '芝',
-        length: 1400,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 750,
-        rewards: [3600, 1440, 900, 540, 360],
-        drops: ['']
-    }, {
-        name: 'ダイヤモンドステークス',
-        class: 'シニア',
-        month: 2,
-        period: '後半',
-        grade: 'GIII',
-        location: '東京',
-        ground: '芝',
-        length: 3400,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 1500,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['']
-    }, {
-        name: '小倉大賞典',
-        class: 'シニア',
-        month: 2,
-        period: '後半',
-        grade: 'GIII',
-        location: '小倉',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 1500,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['']
-    }, {
-        name: '阪急杯',
-        class: 'シニア',
-        month: 2,
-        period: '後半',
-        grade: 'GIII',
-        location: '阪神',
-        ground: '芝',
-        length: 1400,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 1500,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['']
-    }, {
-        name: '総武ステークス',
-        class: 'シニア',
-        month: 2,
-        period: '後半',
-        grade: 'OP',
-        location: '中山',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: '北九州短距離ステークス',
-        class: 'シニア',
-        month: 2,
-        period: '後半',
-        grade: 'OP',
-        location: '小倉',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 18,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: '金鯱賞',
-        class: 'シニア',
-        month: 3,
-        period: '前半',
-        grade: 'GII',
-        location: '中京',
-        ground: '芝',
-        length: 2000,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 2000,
-        rewards: [6700, 2680, 1675, 1005, 670],
-        drops: ['']
-    }, {
-        name: 'オーシャンステークス',
-        class: 'シニア',
-        month: 3,
-        period: '前半',
-        grade: 'GIII',
-        location: '中山',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '外',
-        fullgate: 16,
-        require: 1500,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['']
-    }, {
-        name: '中山ウマ娘ステークス',
-        class: 'シニア',
-        month: 3,
-        period: '前半',
-        grade: 'GIII',
-        location: '中山',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 1000,
-        rewards: [3600, 1440, 900, 540, 360],
-        drops: ['']
-    }, {
-        name: '大阪城ステークス',
-        class: 'シニア',
-        month: 3,
-        period: '前半',
-        grade: 'OP',
-        location: '阪神',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [2600, 1040, 650, 390, 260],
-        drops: ['']
-    }, {
-        name: 'ポラリスステークス',
-        class: 'シニア',
-        month: 3,
-        period: '前半',
-        grade: 'OP',
-        location: '阪神',
-        ground: 'ダート',
-        length: 1400,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: '仁川ステークス',
-        class: 'シニア',
-        month: 3,
-        period: '前半',
-        grade: 'OP',
-        location: '阪神',
-        ground: 'ダート',
-        length: 2000,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: '東風ステークス',
-        class: 'シニア',
-        month: 3,
-        period: '前半',
-        grade: 'OP',
-        location: '中山',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 16,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: '大阪杯',
-        class: 'シニア',
-        month: 3,
-        period: '後半',
-        grade: 'GI',
-        location: '阪神',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 20000,
-        rewards: [13500, 6400, 3375, 2025, 1350],
-        drops: ['']
-    }, {
-        name: '高松宮記念',
-        class: 'シニア',
-        month: 3,
-        period: '後半',
-        grade: 'GI',
-        location: '中京',
-        ground: '芝',
-        length: 1200,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 15000,
-        rewards: [13000, 5200, 3250, 1950, 1300],
-        drops: ['']
-    }, {
-        name: '阪神大賞典',
-        class: 'シニア',
-        month: 3,
-        period: '後半',
-        grade: 'GII',
-        location: '阪神',
-        ground: '芝',
-        length: 3000,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 2000,
-        rewards: [6700, 2680, 1675, 1005, 670],
-        drops: ['']
-    }, {
-        name: '日経賞',
-        class: 'シニア',
-        month: 3,
-        period: '後半',
-        grade: 'GII',
-        location: '中山',
-        ground: '芝',
-        length: 2500,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 2000,
-        rewards: [6700, 2680, 1675, 1005, 670],
-        drops: ['']
-    }, {
-        name: 'マーチステークス',
-        class: 'シニア',
-        month: 3,
-        period: '後半',
-        grade: 'GIII',
-        location: '中山',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 1000,
-        rewards: [3600, 1440, 900, 540, 360],
-        drops: ['']
-    }, {
-        name: '千葉ステークス',
-        class: 'シニア',
-        month: 3,
-        period: '後半',
-        grade: 'OP',
-        location: '中山',
-        ground: 'ダート',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: '六甲ステークス',
-        class: 'シニア',
-        month: 3,
-        period: '後半',
-        grade: 'OP',
-        location: '阪神',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: '阪神ウマ娘ステークス',
-        class: 'シニア',
-        month: 4,
-        period: '前半',
-        grade: 'GII',
-        location: '阪神',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 1800,
-        rewards: [5500, 2200, 1375, 825, 550],
-        drops: ['']
-    }, {
-        name: 'ダービー卿チャレンジトロフィー',
-        class: 'シニア',
-        month: 4,
-        period: '前半',
-        grade: 'GIII',
-        location: '中山',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 16,
-        require: 1250,
-        rewards: [3900, 1560, 975, 585, 390],
-        drops: ['']
-    }, {
-        name: 'アンタレスステークス',
-        class: 'シニア',
-        month: 4,
-        period: '前半',
-        grade: 'GIII',
-        location: '阪神',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 1000,
-        rewards: [3600, 1440, 900, 540, 360],
-        drops: ['']
-    }, {
-        name: 'コーラルステークス',
-        class: 'シニア',
-        month: 4,
-        period: '前半',
-        grade: 'OP',
-        location: '阪神',
-        ground: 'ダート',
-        length: 1400,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: '京葉ステークス',
-        class: 'シニア',
-        month: 4,
-        period: '前半',
-        grade: 'OP',
-        location: '中山',
-        ground: 'ダート',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: '春雷ステークス',
-        class: 'シニア',
-        month: 4,
-        period: '前半',
-        grade: 'OP',
-        location: '中山',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '外',
-        fullgate: 16,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: '福島民報杯',
-        class: 'シニア',
-        month: 4,
-        period: '前半',
-        grade: 'OP',
-        location: '福島',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2600, 1040, 650, 390, 260],
-        drops: ['']
-    }, {
-        name: '吾妻小富士ステークス',
-        class: 'シニア',
-        month: 4,
-        period: '前半',
-        grade: 'OP',
-        location: '福島',
-        ground: 'ダート',
-        length: 1700,
-        rotation: '右',
-        side: '',
-        fullgate: 15,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: '天皇賞（春）',
-        class: 'シニア',
-        month: 4,
-        period: '後半',
-        grade: 'GI',
-        location: '京都',
-        ground: '芝',
-        length: 3200,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 20000,
-        rewards: [15000, 6000, 3750, 2250, 1500],
-        drops: ['天皇賞（春）優勝レイ']
-    }, {
-        name: 'マイラーズカップ',
-        class: 'シニア',
-        month: 4,
-        period: '後半',
-        grade: 'GII',
-        location: '京都',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 1900,
-        rewards: [5900, 2360, 1475, 885, 590],
-        drops: ['']
-    }, {
-        name: '福島ウマ娘ステークス',
-        class: 'シニア',
-        month: 4,
-        period: '後半',
-        grade: 'GIII',
-        location: '福島',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 1250,
-        rewards: [3800, 1520, 950, 570, 380],
-        drops: ['']
-    }, {
-        name: 'オアシスステークス',
-        class: 'シニア',
-        month: 4,
-        period: '後半',
-        grade: 'OP',
-        location: '東京',
-        ground: 'ダート',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: '天王山ステークス',
-        class: 'シニア',
-        month: 4,
-        period: '後半',
-        grade: 'OP',
-        location: '東京',
-        ground: 'ダート',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: 'ヴィクトリアマイル',
-        class: 'シニア',
-        month: 5,
-        period: '前半',
-        grade: 'GI',
-        location: '東京',
-        ground: '芝',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 10000,
-        rewards: [10500, 4200, 2625, 1575, 1050],
-        drops: ['ヴィクトリアマイル優勝レイ']
-    }, {
-        name: '京王杯スプリングカップ',
-        class: 'シニア',
-        month: 5,
-        period: '前半',
-        grade: 'GII',
-        location: '東京',
-        ground: '芝',
-        length: 1400,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 1900,
-        rewards: [5900, 2360, 1475, 885, 590],
-        drops: ['']
-    }, {
-        name: '新潟大賞典',
-        class: 'シニア',
-        month: 5,
-        period: '前半',
-        grade: 'GIII',
-        location: '新潟',
-        ground: '芝',
-        length: 2000,
-        rotation: '左',
-        side: '外',
-        fullgate: 18,
-        require: 1500,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['']
-    }, {
-        name: '谷川岳ステークス',
-        class: 'シニア',
-        month: 5,
-        period: '前半',
-        grade: 'OP',
-        location: '新潟',
-        ground: '芝',
-        length: 1600,
-        rotation: '左',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: 'メトロポリタンステークス',
-        class: 'シニア',
-        month: 5,
-        period: '前半',
-        grade: 'OP',
-        location: '東京',
-        ground: '芝',
-        length: 2400,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 350,
-        rewards: [2600, 1040, 650, 390, 260],
-        drops: ['']
-    }, {
-        name: '鞍馬ステークス',
-        class: 'シニア',
-        month: 5,
-        period: '前半',
-        grade: 'OP',
-        location: '京都',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: 'ブリリアントステークス',
-        class: 'シニア',
-        month: 5,
-        period: '前半',
-        grade: 'OP',
-        location: '東京',
-        ground: 'ダート',
-        length: 2100,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: '都大路ステークス',
-        class: 'シニア',
-        month: 5,
-        period: '前半',
-        grade: 'OP',
-        location: '東京',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [2600, 1040, 650, 390, 260],
-        drops: ['']
-    }, {
-        name: '栗東ステークス',
-        class: 'シニア',
-        month: 5,
-        period: '前半',
-        grade: 'OP',
-        location: '東京',
-        ground: 'ダート',
-        length: 1400,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: '目黒記念',
-        class: 'シニア',
-        month: 5,
-        period: '後半',
-        grade: 'GII',
-        location: '東京',
-        ground: '芝',
-        length: 2500,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 1800,
-        rewards: [5700, 2280, 1425, 855, 570],
-        drops: ['']
-    }, {
-        name: '平安ステークス',
-        class: 'シニア',
-        month: 5,
-        period: '後半',
-        grade: 'GIII',
-        location: '京都',
-        ground: 'ダート',
-        length: 1900,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 1000,
-        rewards: [3600, 1440, 900, 540, 360],
-        drops: ['']
-    }, {
-        name: 'メイステークス',
-        class: 'シニア',
-        month: 5,
-        period: '後半',
-        grade: 'OP',
-        location: '東京',
-        ground: '芝',
-        length: 1800,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 350,
-        rewards: [2400, 960, 600, 360, 240],
-        drops: ['']
-    }, {
-        name: '韋駄天ステークス',
-        class: 'シニア',
-        month: 5,
-        period: '後半',
-        grade: 'OP',
-        location: '新潟',
-        ground: '芝',
-        length: 1000,
-        rotation: '直線',
-        side: '',
-        fullgate: 18,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: '欅ステークス',
-        class: 'シニア',
-        month: 5,
-        period: '後半',
-        grade: 'OP',
-        location: '東京',
-        ground: 'ダート',
-        length: 1400,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: '安土城ステークス',
-        class: 'シニア',
-        month: 5,
-        period: '後半',
-        grade: 'OP',
-        location: '京都',
-        ground: '芝',
-        length: 1400,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: '安田記念',
-        class: 'シニア',
-        month: 6,
-        period: '前半',
-        grade: 'GI',
-        location: '東京',
-        ground: '芝',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 15000,
-        rewards: [13000, 5200, 3250, 1950, 1300],
-        drops: ['安田記念優勝レイ']
-    }, {
-        name: '鳴尾記念',
-        class: 'シニア',
-        month: 6,
-        period: '前半',
-        grade: 'GIII',
-        location: '阪神',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 1500,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['']
-    }, {
-        name: 'マーメイドステークス',
-        class: 'シニア',
-        month: 6,
-        period: '前半',
-        grade: 'GIII',
-        location: '阪神',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 1000,
-        rewards: [3600, 1440, 900, 540, 360],
-        drops: ['']
-    }, {
-        name: 'エプソムカップ',
-        class: 'シニア',
-        month: 6,
-        period: '前半',
-        grade: 'GIII',
-        location: '東京',
-        ground: '芝',
-        length: 1800,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 1500,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['']
-    }, {
-        name: '天保山ステークス',
-        class: 'シニア',
-        month: 6,
-        period: '前半',
-        grade: 'OP',
-        location: '阪神',
-        ground: 'ダート',
-        length: 1400,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: 'ステイプニルステークス',
-        class: 'シニア',
-        month: 6,
-        period: '前半',
-        grade: 'OP',
-        location: '東京',
-        ground: 'ダート',
-        length: 2100,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: '宝塚記念',
-        class: 'シニア',
-        month: 6,
-        period: '後半',
-        grade: 'GI',
-        location: '阪神',
-        ground: '芝',
-        length: 2200,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 20000,
-        rewards: [15000, 6000, 3750, 2250, 1500],
-        drops: ['宝塚記念優勝レイ']
-    }, {
-        name: '帝王賞',
-        class: 'シニア',
-        month: 6,
-        period: '後半',
-        grade: 'GI',
-        location: '大井',
-        ground: 'ダート',
-        length: 2000,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 12000,
-        rewards: [6000, 2400, 1500, 900, 600],
-        drops: ['帝王賞優勝レイ']
-    }, {
-        name: '函館スプリントステークス',
-        class: 'シニア',
-        month: 6,
-        period: '後半',
-        grade: 'GIII',
-        location: '函館',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 1250,
-        rewards: [3900, 1560, 975, 585, 390],
-        drops: ['']
-    }, {
-        name: 'アハルテケステークス',
-        class: 'シニア',
-        month: 6,
-        period: '後半',
-        grade: 'OP',
-        location: '東京',
-        ground: 'ダート',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: '米子ステークス',
-        class: 'シニア',
-        month: 6,
-        period: '後半',
-        grade: 'OP',
-        location: '阪神',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: '大沼ステークス',
-        class: 'シニア',
-        month: 6,
-        period: '後半',
-        grade: 'OP',
-        location: '函館',
-        ground: 'ダート',
-        length: 1700,
-        rotation: '右',
-        side: '',
-        fullgate: 14,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: 'パラダイスステークス',
-        class: 'シニア',
-        month: 6,
-        period: '後半',
-        grade: 'OP',
-        location: '東京',
-        ground: '芝',
-        length: 1400,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: '三宮ステークス',
-        class: 'シニア',
-        month: 6,
-        period: '後半',
-        grade: 'OP',
-        location: '阪神',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: 'CBC賞',
-        class: 'シニア',
-        month: 7,
-        period: '前半',
-        grade: 'GIII',
-        location: '中京',
-        ground: '芝',
-        length: 1200,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 1250,
-        rewards: [3900, 1560, 975, 585, 390],
-        drops: ['']
-    }, {
-        name: 'プロキオンステークス',
-        class: 'シニア',
-        month: 7,
-        period: '前半',
-        grade: 'GIII',
-        location: '中京',
-        ground: 'ダート',
-        length: 1400,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 1000,
-        rewards: [3600, 1440, 900, 540, 360],
-        drops: ['']
-    }, {
-        name: '七夕賞',
-        class: 'シニア',
-        month: 7,
-        period: '前半',
-        grade: 'GIII',
-        location: '福島',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 1500,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['']
-    }, {
-        name: '函館記念',
-        class: 'シニア',
-        month: 7,
-        period: '前半',
-        grade: 'GIII',
-        location: '函館',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 1500,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['']
-    }, {
-        name: '巴賞',
-        class: 'シニア',
-        month: 7,
-        period: '前半',
-        grade: 'OP',
-        location: '函館',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2400, 960, 600, 360, 240],
-        drops: ['']
-    }, {
-        name: 'マリーンステークス',
-        class: 'シニア',
-        month: 7,
-        period: '前半',
-        grade: 'OP',
-        location: '函館',
-        ground: 'ダート',
-        length: 1700,
-        rotation: '右',
-        side: '',
-        fullgate: 14,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: '名鉄杯',
-        class: 'シニア',
-        month: 7,
-        period: '前半',
-        grade: 'OP',
-        location: '中京',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: '中京記念',
-        class: 'シニア',
-        month: 7,
-        period: '後半',
-        grade: 'GIII',
-        location: '中京',
-        ground: '芝',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 1250,
-        rewards: [3900, 1560, 975, 585, 390],
-        drops: ['']
-    }, {
-        name: 'アイビスサマーダッシュ',
-        class: 'シニア',
-        month: 7,
-        period: '後半',
-        grade: 'GIII',
-        location: '新潟',
-        ground: '芝',
-        length: 1000,
-        rotation: '直線',
-        side: '',
-        fullgate: 18,
-        require: 1250,
-        rewards: [3900, 1560, 975, 585, 390],
-        drops: ['']
-    }, {
-        name: 'クイーンステークス',
-        class: 'シニア',
-        month: 7,
-        period: '後半',
-        grade: 'GIII',
-        location: '札幌',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 14,
-        require: 1000,
-        rewards: [3600, 1440, 900, 540, 360],
-        drops: ['']
-    }, {
-        name: '福岡テレビオープン',
-        class: 'シニア',
-        month: 7,
-        period: '後半',
-        grade: 'OP',
-        location: '福岡',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 14,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: '小倉記念',
-        class: 'シニア',
-        month: 8,
-        period: '前半',
-        grade: 'GIII',
-        location: '小倉',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '',
-        fullgate: 18,
-        require: 1500,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['']
-    }, {
-        name: '関屋記念',
-        class: 'シニア',
-        month: 8,
-        period: '前半',
-        grade: 'GIII',
-        location: '新潟',
-        ground: '芝',
-        length: 1600,
-        rotation: '左',
-        side: '外',
-        fullgate: 18,
-        require: 1250,
-        rewards: [3900, 1560, 975, 585, 390],
-        drops: ['']
-    }, {
-        name: 'エルムステークス',
-        class: 'シニア',
-        month: 8,
-        period: '前半',
-        grade: 'GIII',
-        location: '札幌',
-        ground: 'ダート',
-        length: 1700,
-        rotation: '右',
-        side: '',
-        fullgate: 14,
-        require: 1000,
-        rewards: [3600, 1440, 900, 540, 360],
-        drops: ['']
-    }, {
-        name: '札幌日経オープン',
-        class: 'シニア',
-        month: 8,
-        period: '前半',
-        grade: 'OP',
-        location: '札幌',
-        ground: '芝',
-        length: 2600,
-        rotation: '右',
-        side: '',
-        fullgate: 14,
-        require: 350,
-        rewards: [2600, 1040, 650, 390, 260],
-        drops: ['']
-    }, {
-        name: 'UHB賞',
-        class: 'シニア',
-        month: 8,
-        period: '前半',
-        grade: 'OP',
-        location: '札幌',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: '阿蘇ステークス',
-        class: 'シニア',
-        month: 8,
-        period: '前半',
-        grade: 'OP',
-        location: '小倉',
-        ground: 'ダート',
-        length: 1700,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: '関越ステークス',
-        class: 'シニア',
-        month: 8,
-        period: '前半',
-        grade: 'OP',
-        location: '新潟',
-        ground: '芝',
-        length: 1800,
-        rotation: '左',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [2400, 960, 600, 360, 240],
-        drops: ['']
-    }, {
-        name: '札幌記念',
-        class: 'シニア',
-        month: 8,
-        period: '後半',
-        grade: 'GII',
-        location: '札幌',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 2000,
-        rewards: [7000, 2800, 1750, 1050, 700],
-        drops: ['']
-    }, {
-        name: '北九州記念',
-        class: 'シニア',
-        month: 8,
-        period: '後半',
-        grade: 'GIII',
-        location: '小倉',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 18,
-        require: 1250,
-        rewards: [3900, 1560, 975, 585, 390],
-        drops: ['']
-    }, {
-        name: 'キーンランドカップ',
-        class: 'シニア',
-        month: 8,
-        period: '後半',
-        grade: 'GIII',
-        location: '札幌',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 1500,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['']
-    }, {
-        name: 'NST賞',
-        class: 'シニア',
-        month: 8,
-        period: '後半',
-        grade: 'OP',
-        location: '新潟',
-        ground: 'ダート',
-        length: 1200,
-        rotation: '左',
-        side: '',
-        fullgate: 15,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: 'BSN賞',
-        class: 'シニア',
-        month: 8,
-        period: '後半',
-        grade: 'OP',
-        location: '新潟',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '左',
-        side: '',
-        fullgate: 15,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: '小倉日経オープン',
-        class: 'シニア',
-        month: 8,
-        period: '後半',
-        grade: 'OP',
-        location: '小倉',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2400, 960, 600, 360, 240],
-        drops: ['']
-    }, {
-        name: '朱鷺ステークス',
-        class: 'シニア',
-        month: 8,
-        period: '後半',
-        grade: 'OP',
-        location: '新潟',
-        ground: '芝',
-        length: 1400,
-        rotation: '左',
-        side: '内',
-        fullgate: 18,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: 'セントウルステークス',
-        class: 'シニア',
-        month: 9,
-        period: '前半',
-        grade: 'GII',
-        location: '阪神',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 1900,
-        rewards: [5900, 2360, 1475, 885, 590],
-        drops: ['']
-    }, {
-        name: '新潟記念',
-        class: 'シニア',
-        month: 9,
-        period: '前半',
-        grade: 'GIII',
-        location: '新潟',
-        ground: '芝',
-        length: 2000,
-        rotation: '左',
-        side: '外',
-        fullgate: 18,
-        require: 1500,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['']
-    }, {
-        name: '京成杯オータムハンデキャップ',
-        class: 'シニア',
-        month: 9,
-        period: '前半',
-        grade: 'GIII',
-        location: '中山',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 16,
-        require: 1250,
-        rewards: [3900, 1560, 975, 585, 390],
-        drops: ['']
-    }, {
-        name: '丹頂ステークス',
-        class: 'シニア',
-        month: 9,
-        period: '前半',
-        grade: 'OP',
-        location: '札幌',
-        ground: '芝',
-        length: 2600,
-        rotation: '右',
-        side: '',
-        fullgate: 14,
-        require: 350,
-        rewards: [2400, 960, 600, 360, 240],
-        drops: ['']
-    }, {
-        name: 'エニフステークス',
-        class: 'シニア',
-        month: 9,
-        period: '前半',
-        grade: 'OP',
-        location: '阪神',
-        ground: 'ダート',
-        length: 1400,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: 'ラジオ日本賞',
-        class: 'シニア',
-        month: 9,
-        period: '前半',
-        grade: 'OP',
-        location: '中山',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: 'スプリンターズステークス',
-        class: 'シニア',
-        month: 9,
-        period: '後半',
-        grade: 'GI',
-        location: '中山',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '外',
-        fullgate: 16,
-        require: 15000,
-        rewards: [13000, 5200, 3250, 1950, 1300],
-        drops: ['スプリンターズS優勝レイ']
-    }, {
-        name: 'オールカマー',
-        class: 'シニア',
-        month: 9,
-        period: '後半',
-        grade: 'GII',
-        location: '中山',
-        ground: '芝',
-        length: 2200,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 2000,
-        rewards: [6700, 2680, 1675, 1005, 670],
-        drops: ['']
-    }, {
-        name: 'シリウスステークス',
-        class: 'シニア',
-        month: 9,
-        period: '後半',
-        grade: 'GIII',
-        location: '阪神',
-        ground: 'ダート',
-        length: 2000,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 1000,
-        rewards: [3600, 1440, 900, 540, 360],
-        drops: ['']
-    }, {
-        name: 'ポートアイランドステークス',
-        class: 'シニア',
-        month: 9,
-        period: '後半',
-        grade: 'OP',
-        location: '阪神',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: 'ながつきステークス',
-        class: 'シニア',
-        month: 9,
-        period: '後半',
-        grade: 'OP',
-        location: '中山',
-        ground: 'ダート',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: '毎日王冠',
-        class: 'シニア',
-        month: 10,
-        period: '前半',
-        grade: 'GII',
-        location: '東京',
-        ground: '芝',
-        length: 1800,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 2000,
-        rewards: [6700, 2680, 1675, 1005, 670],
-        drops: ['']
-    }, {
-        name: '京都大賞典',
-        class: 'シニア',
-        month: 10,
-        period: '前半',
-        grade: 'GII',
-        location: '京都',
-        ground: '芝',
-        length: 2400,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 2000,
-        rewards: [6700, 2680, 1675, 1005, 670],
-        drops: ['']
-    }, {
-        name: '府中ウマ娘ステークス',
-        class: 'シニア',
-        month: 10,
-        period: '前半',
-        grade: 'GII',
-        location: '東京',
-        ground: '芝',
-        length: 1800,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 1800,
-        rewards: [5500, 2200, 1375, 825, 550],
-        drops: ['']
-    }, {
-        name: 'オパールステークス',
-        class: 'シニア',
-        month: 10,
-        period: '前半',
-        grade: 'OP',
-        location: '京都',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: 'グリーンチャンネルカップ',
-        class: 'シニア',
-        month: 10,
-        period: '前半',
-        grade: 'OP',
-        location: '東京',
-        ground: 'ダート',
-        length: 1400,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: 'オクトーバーステークス',
-        class: 'シニア',
-        month: 10,
-        period: '前半',
-        grade: 'OP',
-        location: '東京',
-        ground: '芝',
-        length: 2000,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 350,
-        rewards: [2600, 1040, 650, 390, 260],
-        drops: ['']
-    }, {
-        name: '信越ステークス',
-        class: 'シニア',
-        month: 10,
-        period: '前半',
-        grade: 'OP',
-        location: '新潟',
-        ground: '芝',
-        length: 1400,
-        rotation: '左',
-        side: '内',
-        fullgate: 18,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: '太秦ステークス',
-        class: 'シニア',
-        month: 10,
-        period: '前半',
-        grade: 'OP',
-        location: '京都',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: '天皇賞（秋）',
-        class: 'シニア',
-        month: 10,
-        period: '後半',
-        grade: 'GI',
-        location: '東京',
-        ground: '芝',
-        length: 2000,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 20000,
-        rewards: [15000, 6000, 3750, 2250, 1500],
-        drops: ['天皇賞（秋）勝利レイ']
-    }, {
-        name: 'スワンステークス',
-        class: 'シニア',
-        month: 10,
-        period: '後半',
-        grade: 'GII',
-        location: '京都',
-        ground: '芝',
-        length: 1400,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 1900,
-        rewards: [5900, 2360, 1475, 885, 590],
-        drops: ['']
-    }, {
-        name: '富士ステークス',
-        class: 'シニア',
-        month: 10,
-        period: '後半',
-        grade: 'GII',
-        location: '東京',
-        ground: '芝',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 1900,
-        rewards: [5900, 2360, 1475, 885, 590],
-        drops: ['']
-    }, {
-        name: '室町ステークス',
-        class: 'シニア',
-        month: 10,
-        period: '後半',
-        grade: 'OP',
-        location: '京都',
-        ground: 'ダート',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: 'ブラジルカップ',
-        class: 'シニア',
-        month: 10,
-        period: '後半',
-        grade: 'OP',
-        location: '東京',
-        ground: 'ダート',
-        length: 2100,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: 'カシオペアステークス',
-        class: 'シニア',
-        month: 10,
-        period: '後半',
-        grade: 'OP',
-        location: '京都',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [2600, 1040, 650, 390, 260],
-        drops: ['']
-    }, {
-        name: 'ルミエールオータムダッシュ',
-        class: 'シニア',
-        month: 10,
-        period: '後半',
-        grade: 'OP',
-        location: '新潟',
-        ground: '芝',
-        length: 1000,
-        rotation: '直線',
-        side: '',
-        fullgate: 18,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: 'エリザベス女王杯',
-        class: 'シニア',
-        month: 11,
-        period: '前半',
-        grade: 'GI',
-        location: '京都',
-        ground: '芝',
-        length: 2200,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 10000,
-        rewards: [10500, 4200, 2625, 1575, 1050],
-        drops: ['エリザベス女王杯優勝レイ']
-    }, {
-        name: 'JBCレディスクラシック',
-        class: 'シニア',
-        month: 11,
-        period: '前半',
-        grade: 'GI',
-        location: '大井',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 12000,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['JBCレディスクラシック優勝レイ']
-    }, {
-        name: 'JBCスプリント',
-        class: 'シニア',
-        month: 11,
-        period: '前半',
-        grade: 'GI',
-        location: '大井',
-        ground: 'ダート',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 12000,
-        rewards: [6000, 2400, 1500, 900, 600],
-        drops: ['JBCスプリント優勝レイ']
-    }, {
-        name: 'JBCクラシック',
-        class: 'シニア',
-        month: 11,
-        period: '前半',
-        grade: 'GI',
-        location: '大井',
-        ground: 'ダート',
-        length: 2000,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 12000,
-        rewards: [8000, 3200, 2000, 1200, 800],
-        drops: ['JBCクラシック優勝レイ']
-    }, {
-        name: 'アルゼンチン共和国杯',
-        class: 'シニア',
-        month: 11,
-        period: '前半',
-        grade: 'GII',
-        location: '東京',
-        ground: '芝',
-        length: 2500,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 1900,
-        rewards: [5700, 2280, 1425, 855, 570],
-        drops: ['']
-    }, {
-        name: 'みやこステークス',
-        class: 'シニア',
-        month: 11,
-        period: '前半',
-        grade: 'GIII',
-        location: '京都',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 750,
-        rewards: [3800, 1520, 950, 570, 380],
-        drops: ['']
-    }, {
-        name: '武蔵野ステークス',
-        class: 'シニア',
-        month: 11,
-        period: '前半',
-        grade: 'GIII',
-        location: '東京',
-        ground: 'ダート',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 1250,
-        rewards: [3800, 1520, 950, 570, 380],
-        drops: ['']
-    }, {
-        name: '福島記念',
-        class: 'シニア',
-        month: 11,
-        period: '前半',
-        grade: 'GIII',
-        location: '福島',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 1500,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['']
-    }, {
-        name: 'オーロラカップ',
-        class: 'シニア',
-        month: 11,
-        period: '前半',
-        grade: 'OP',
-        location: '東京',
-        ground: '芝',
-        length: 1400,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: 'ジャパンカップ',
-        class: 'シニア',
-        month: 11,
-        period: '後半',
-        grade: 'GI',
-        location: '東京',
-        ground: '芝',
-        length: 2400,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 25000,
-        rewards: [30000, 12000, 7500, 4500, 3000],
-        drops: ['ジャパンカップ優勝レイ']
-    }, {
-        name: 'マイルチャンピオンシップ',
-        class: 'シニア',
-        month: 11,
-        period: '後半',
-        grade: 'GI',
-        location: '京都',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 15000,
-        rewards: [11000, 4400, 2750, 1650, 1100],
-        drops: ['マイルCS優勝レイ']
-    }, {
-        name: '京阪杯',
-        class: 'シニア',
-        month: 11,
-        period: '後半',
-        grade: 'GIII',
-        location: '京都',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 1250,
-        rewards: [3900, 1560, 975, 575, 390],
-        drops: ['']
-    }, {
-        name: 'アンドロメダステークス',
-        class: 'シニア',
-        month: 11,
-        period: '後半',
-        grade: 'OP',
-        location: '京都',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 350,
-        rewards: [2600, 1040, 650, 390, 260],
-        drops: ['']
-    }, {
-        name: '霜月ステークス',
-        class: 'シニア',
-        month: 11,
-        period: '後半',
-        grade: 'OP',
-        location: '東京',
-        ground: 'ダート',
-        length: 1400,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: '福島民友カップ',
-        class: 'シニア',
-        month: 11,
-        period: '後半',
-        grade: 'OP',
-        location: '福島',
-        ground: 'ダート',
-        length: 1700,
-        rotation: '右',
-        side: '',
-        fullgate: 15,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: 'キャピタルステークス',
-        class: 'シニア',
-        month: 11,
-        period: '後半',
-        grade: 'OP',
-        location: '東京',
-        ground: '芝',
-        length: 1600,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: 'オータムリーフステークス',
-        class: 'シニア',
-        month: 11,
-        period: '後半',
-        grade: 'OP',
-        location: '京都',
-        ground: 'ダート',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: 'チャンピオンズカップ',
-        class: 'シニア',
-        month: 12,
-        period: '前半',
-        grade: 'GI',
-        location: '中京',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '左',
-        side: '',
-        fullgate: 16,
-        require: 12000,
-        rewards: [10000, 4000, 2500, 1500, 1000],
-        drops: ['チャンピオンズカップ優勝レイ']
-    }, {
-        name: 'ステイヤーズステークス',
-        class: 'シニア',
-        month: 12,
-        period: '前半',
-        grade: 'GII',
-        location: '中山',
-        ground: '芝',
-        length: 3600,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 2000,
-        rewards: [6200, 2480, 1550, 930, 620],
-        drops: ['']
-    }, {
-        name: 'チャレンジカップ',
-        class: 'シニア',
-        month: 12,
-        period: '前半',
-        grade: 'GIII',
-        location: '阪神',
-        ground: '芝',
-        length: 2000,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 1500,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['']
-    }, {
-        name: '中日新聞杯',
-        class: 'シニア',
-        month: 12,
-        period: '前半',
-        grade: 'GIII',
-        location: '中京',
-        ground: '芝',
-        length: 2000,
-        rotation: '左',
-        side: '',
-        fullgate: 18,
-        require: 1500,
-        rewards: [4100, 1640, 1025, 615, 410],
-        drops: ['']
-    }, {
-        name: 'カペラステークス',
-        class: 'シニア',
-        month: 12,
-        period: '前半',
-        grade: 'GIII',
-        location: '中山',
-        ground: 'ダート',
-        length: 1200,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 1000,
-        rewards: [3600, 1440, 900, 540, 360],
-        drops: ['']
-    }, {
-        name: 'ターコイズステークス',
-        class: 'シニア',
-        month: 12,
-        period: '前半',
-        grade: 'GIII',
-        location: '中山',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 16,
-        require: 1000,
-        rewards: [3600, 1440, 900, 540, 360],
-        drops: ['']
-    }, {
-        name: 'ラピスラズリステークス',
-        class: 'シニア',
-        month: 12,
-        period: '前半',
-        grade: 'OP',
-        location: '中山',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '外',
-        fullgate: 16,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: '師走ステークス',
-        class: 'シニア',
-        month: 12,
-        period: '前半',
-        grade: 'OP',
-        location: '中山',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: 'リゲルステークス',
-        class: 'シニア',
-        month: 12,
-        period: '前半',
-        grade: 'OP',
-        location: '阪神',
-        ground: '芝',
-        length: 1600,
-        rotation: '右',
-        side: '外',
-        fullgate: 18,
-        require: 350,
-        rewards: [2500, 1000, 625, 375, 250],
-        drops: ['']
-    }, {
-        name: 'タンザナイトステークス',
-        class: 'シニア',
-        month: 12,
-        period: '前半',
-        grade: 'OP',
-        location: '阪神',
-        ground: '芝',
-        length: 1200,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 350,
-        rewards: [2300, 920, 575, 345, 230],
-        drops: ['']
-    }, {
-        name: 'ディセンバーステークス',
-        class: 'シニア',
-        month: 12,
-        period: '前半',
-        grade: 'OP',
-        location: '中山',
-        ground: '芝',
-        length: 1800,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 350,
-        rewards: [1600, 1040, 650, 390, 260],
-        drops: ['']
-    }, {
-        name: '有馬記念',
-        class: 'シニア',
-        month: 12,
-        period: '後半',
-        grade: 'GI',
-        location: '中山',
-        ground: '芝',
-        length: 2500,
-        rotation: '右',
-        side: '内',
-        fullgate: 16,
-        require: 25000,
-        rewards: [30000, 12000, 7500, 4500, 3000],
-        drops: ['有馬記念優勝レイ']
-    }, {
-        name: '東京大賞典',
-        class: 'シニア',
-        month: 12,
-        period: '後半',
-        grade: 'GI',
-        location: '大井',
-        ground: 'ダート',
-        length: 2000,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 12000,
-        rewards: [8000, 3200, 2000, 1200, 800],
-        drops: ['東京大賞典優勝レイ']
-    }, {
-        name: '阪神カップ',
-        class: 'シニア',
-        month: 12,
-        period: '後半',
-        grade: 'GII',
-        location: '阪神',
-        ground: '芝',
-        length: 1400,
-        rotation: '右',
-        side: '内',
-        fullgate: 18,
-        require: 2000,
-        rewards: [6700, 2680, 1675, 1005, 670],
-        drops: ['']
-    }, {
-        name: 'ギャラクシーステークス',
-        class: 'シニア',
-        month: 12,
-        period: '後半',
-        grade: 'OP',
-        location: '阪神',
-        ground: 'ダート',
-        length: 1400,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    }, {
-        name: 'ベテルギウスステークス',
-        class: 'シニア',
-        month: 12,
-        period: '後半',
-        grade: 'OP',
-        location: '阪神',
-        ground: 'ダート',
-        length: 1800,
-        rotation: '右',
-        side: '',
-        fullgate: 16,
-        require: 350,
-        rewards: [2200, 880, 550, 330, 220],
-        drops: ['']
-    },
-];
+const RAW_RACE = '\n\
+ジュニア	6	後半	ジュニア級メイクデビュー	デビュー	可変	可変	可変	可変	可変	9		700	280	175	105	70		マニー		サポートPt					\n\
+																									\n\
+ジュニア	7	後半	函館ジュニアステークス	GIII	函館	芝	1200	右		16	350	3100	1240	775	465	310	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+ジュニア	7	後半	中京ジュニアステークス	OP	中京	芝	1600	左		16	350	1600	640	400	240	160		マニー		サポートPt					\n\
+																									\n\
+ジュニア	8	前半	ダリア賞	OP	新潟	芝	1400	左	内	18	350	1600	640	400	240	160		マニー		サポートPt					\n\
+ジュニア	8	前半	フェニックス賞	OP	小倉	芝	1200	右		18	350	1600	640	400	240	160		マニー		サポートPt					\n\
+ジュニア	8	前半	コスモス賞	OP	札幌	芝	1800	右		14	350	1600	640	400	240	160		マニー		サポートPt					\n\
+																									\n\
+ジュニア	8	後半	新潟ジュニアステークス	GIII	新潟	芝	1600	左	外	18	350	3100	1240	775	465	310	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+ジュニア	8	後半	クローバー賞	OP	札幌	芝	1500	右		14	350	1600	640	400	240	160		マニー		サポートPt					\n\
+																									\n\
+ジュニア	9	前半	札幌ジュニアステークス	GIII	札幌	芝	1800	右		14	350	3100	1240	775	465	310	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+ジュニア	9	前半	小倉ジュニアステークス	GIII	小倉	芝	1200	右		18	350	3100	1240	775	465	310	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+ジュニア	9	前半	すずらん賞	OP	札幌	芝	1200	右		16	350	1600	640	400	240	160		マニー		サポートPt					\n\
+ジュニア	9	前半	野路菊ステークス	OP	阪神	芝	1800	右	外	18	350	1600	640	400	240	160		マニー		サポートPt					\n\
+ジュニア	9	前半	アスター賞	Pre-OP	中山	芝	1600	右	外	16	350	1000	400	250	150	100		マニー		サポートPt					\n\
+																									\n\
+ジュニア	9	後半	ききょうステークス	OP	阪神	芝	1400	右	内	18	350	1600	640	400	240	160		マニー		サポートPt					\n\
+ジュニア	9	後半	芙蓉ステークス	OP	中山	芝	2000	右	内	18	350	1600	640	400	240	160		マニー		サポートPt					\n\
+ジュニア	9	後半	カンナステークス	OP	中山	芝	1200	右	外	16	350	1600	640	400	240	160		マニー		サポートPt					\n\
+ジュニア	9	後半	サフラン賞	Pre-OP	中山	芝	1600	右	外	16	350	1000	400	250	150	100		マニー		サポートPt					\n\
+																									\n\
+ジュニア	10	前半	サウジアラビアロイヤルカップ	GIII	東京	芝	1800	左		18	350	3300	1320	825	495	330	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+ジュニア	10	前半	もみじステークス	OP	京都	芝	1400	右	外	18	350	1600	640	400	240	160		マニー		サポートPt					\n\
+ジュニア	10	前半	りんどう賞	Pre-OP	京都	芝	1400	右	外	18	350	1000	400	250	150	100		マニー		サポートPt					\n\
+ジュニア	10	前半	紫菊賞	Pre-OP	京都	芝	2000	右	内	18	350	1000	400	250	150	100		マニー		サポートPt					\n\
+ジュニア	10	前半	プラタナス賞	Pre-OP	東京	ダート	1600	左		16	350	1000	400	250	150	100		マニー		サポートPt					\n\
+																									\n\
+ジュニア	10	後半	アルテミスステークス	GIII	東京	芝	1600	左		18	350	2900	1160	725	435	290	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+ジュニア	10	後半	アイビーステークス	OP	東京	芝	1800	左		18	350	1700	680	425	255	170		マニー		サポートPt					\n\
+ジュニア	10	後半	萩ステークス	OP	京都	芝	1800	右	外	18	350	1700	680	425	255	170		マニー		サポートPt					\n\
+ジュニア	10	後半	なでしこ賞	Pre-OP	京都	ダート	1400	右		16	350	1000	400	250	150	100		マニー		サポートPt					\n\
+																									\n\
+ジュニア	11	前半	京王杯ジュニアステークス	GII	東京	芝	1400	左		18	375	3800	1520	950	570	380	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+ジュニア	11	前半	デイリー杯ジュニアステークス	GII	京都	芝	1600	右	外	18	375	3800	1520	950	570	380	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+ジュニア	11	前半	ファンタジーステークス	GIII	京都	芝	1400	右	外	18	350	2900	1160	725	435	290	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+ジュニア	11	前半	福島ジュニアステークス	OP	福島	芝	1200	右		14	350	1600	640	400	240	160		マニー		サポートPt					\n\
+ジュニア	11	前半	百日草特別	Pre-OP	東京	芝	2000	左		18	350	1000	400	250	150	100		マニー		サポートPt					\n\
+ジュニア	11	前半	きんもくせい特別	Pre-OP	福島	芝	1800	右		16	350	1000	400	250	150	100		マニー		サポートPt					\n\
+ジュニア	11	前半	オキザリス賞	Pre-OP	東京	ダート	1400	左		16	350	1000	400	250	150	100		マニー		サポートPt					\n\
+ジュニア	11	前半	黄菊賞	Pre-OP	東京	芝	2000	右	内	18	350	1000	400	250	150	100		マニー		サポートPt					\n\
+																									\n\
+ジュニア	11	後半	東京スポーツ杯ジュニアステークス	GIII	東京	芝	1800	左		18	350	3300	1320	825	495	330	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+ジュニア	11	後半	京都ジュニアステークス	GIII	京都	芝	2000	右	内	　18	350	3300	1320	825	495	330	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+ジュニア	11	後半	もちの木賞	Pre-OP	京都	ダート	1800	右		16	350	1000	400	250	150	100		マニー		サポートPt					\n\
+ジュニア	11	後半	赤松賞	Pre-OP	東京	芝	1600	左		18	350	1000	400	250	150	100		マニー		サポートPt					\n\
+ジュニア	11	後半	秋明菊賞	Pre-OP	京都	芝	1400	右	外	18	350	1000	400	250	150	100		マニー		サポートPt					\n\
+ジュニア	11	後半	カトレア賞	Pre-OP	東京	ダート	1600	左		16	350	1000	400	250	150	100		マニー		サポートPt					\n\
+ジュニア	11	後半	ベゴニア賞	Pre-OP	東京	芝	1600	左		18	350	1000	400	250	150	100		マニー		サポートPt					\n\
+ジュニア	11	後半	白菊賞	Pre-OP	京都	芝	1600	右	外	18	350	1000	400	250	150	100		マニー		サポートPt					\n\
+ジュニア	11	後半	葉牡丹賞	Pre-OP	中山	芝	2000	右	内	18	350	1000	400	250	150	100		マニー		サポートPt					\n\
+ジュニア	11	後半	こうやまき賞	Pre-OP	中京	芝	1600	左		16	350	1000	400	250	150	100		マニー		サポートPt					\n\
+																									\n\
+ジュニア	12	前半	朝日杯フューチュリティステークス	GI	阪神	芝	1600	右	外	18	1000	7000	2800	1750	1050	700	マイルシューズ	マニー	朝日杯FS優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+ジュニア	12	前半	阪神ジュベナイルフィリーズ	GI	阪神	芝	1600	右	外	18	1000	6500	2600	1625	975	650	マイルシューズ	マニー	阪神JF優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+ジュニア	12	前半	万両賞	Pre-OP	阪神	芝	1400	右	内	18	350	1000	400	250	150	100		マニー		サポートPt					\n\
+ジュニア	12	前半	黒松賞	Pre-OP	中山	芝	1200	右	外	16	350	1000	400	250	150	100		マニー		サポートPt					\n\
+ジュニア	12	前半	エリカ賞	Pre-OP	阪神	芝	2000	右	内	16	350	1000	400	250	150	100		マニー		サポートPt					\n\
+ジュニア	12	前半	つわぶき賞	Pre-OP	中京	芝	1400	左		18	350	1000	400	250	150	100		マニー		サポートPt					\n\
+ジュニア	12	前半	ひいらぎ賞	Pre-OP	中山	芝	1600	右	外	16	350	1000	400	250	150	100		マニー		サポートPt					\n\
+ジュニア	12	前半	さざんか賞	Pre-OP	阪神	芝	1200	右	内	16	350	1000	400	250	150	100		マニー		サポートPt					\n\
+ジュニア	12	前半	寒椿賞	Pre-OP	中京	ダート	1400	左		16	350	1000	400	250	150	100		マニー		サポートPt					\n\
+																									\n\
+ジュニア	12	後半	ホープフルステークス	GI	中山	芝	2000	右	内	18	1000	7000	2800	1750	1050	700	中距離シューズ	マニー	ホープフルS優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+ジュニア	12	後半	全日本ジュニア優駿	GI	川崎	ダート	1600	左		14	1000	4200	1680	1050	630	420	ダートシューズ	マニー	全日本ジュニア優駿優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+ジュニア	12	後半	クリスマスローズステークス	OP	中山	芝	1200	右	外	16	350	1600	640	400	240	160		マニー		サポートPt					\n\
+ジュニア	12	後半	千両賞	Pre-OP	阪神	芝	1600	右	外	18	350	1000	400	250	150	100		マニー		サポートPt					\n\
+																									\n\
+クラシック	1	前半	シンザン記念	GIII	京都	芝	1600	右	外	18	1000	3800	1520	950	570	380	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	1	前半	フェアリーステークス	GIII	中山	芝	1600	右	外	16	750	3500	1400	875	525	350	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	1	前半	京成杯	GIII	中山	芝	2000	右	内	18	1000	3800	1520	950	570	380	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	1	前半	ジュニアカップ	OP	中山	芝	1600	右	外	16	350	2000	800	500	300	200		マニー		サポートPt					\n\
+クラシック	1	前半	紅梅ステークス	OP	京都	芝	1400	右	外	18	350	2000	800	500	300	200		マニー		サポートPt					\n\
+																									\n\
+クラシック	1	後半	若駒ステークス	OP	京都	芝	2000	右	内	18	350	2000	800	500	300	200		マニー		サポートPt					\n\
+クラシック	1	後半	クロッカスステークス	OP	東京	芝	1400	左		18	350	2000	800	500	300	200		マニー		サポートPt					\n\
+																									\n\
+クラシック	2	前半	きさらぎ賞	GIII	京都	芝	1800	右	外	18	1000	3800	1520	950	570	380	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	2	前半	クイーンカップ	GIII	東京	芝	1600	左		18	750	3500	1400	875	525	350	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	2	前半	共同通信杯	GIII	東京	芝	1800	左		18	1000	3800	1520	950	570	380	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	2	前半	エルフィンステークス	OP	京都	芝	1600	右	外	18	350	2000	800	500	300	200		マニー		サポートPt					\n\
+																									\n\
+クラシック	2	後半	ヒヤシンスステークス	OP	東京	ダート	1600	左		16	350	1900	760	475	285	190		マニー		サポートPt					\n\
+クラシック	2	後半	すみれステークス	OP	阪神	芝	2200	右	内	18	350	2000	800	500	300	200		マニー		サポートPt					\n\
+クラシック	2	後半	マーガレットステークス	OP	阪神	芝	1200	右	内	16	350	2000	800	500	300	200		マニー		サポートPt					\n\
+																									\n\
+クラシック	3	前半	弥生賞	GII	中山	芝	2000	右	内	18	1750	5400	2160	1350	810	540	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	3	前半	フィリーズレビュー	GII	阪神	芝	1400	右	内	18	1750	5200	2080	1300	780	520	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	3	前半	チューリップ賞	GII	阪神	芝	1600	右	外	18	1750	5200	2080	1300	780	520	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	3	前半	アネモネステークス	OP	中山	芝	1600	右	外	16	350	2000	800	500	300	200		マニー		サポートPt					\n\
+クラシック	3	前半	昇竜ステークス	OP	中京	ダート	1400	左		16	350	1800	720	450	270	180		マニー		サポートPt					\n\
+																									\n\
+クラシック	3	後半	スプリングステークス	GII	中山	芝	1800	右	内	16	1750	5400	2160	1350	810	540	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	3	後半	ファルコンステークス	GIII	中京	芝	1400	左		18	1250	3800	1520	950	570	380	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	3	後半	フラワーカップ	GIII	中山	芝	1800	右	内	16	750	3500	1400	875	525	350	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	3	後半	毎日杯	GIII	阪神	芝	1800	右	外	18	1250	3800	1520	950	570	380	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	3	後半	若葉ステークス	OP	阪神	芝	2000	右	内	16	350	2000	800	500	300	200		マニー		サポートPt					\n\
+																									\n\
+クラシック	4	前半	皐月賞	GI	中山	芝	2000	右	内	18	4500	11000	4400	2750	1650	1100	中距離シューズ	マニー	皐月賞優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	4	前半	皐月賞（東京）	GI	東京	芝	2000	左		18	4500	11000	4400	2750	1650	1100	中距離シューズ	マニー	皐月賞優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	4	前半	桜花賞	GI	阪神	芝	1600	右	外	18	4500	10500	4200	2625	1575	1050	マイルシューズ	マニー	桜花賞優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	4	前半	ニュージーランドトロフィー	GII	中山	芝	1600	右	外	16	1750	5400	2160	1350	810	540	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	4	前半	アーリントンカップ	GIII	阪神	芝	1600	右	外	18	1250	3800	1520	950	570	380	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	4	前半	マリーンカップ	GIII	船橋	ダート	1600	左		14	1000	2500	1000	625	375	250	ダートシューズ	マニー							\n\
+クラシック	4	前半	伏竜ステークス	OP	中山	ダート	1800	右		16	350	1800	720	450	270	180		マニー		サポートPt					\n\
+クラシック	4	前半	忘れな草賞	OP	阪神	芝	2000	右	内	16	350	2000	800	500	300	200		マニー		サポートPt					\n\
+																									\n\
+クラシック	4	後半	フローラステークス	GII	東京	芝	2000	左		18	1750	5200	2080	1300	780	520	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	4	後半	青葉賞	GII	東京	芝	2400	左		18	1800	5400	2160	1350	810	540	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	4	後半	橘ステークス	OP	京都	芝	1400	右	外	18	350	2000	800	500	300	200		マニー		サポートPt					\n\
+クラシック	4	後半	端午ステークス	OP	京都	ダート	1400	右		16	350	1800	720	450	270	180		マニー		サポートPt					\n\
+クラシック	4	後半	スイートピーステークス	OP	東京	芝	1800	左		18	350	2000	800	500	300	200		マニー		サポートPt					\n\
+																									\n\
+クラシック	5	前半	NHKマイルカップ	GI	東京	芝	1600	左		18	5000	10500	4200	2625	1575	1050	マイルシューズ	マニー	NHKマイルC優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	5	前半	京都新聞杯	GII	京都	芝	2200	右	外	18	1750	5400	2160	1350	810	540	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	5	前半	プリンシパルステークス	OP	東京	芝	2000	左		18	350	2000	800	500	300	200		マニー		サポートPt					\n\
+クラシック	5	前半	青竜ステークス	OP	東京	ダート	1600	左		16	350	1800	720	450	270	180		マニー		サポートPt					\n\
+																									\n\
+クラシック	5	後半	日本ダービー 東京優駿	GI	東京	芝	2400	左		18	6000	20000	8000	5000	3000	2000	中距離シューズ	マニー	日本ダービー優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	5	後半	オークス	GI	東京	芝	2400	左		18	6000	11000	4400	2750	1650	1100	中距離シューズ	マニー	オークス優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	5	後半	葵ステークス	GIII	京都	芝	1200	右	内	18	1250	3800	1520	950	570	380	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	5	後半	鳳雛ステークス	OP	京都	ダート	1800	右		16	350	1900	760	475	285	190		マニー		サポートPt					\n\
+クラシック	5	後半	白百合ステークス	OP	京都	芝	1800	右	外	18	350	2000	800	500	300	200		マニー		サポートPt					\n\
+																									\n\
+クラシック	6	前半	安田記念	GI	東京	芝	1600	左		18	15000	13000	5200	3250	1950	1300	マイルシューズ	マニー	安田記念優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	6	前半	関東オークス	GII	川崎	ダート	2100	左		14	1800	3500	1400	875	525	350	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	6	前半	鳴尾記念	GIII	阪神	芝	2000	右	内	16	1500	4100	1640	1025	615	410	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	6	前半	マーメイドステークス	GIII	阪神	芝	2000	右	内	16	1000	3600	1440	900	540	360	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	6	前半	エプソムカップ	GIII	東京	芝	1800	左		18	1500	4100	1640	1025	615	410	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	6	前半	天保山ステークス	OP	阪神	ダート	1400	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+クラシック	6	前半	ステイプニルステークス	OP	東京	ダート	2100	左		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+																									\n\
+クラシック	6	後半	宝塚記念	GI	阪神	芝	2200	右	内	18	20000	15000	6000	3750	2250	1500	中距離シューズ	マニー	宝塚記念優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	6	後半	函館スプリントステークス	GIII	函館	芝	1200	右		16	1250	3900	1560	975	585	390	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	6	後半	ユニコーンステークス	GIII	東京	ダート	1600	左		16	750	3500	1400	875	525	350	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	6	後半	アハルテケステークス	OP	東京	ダート	1600	左		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+クラシック	6	後半	米子ステークス	OP	阪神	芝	1600	右	外	18	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+クラシック	6	後半	大沼ステークス	OP	函館	ダート	1700	右		14	350	2300	920	575	345	230		マニー		サポートPt					\n\
+クラシック	6	後半	パラダイスステークス	OP	東京	芝	1400	左		18	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+クラシック	6	後半	三宮ステークス	OP	阪神	ダート	1800	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+																									\n\
+クラシック	7	前半	ジャパンダートダービー	GI	大井	ダート	2000	右		16	4000	4500	1800	1125	675	450	ダートシューズ	マニー	ジャパンダートダービー優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	7	前半	CBC賞	GIII	中京	芝	1200	左		18	1250	3900	1560	975	585	390	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	7	前半	プロキオンステークス	GIII	中京	ダート	1400	左		16	1000	3600	1440	900	540	360	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	7	前半	七夕賞	GIII	福島	芝	2000	右		16	1500	4100	1640	1025	615	410	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	7	前半	函館記念	GIII	函館	芝	2000	右		16	1500	4100	1640	1025	615	410	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	7	前半	ラジオNIKKEI賞	GIII	福島	芝	1800	右		16	1250	3800	1520	950	570	380	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	7	前半	スパーキングレディーカップ	GIII	川崎	ダート	1600	左		14	1000	2500	1000	625	375	250	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	7	前半	巴賞	OP	函館	芝	1800	右		16	350	2400	960	600	360	240		マニー		サポートPt					\n\
+クラシック	7	前半	マリーンステークス	OP	函館	ダート	1700	右		14	350	2200	880	550	330	220		マニー		サポートPt					\n\
+クラシック	7	前半	名鉄杯	OP	中京	ダート	1800	左		16	350	2300	920	575	345	230		マニー		サポートPt					\n\
+																									\n\
+クラシック	7	後半	中京記念	GIII	中京	芝	1600	左		16	1250	3900	1560	975	585	390	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	7	後半	アイビスサマーダッシュ	GIII	新潟	芝	1000	直線		18	1250	3900	1560	975	585	390	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	7	後半	クイーンステークス	GIII	札幌	芝	1800	右		14	1000	3600	1440	900	540	360	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	7	後半	マーキュリーカップ	GIII	盛岡	ダート	2000	左		14	1000	2300	920	575	345	230	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	7	後半	福岡テレビオープン	OP	福岡	芝	1200	右		14	350	2300	920	575	345	230		マニー		サポートPt					\n\
+																									\n\
+クラシック	8	前半	小倉記念	GIII	小倉	芝	2000	右		18	1500	4100	1640	1025	615	410	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	8	前半	関屋記念	GIII	新潟	芝	1600	左	外	18	1250	3900	1560	975	585	390	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	8	前半	エルムステークス	GIII	札幌	ダート	1700	右		14	1000	3600	1440	900	540	360	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	8	前半	レパードステークス	GIII	新潟	ダート	1800	左		15	1250	4000	1600	1000	600	400	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	8	前半	札幌日経オープン	OP	札幌	芝	2600	右		14	350	2600	1040	650	390	260		マニー		サポートPt					\n\
+クラシック	8	前半	UHB賞	OP	札幌	芝	1200	右		16	350	2300	920	575	345	230		マニー		サポートPt					\n\
+クラシック	8	前半	阿蘇ステークス	OP	小倉	ダート	1700	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+クラシック	8	前半	関越ステークス	OP	新潟	芝	1800	左	外	18	350	2400	960	600	360	240		マニー		サポートPt					\n\
+																									\n\
+クラシック	8	後半	札幌記念	GII	札幌	芝	2000	右		16	2000	7000	2800	1750	1050	700	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	8	後半	北九州記念	GIII	小倉	芝	1200	右		18	1250	3900	1560	975	585	390	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	8	後半	キーンランドカップ	GIII	札幌	芝	1200	右		16	1500	4100	1640	1025	615	410	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	8	後半	クラスターカップ	GIII	盛岡	ダート	1200	左		14	1000	2300	920	575	345	230	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	8	後半	NST賞	OP	新潟	ダート	1200	左		15	350	2200	880	550	330	220		マニー		サポートPt					\n\
+クラシック	8	後半	BSN賞	OP	新潟	ダート	1800	左		15	350	2300	920	575	345	230		マニー		サポートPt					\n\
+クラシック	8	後半	小倉日経オープン	OP	小倉	芝	1800	右		16	350	2400	960	600	360	240		マニー		サポートPt					\n\
+クラシック	8	後半	朱鷺ステークス	OP	新潟	芝	1400	左	内	18	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+																									\n\
+クラシック	9	前半	セントウルステークス	GII	阪神	芝	1200	右	内	16	1900	5900	2360	1475	885	590	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	9	前半	ローズステークス	GII	阪神	芝	1800	右	外	18	1750	5200	2080	1300	780	520	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	9	前半	新潟記念	GIII	新潟	芝	2000	左	外	18	1500	4100	1640	1025	615	410	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	9	前半	京成杯オータムハンデキャップ	GIII	中山	芝	1600	右	外	16	1250	3900	1560	975	585	390	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	9	前半	紫苑ステークス	GIII	中山	芝	2000	右	内	18	1000	3500	1400	875	525	350	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	9	前半	丹頂ステークス	OP	札幌	芝	2600	右		14	350	2400	960	600	360	240		マニー		サポートPt					\n\
+クラシック	9	前半	エニフステークス	OP	阪神	ダート	1400	右		16	350	2300	920	575	345	230		マニー		サポートPt					\n\
+クラシック	9	前半	ラジオ日本賞	OP	中山	ダート	1800	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+																									\n\
+クラシック	9	後半	スプリンターズステークス	GI	中山	芝	1200	右	外	16	15000	13000	5200	3250	1950	1300	短距離シューズ	マニー	スプリンターズS優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	9	後半	神戸新聞杯	GII	阪神	芝	2400	右	外	18	1750	5400	2160	1350	810	540	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	9	後半	オールカマー	GII	中山	芝	2200	右	外	18	2000	6700	2680	1675	1005	670	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	9	後半	セントライト記念	GII	中山	芝	2200	右	外	18	1750	5400	2160	1350	810	540	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	9	後半	さざんかテレビ杯	GII	船橋	ダート	1800	左		14	1800	3200	1280	800	480	320	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	9	後半	シリウスステークス	GIII	阪神	ダート	2000	右		16	1000	3600	1440	900	540	360	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	9	後半	ポートアイランドステークス	OP	阪神	芝	1600	右	外	18	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+クラシック	9	後半	ながつきステークス	OP	中山	ダート	1200	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+																									\n\
+クラシック	10	前半	マイルチャンピオンシップ南部杯	GI	盛岡	ダート	16	左		16	12000	6000	2400	1500	900	600	ダートシューズ	マニー	マイルCS南部杯優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	10	前半	毎日王冠	GII	東京	芝	1800	左		18	2000	6700	2680	1675	1005	670	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	10	前半	京都大賞典	GII	京都	芝	2400	右	外	18	2000	6700	2680	1675	1005	670	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	10	前半	府中ウマ娘ステークス	GII	東京	芝	1800	左		18	1800	5500	2200	1375	825	550	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	10	前半	レディスプレリュード	GII	大井	ダート	1800	右		16	1800	3100	1240	775	465	310	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	10	前半	東京盃	GII	大井	ダート	1200	右		16	1800	3500	1400	875	525	350	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	10	前半	オパールステークス	OP	京都	芝	1200	右	内	18	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+クラシック	10	前半	グリーンチャンネルカップ	OP	東京	ダート	1400	左		16	350	2300	920	575	345	230		マニー		サポートPt					\n\
+クラシック	10	前半	オクトーバーステークス	OP	東京	芝	2000	左		18	350	2600	1040	650	390	260		マニー		サポートPt					\n\
+クラシック	10	前半	信越ステークス	OP	新潟	芝	1400	左	内	18	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+クラシック	10	前半	太秦ステークス	OP	京都	ダート	1800	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+																									\n\
+クラシック	10	後半	菊花賞	GI	京都	芝	3000	右	外	18	7500	12000	4800	3000	1800	1200	長距離シューズ	マニー	菊花賞優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	10	後半	天皇賞 秋	GI	東京	芝	2000	左		18	20000	15000	6000	3750	2250	1500	中距離シューズ	マニー	天皇賞（秋）勝利レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	10	後半	秋華賞	GI	京都	芝	2000	右	内	18	7500	10000	4000	2500	1500	1000	中距離シューズ	マニー	秋華賞優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	10	後半	スワンステークス	GII	京都	芝	1400	右	外	18	1900	5900	2360	1475	885	590	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	10	後半	富士ステークス	GII	東京	芝	1600	左		18	1900	5900	2360	1475	885	590	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	10	後半	室町ステークス	OP	京都	ダート	1200	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+クラシック	10	後半	ブラジルカップ	OP	東京	ダート	2100	左		16	350	2300	920	575	345	230		マニー		サポートPt					\n\
+クラシック	10	後半	カシオペアステークス	OP	京都	芝	1800	右	外	18	350	2600	1040	650	390	260		マニー		サポートPt					\n\
+クラシック	10	後半	ルミエールオータムダッシュ	OP	新潟	芝	1000	直線		18	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+																									\n\
+クラシック	11	前半	エリザベス女王杯	GI	京都	芝	2200	右	外	18	10000	10500	4200	2625	1575	1050	中距離シューズ	マニー	エリザベス女王杯優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	11	前半	JBCレディスクラシック（大井）	GI	大井	ダート	1800	右		16	12000	4100	1640	1025	615	410	ダートシューズ	マニー	JBCレディスクラシック優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	11	前半	JBCレディスクラシック（川崎）	GI	川崎	ダート	1600	左		14	12000	4100	1640	1025	615	410	ダートシューズ	マニー	JBCレディスクラシック優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	11	前半	JBCレディスクラシック（船橋）	GI	船橋	ダート	1600	左		14	12000	4100	1640	1025	615	410	ダートシューズ	マニー	JBCレディスクラシック優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	11	前半	JBCレディスクラシック（盛岡）	GI	盛岡	ダート	1800	左		16	12000	4100	1640	1025	615	410	ダートシューズ	マニー	JBCレディスクラシック優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	11	前半	JBCスプリント（大井）	GI	大井	ダート	1200	右		16	12000	6000	2400	1500	900	600	ダートシューズ	マニー	JBCスプリント優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	11	前半	JBCスプリント（川崎）	GI	川崎	ダート	1400	左		12	12000	6000	2400	1500	900	600	ダートシューズ	マニー	JBCスプリント優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	11	前半	JBCスプリント（船橋）	GI	船橋	ダート	1000	左		14	12000	6000	2400	1500	900	600	ダートシューズ	マニー	JBCスプリント優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	11	前半	JBCスプリント（盛岡）	GI	盛岡	ダート	1200	左		16	12000	6000	2400	1500	900	600	ダートシューズ	マニー	JBCスプリント優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	11	前半	JBCクラシック（大井）	GI	大井	ダート	2000	右		16	12000	8000	3200	2000	1200	800	ダートシューズ	マニー	JBCクラシック優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	11	前半	JBCクラシック（川崎）	GI	川崎	ダート	2100	左		14	12000	8000	3200	2000	1200	800	ダートシューズ	マニー	JBCクラシック優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	11	前半	JBCクラシック（船橋）	GI	船橋	ダート	1800	左		14	12000	8000	3200	2000	1200	800	ダートシューズ	マニー	JBCクラシック優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	11	前半	JBCクラシック（盛岡）	GI	盛岡	ダート	2000	左		16	12000	8000	3200	2000	1200	800	ダートシューズ	マニー	JBCクラシック優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	11	前半	アルゼンチン共和国杯	GII	東京	芝	2500	左		18	1900	5700	2280	1425	855	570	長距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	11	前半	みやこステークス	GIII	京都	ダート	1800	右		16	750	3800	1520	950	570	380	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	11	前半	武蔵野ステークス	GIII	東京	ダート	1600	左		16	1250	3800	1520	950	570	380	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	11	前半	福島記念	GIII	福島	芝	2000	右		16	1500	4100	1640	1025	615	410	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	11	前半	オーロラカップ	OP	東京	芝	1400	左		18	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+																									\n\
+クラシック	11	後半	ジャパンカップ	GI	東京	芝	2400	左		18	25000	30000	12000	7500	4500	3000	中距離シューズ	マニー	ジャパンカップ優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	11	後半	マイルチャンピオンシップ	GI	京都	芝	1600	右	外	18	15000	11000	4400	2750	1650	1100	マイルシューズ	マニー	マイルCS優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	11	後半	京阪杯	GIII	京都	芝	1200	右	内	18	1250	3900	1560	975	575	390	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	11	後半	アンドロメダステークス	OP	京都	芝	2000	右	内	18	350	2600	1040	650	390	260		マニー		サポートPt					\n\
+クラシック	11	後半	霜月ステークス	OP	東京	ダート	1400	左		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+クラシック	11	後半	福島民友カップ	OP	福島	ダート	1700	右		15	350	2300	920	575	345	230		マニー		サポートPt					\n\
+クラシック	11	後半	キャピタルステークス	OP	東京	芝	1600	左		18	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+クラシック	11	後半	オータムリーフステークス	OP	京都	ダート	1200	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+																									\n\
+クラシック	12	前半	チャンピオンズカップ	GI	中京	ダート	1800	左		16	12000	10000	4000	2500	1500	1000	ダートシューズ	マニー	チャンピオンズカップ優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	12	前半	ステイヤーズステークス	GII	中山	芝	3600	右	内	16	2000	6200	2480	1550	930	620	長距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	12	前半	チャレンジカップ	GIII	阪神	芝	2000	右	内	16	1500	4100	1640	1025	615	410	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	12	前半	中日新聞杯	GIII	中京	芝	2000	左		18	1500	4100	1640	1025	615	410	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	12	前半	カペラステークス	GIII	中山	ダート	1200	右		16	1000	3600	1440	900	540	360	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	12	前半	ターコイズステークス	GIII	中山	芝	1600	右	外	16	1000	3600	1440	900	540	360	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	12	前半	クイーン賞	GIII	船橋	ダート	1800	左		14	1000	2100	840	525	315	210	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	12	前半	ラピスラズリステークス	OP	中山	芝	1200	右	外	16	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+クラシック	12	前半	師走ステークス	OP	中山	ダート	1800	右		16	350	2300	920	575	345	230		マニー		サポートPt					\n\
+クラシック	12	前半	リゲルステークス	OP	阪神	芝	1600	右	外	18	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+クラシック	12	前半	タンザナイトステークス	OP	阪神	芝	1200	右	内	16	350	2300	920	575	345	230		マニー		サポートPt					\n\
+クラシック	12	前半	ディセンバーステークス	OP	中山	芝	1800	右	内	16	350	1600	1040	650	390	260		マニー		サポートPt					\n\
+																									\n\
+クラシック	12	後半	有馬記念	GI	中山	芝	2500	右	内	16	25000	30000	12000	7500	4500	3000	長距離シューズ	マニー	有馬記念優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	12	後半	東京大賞典	GI	大井	ダート	2000	右		16	12000	8000	3200	2000	1200	800	ダートシューズ	マニー	東京大賞典優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	12	後半	阪神カップ	GII	阪神	芝	1400	右	内	18	2000	6700	2680	1675	1005	670	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+クラシック	12	後半	ギャラクシーステークス	OP	阪神	ダート	1400	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+クラシック	12	後半	ベテルギウスステークス	OP	阪神	ダート	1800	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+																									\n\
+シニア	1	前半	日経新春杯	GII	京都	芝	2400	右	外	18	1800	5700	2280	1425	855	570	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	1	前半	京都金杯	GIII	京都	芝	1600	右	外	18	1500	4100	1640	1025	615	410	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	1	前半	中山金杯	GIII	中山	芝	2000	右	内	18	1500	4100	1640	1025	615	410	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	1	前半	愛知杯	GIII	中京	芝	2000	左		18	750	3600	1440	900	540	360	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	1	前半	万葉ステークス	OP	京都	芝	3000	右	外	18	350	2400	960	600	360	240		マニー		サポートPt					\n\
+シニア	1	前半	淀短距離ステークス	OP	京都	芝	1200	右	内	18	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+シニア	1	前半	ポルックスステークス	OP	中山	ダート	1800	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+シニア	1	前半	ジャニュアリーステークス	OP	中山	ダート	1200	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+シニア	1	前半	ニューイヤーステークス	OP	中山	芝	1600	右	外	16	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+シニア	1	前半	カーバンクルステークス	OP	中山	芝	1200	右	外	16	350	2300	920	575	345	230		マニー		サポートPt					\n\
+																									\n\
+シニア	1	後半	東海ステークス	GII	中京	ダート	1800	左		16	1800	5500	2200	1375	825	550	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	1	後半	アメリカJCC	GII	中山	芝	2200	右	外	18	1900	6200	2480	1550	930	620	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	1	後半	シルクロードステークス	GIII	京都	芝	1200	右	内	18	1250	3900	1560	975	585	390	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	1	後半	根岸ステークス	GIII	東京	ダート	1400	左		16	1000	3800	1520	950	570	380	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	1	後半	TCK女王盃	GIII	大井	ダート	1800	右		16	1800	2200	880	550	330	220	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	1	後半	すばるステークス	OP	京都	ダート	1400	右		16	350	2300	920	575	345	230		マニー		サポートPt					\n\
+シニア	1	後半	白富士ステークス	OP	東京	芝	2000	左		16	350	2300	920	575	345	230		マニー		サポートPt					\n\
+																									\n\
+シニア	2	前半	川崎記念	GI	川崎	ダート	2100	左		14	12000	6000	2400	1500	900	600	ダートシューズ	マニー	川崎記念優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	2	前半	京都記念	GII	京都	芝	2200	右	外	18	1900	6200	2480	1550	930	620	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	2	前半	東京新聞杯	GIII	東京	芝	1600	左		18	1250	3900	1560	975	585	390	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	2	前半	大和ステークス	OP	京都	ダート	1200	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+シニア	2	前半	洛陽ステークス	OP	京都	芝	1600	右	外	18	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+シニア	2	前半	アルデバランステークス	OP	京都	ダート	1900	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+シニア	2	前半	バレンタインステークス	OP	京都	ダート	1400	左		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+																									\n\
+シニア	2	後半	フェブラリーステークス	GI	東京	ダート	1600	左		16	12000	10000	4000	2500	1500	1000	ダートシューズ	マニー	フェブラリーS優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	2	後半	中山記念	GII	中山	芝	1800	右	内	16	1900	6700	2680	1675	1005	670	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	2	後半	京都ウマ娘ステークス	GIII	京都	芝	1400	右	外	18	750	3600	1440	900	540	360	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	2	後半	ダイヤモンドステークス	GIII	東京	芝	3400	左		18	1500	4100	1640	1025	615	410	長距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	2	後半	小倉大賞典	GIII	小倉	芝	1800	右		16	1500	4100	1640	1025	615	410	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	2	後半	阪急杯	GIII	阪神	芝	1400	右	内	18	1500	4100	1640	1025	615	410	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	2	後半	総武ステークス	OP	中山	ダート	1800	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+シニア	2	後半	北九州短距離ステークス	OP	小倉	芝	1200	右		18	350	2300	920	575	345	230		マニー		サポートPt					\n\
+																									\n\
+シニア	3	前半	金鯱賞	GII	中京	芝	2000	左		18	2000	6700	2680	1675	1005	670	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	3	前半	エンプレス杯	GII	川崎	ダート	2100	左		14	1800	3500	1400	875	525	350	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	3	前半	オーシャンステークス	GIII	中山	芝	1200	右	外	16	1500	4100	1640	1025	615	410	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	3	前半	中山ウマ娘ステークス	GIII	中山	芝	1800	右	内	16	1000	3600	1440	900	540	360	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	3	前半	大阪城ステークス	OP	阪神	芝	1800	右	外	18	350	2600	1040	650	390	260		マニー		サポートPt					\n\
+シニア	3	前半	ポラリスステークス	OP	阪神	ダート	1400	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+シニア	3	前半	仁川ステークス	OP	阪神	ダート	2000	右		16	350	2300	920	575	345	230		マニー		サポートPt					\n\
+シニア	3	前半	東風ステークス	OP	中山	芝	1600	右	外	16	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+																									\n\
+シニア	3	後半	大阪杯	GI	阪神	芝	2000	右	内	16	20000	13500	6400	3375	2025	1350	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	3	後半	高松宮記念	GI	中京	芝	1200	左		18	15000	13000	5200	3250	1950	1300	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	3	後半	阪神大賞典	GII	阪神	芝	3000	右	内	16	2000	6700	2680	1675	1005	670	長距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	3	後半	日経賞	GII	中山	芝	2500	右	内	16	2000	6700	2680	1675	1005	670	長距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	3	後半	ダイオライト記念	GII	船橋	ダート	2400	左		14	1800	3200	1280	800	480	320	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	3	後半	マーチステークス	GIII	中山	ダート	1800	右		16	1000	3600	1440	900	540	360	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	3	後半	千葉ステークス	OP	中山	ダート	1200	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+シニア	3	後半	六甲ステークス	OP	阪神	芝	1600	右	外	18	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+																									\n\
+シニア	4	前半	阪神ウマ娘ステークス	GII	阪神	芝	1600	右	外	18	1800	5500	2200	1375	825	550	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	4	前半	ダービー卿チャレンジトロフィー	GIII	中山	芝	1600	右	外	16	1250	3900	1560	975	585	390	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	4	前半	アンタレスステークス	GIII	阪神	ダート	1800	右		16	1000	3600	1440	900	540	360	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	4	前半	マリーンカップ	GIII	船橋	ダート	1600	左		14	1000	2500	1000	624	375	250	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	4	前半	コーラルステークス	OP	阪神	ダート	1400	右		16	350	2300	920	575	345	230		マニー		サポートPt					\n\
+シニア	4	前半	京葉ステークス	OP	中山	ダート	1200	右		16	350	2300	920	575	345	230		マニー		サポートPt					\n\
+シニア	4	前半	春雷ステークス	OP	中山	芝	1200	右	外	16	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+シニア	4	前半	福島民報杯	OP	福島	芝	2000	右		16	350	2600	1040	650	390	260		マニー		サポートPt					\n\
+シニア	4	前半	吾妻小富士ステークス	OP	福島	ダート	1700	右		15	350	2200	880	550	330	220		マニー		サポートPt					\n\
+																									\n\
+シニア	4	後半	天皇賞 春	GI	京都	芝	3200	右	外	18	20000	15000	6000	3750	2250	1500	長距離シューズ	マニー	天皇賞（春）優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	4	後半	天皇賞 春（阪神）	GI	阪神	芝	3200	右	外内	18	20000	15000	6000	3750	2250	1500	長距離シューズ	マニー	天皇賞（春）優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	4	後半	マイラーズカップ	GII	京都	芝	1600	右	外	18	1900	5900	2360	1475	885	590	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	4	後半	福島ウマ娘ステークス	GIII	福島	芝	1800	右		16	1250	3800	1520	950	570	380	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	4	後半	東京スプリント	GIII	大井	ダート	1200	右		16	1000	2700	1080	675	405	270	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	4	後半	オアシスステークス	OP	東京	ダート	1600	左		16	350	2300	920	575	345	230		マニー		サポートPt					\n\
+シニア	4	後半	天王山ステークス	OP	東京	ダート	1200	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+																									\n\
+シニア	5	前半	ヴィクトリアマイル	GI	東京	芝	1600	左		18	10000	10500	4200	2625	1575	1050	マイルシューズ	マニー	ヴィクトリアマイル優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	5	前半	かしわ記念	GI	船橋	ダート	1600	左		14	12000	8000	3200	2000	1200	800	ダートシューズ	マニー	かしわ記念優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	5	前半	京王杯スプリングカップ	GII	東京	芝	1400	左		18	1900	5900	2360	1475	885	590	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	5	前半	新潟大賞典	GIII	新潟	芝	2000	左	外	18	1500	4100	1640	1025	615	410	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	5	前半	谷川岳ステークス	OP	新潟	芝	1600	左	外	18	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+シニア	5	前半	メトロポリタンステークス	OP	東京	芝	2400	左		18	350	2600	1040	650	390	260		マニー		サポートPt					\n\
+シニア	5	前半	鞍馬ステークス	OP	京都	芝	1200	右	内	18	350	2300	920	575	345	230		マニー		サポートPt					\n\
+シニア	5	前半	ブリリアントステークス	OP	東京	ダート	2100	左		16	350	2300	920	575	345	230		マニー		サポートPt					\n\
+シニア	5	前半	都大路ステークス	OP	東京	芝	1800	右	外	18	350	2600	1040	650	390	260		マニー		サポートPt					\n\
+シニア	5	前半	栗東ステークス	OP	東京	ダート	1400	右		16	350	2300	920	575	345	230		マニー		サポートPt					\n\
+																									\n\
+シニア	5	後半	目黒記念	GII	東京	芝	2500	左		18	1800	5700	2280	1425	855	570	長距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	5	後半	平安ステークス	GIII	京都	ダート	1900	右		16	1000	3600	1440	900	540	360	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	5	後半	メイステークス	OP	東京	芝	1800	左		18	350	2400	960	600	360	240		マニー		サポートPt					\n\
+シニア	5	後半	韋駄天ステークス	OP	新潟	芝	1000	直線		18	350	2300	920	575	345	230		マニー		サポートPt					\n\
+シニア	5	後半	欅ステークス	OP	東京	ダート	1400	左		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+シニア	5	後半	安土城ステークス	OP	京都	芝	1400	右	外	18	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+																									\n\
+シニア	6	前半	安田記念	GI	東京	芝	1600	左		18	15000	13000	5200	3250	1950	1300	マイルシューズ	マニー	安田記念優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	6	前半	鳴尾記念	GIII	阪神	芝	2000	右	内	16	1500	4100	1640	1025	615	410	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	6	前半	マーメイドステークス	GIII	阪神	芝	2000	右	内	16	1000	3600	1440	900	540	360	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	6	前半	エプソムカップ	GIII	東京	芝	1800	左		18	1500	4100	1640	1025	615	410	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	6	前半	天保山ステークス	OP	阪神	ダート	1400	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+シニア	6	前半	スレイプニルステークス	OP	東京	ダート	2100	左		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+																									\n\
+シニア	6	後半	宝塚記念	GI	阪神	芝	2200	右	内	18	20000	15000	6000	3750	2250	1500	中距離シューズ	マニー	宝塚記念優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	6	後半	宝塚記念（京都）	GI	京都	芝	2200	右	外	18	20000	15000	6000	3750	2250	1500	中距離シューズ	マニー	宝塚記念優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	6	後半	帝王賞	GI	大井	ダート	2000	右		16	12000	6000	2400	1500	900	600	ダートシューズ	マニー	帝王賞優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	6	後半	函館スプリントステークス	GIII	函館	芝	1200	右		16	1250	3900	1560	975	585	390	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	6	後半	アハルテケステークス	OP	東京	ダート	1600	左		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+シニア	6	後半	米子ステークス	OP	阪神	芝	1600	右	外	18	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+シニア	6	後半	大沼ステークス	OP	函館	ダート	1700	右		14	350	2300	920	575	345	230		マニー		サポートPt					\n\
+シニア	6	後半	パラダイスステークス	OP	東京	芝	1400	左		18	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+シニア	6	後半	三宮ステークス	OP	阪神	ダート	1800	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+																									\n\
+シニア	7	前半	CBC賞	GIII	中京	芝	1200	左		18	1250	3900	1560	975	585	390	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	7	前半	プロキオンステークス	GIII	中京	ダート	1400	左		16	1000	3600	1440	900	540	360	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	7	前半	七夕賞	GIII	福島	芝	2000	右		16	1500	4100	1640	1025	615	410	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	7	前半	函館記念	GIII	函館	芝	2000	右		16	1500	4100	1640	1025	615	410	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	7	前半	スパーキングレディーカップ	GIII	川崎	ダート	1600	左		14	1000	2500	1000	625	375	250	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	7	前半	巴賞	OP	函館	芝	1800	右		16	350	2400	960	600	360	240		マニー		サポートPt					\n\
+シニア	7	前半	マリーンステークス	OP	函館	ダート	1700	右		14	350	2200	880	550	330	220		マニー		サポートPt					\n\
+シニア	7	前半	名鉄杯	OP	中京	ダート	1800	左		16	350	2300	920	575	345	230		マニー		サポートPt					\n\
+																									\n\
+シニア	7	後半	中京記念	GIII	中京	芝	1600	左		16	1250	3900	1560	975	585	390	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	7	後半	アイビスサマーダッシュ	GIII	新潟	芝	1000	直線		18	1250	3900	1560	975	585	390	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	7	後半	クイーンステークス	GIII	札幌	芝	1800	右		14	1000	3600	1440	900	540	360	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	7	後半	マーキュリーカップ	GIII	盛岡	ダート	2000	左		14	1000	2300	920	575	345	230	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	7	後半	福岡テレビオープン	OP	福岡	芝	1200	右		14	350	2300	920	575	345	230		マニー		サポートPt					\n\
+																									\n\
+シニア	8	前半	小倉記念	GIII	小倉	芝	2000	右		18	1500	4100	1640	1025	615	410	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	8	前半	関屋記念	GIII	新潟	芝	1600	左	外	18	1250	3900	1560	975	585	390	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	8	前半	エルムステークス	GIII	札幌	ダート	1700	右		14	1000	3600	1440	900	540	360	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	8	前半	札幌日経オープン	OP	札幌	芝	2600	右		14	350	2600	1040	650	390	260		マニー		サポートPt					\n\
+シニア	8	前半	UHB賞	OP	札幌	芝	1200	右		16	350	2300	920	575	345	230		マニー		サポートPt					\n\
+シニア	8	前半	阿蘇ステークス	OP	小倉	ダート	1700	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+シニア	8	前半	関越ステークス	OP	新潟	芝	1800	左	外	18	350	2400	960	600	360	240		マニー		サポートPt					\n\
+																									\n\
+シニア	8	後半	札幌記念	GII	札幌	芝	2000	右		16	2000	7000	2800	1750	1050	700	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	8	後半	北九州記念	GIII	小倉	芝	1200	右		18	1250	3900	1560	975	585	390	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	8	後半	キーンランドカップ	GIII	札幌	芝	1200	右		16	1500	4100	1640	1025	615	410	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	8	後半	クラスターカップ	GIII	盛岡	ダート	1200	左		14	1000	2300	920	575	345	230	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	8	後半	NST賞	OP	新潟	ダート	1200	左		15	350	2200	880	550	330	220		マニー		サポートPt					\n\
+シニア	8	後半	BSN賞	OP	新潟	ダート	1800	左		15	350	2300	920	575	345	230		マニー		サポートPt					\n\
+シニア	8	後半	小倉日経オープン	OP	小倉	芝	1800	右		16	350	2400	960	600	360	240		マニー		サポートPt					\n\
+シニア	8	後半	朱鷺ステークス	OP	新潟	芝	1400	左	内	18	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+																									\n\
+シニア	9	前半	セントウルステークス	GII	阪神	芝	1200	右	内	16	1900	5900	2360	1475	885	590	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	9	前半	新潟記念	GIII	新潟	芝	2000	左	外	18	1500	4100	1640	1025	615	410	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	9	前半	京成杯オータムハンデキャップ	GIII	中山	芝	1600	右	外	16	1250	3900	1560	975	585	390	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	9	前半	丹頂ステークス	OP	札幌	芝	2600	右		14	350	2400	960	600	360	240		マニー		サポートPt					\n\
+シニア	9	前半	エニフステークス	OP	阪神	ダート	1400	右		16	350	2300	920	575	345	230		マニー		サポートPt					\n\
+シニア	9	前半	ラジオ日本賞	OP	中山	ダート	1800	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+																									\n\
+シニア	9	後半	スプリンターズステークス	GI	中山	芝	1200	右	外	16	15000	13000	5200	3250	1950	1300	短距離シューズ	マニー	スプリンターズS優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	9	後半	オールカマー	GII	中山	芝	2200	右	外	18	2000	6700	2680	1675	1005	670	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	9	後半	さざんかテレビ杯	GII	船橋	ダート	1800	左		14	1800	3200	1280	800	480	320	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	9	後半	シリウスステークス	GIII	阪神	ダート	2000	右		16	1000	3600	1440	900	540	360	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	9	後半	ポートアイランドステークス	OP	阪神	芝	1600	右	外	18	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+シニア	9	後半	ながつきステークス	OP	中山	ダート	1200	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+																									\n\
+シニア	10	前半	マイルチャンピオンシップ南部杯	GI	盛岡	ダート	1600	左		16	12000	6000	2400	1500	900	600	ダート	マニー	マイルCS南部杯優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	10	前半	毎日王冠	GII	東京	芝	1800	左		18	2000	6700	2680	1675	1005	670	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	10	前半	京都大賞典	GII	京都	芝	2400	右	外	18	2000	6700	2680	1675	1005	670	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	10	前半	府中ウマ娘ステークス	GII	東京	芝	1800	左		18	1800	5500	2200	1375	825	550	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	10	前半	レディスプレリュード	GII	大井	ダート	1800	右		16	1800	3100	1240	775	465	310	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	10	前半	東京盃	GII	大井	ダート	1200	右		16	1800	3500	1400	875	525	350	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	10	前半	オパールステークス	OP	京都	芝	1200	右	内	18	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+シニア	10	前半	グリーンチャンネルカップ	OP	東京	ダート	1400	左		16	350	2300	920	575	345	230		マニー		サポートPt					\n\
+シニア	10	前半	オクトーバーステークス	OP	東京	芝	2000	左		18	350	2600	1040	650	390	260		マニー		サポートPt					\n\
+シニア	10	前半	信越ステークス	OP	新潟	芝	1400	左	内	18	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+シニア	10	前半	太秦ステークス	OP	京都	ダート	1800	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+																									\n\
+シニア	10	後半	天皇賞 秋	GI	東京	芝	2000	左		18	20000	15000	6000	3750	2250	1500	中距離シューズ	マニー	天皇賞（秋）勝利レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	10	後半	スワンステークス	GII	京都	芝	1400	右	外	18	1900	5900	2360	1475	885	590	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	10	後半	富士ステークス	GII	東京	芝	1600	左		18	1900	5900	2360	1475	885	590	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	10	後半	室町ステークス	OP	京都	ダート	1200	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+シニア	10	後半	ブラジルカップ	OP	東京	ダート	2100	左		16	350	2300	920	575	345	230		マニー		サポートPt					\n\
+シニア	10	後半	カシオペアステークス	OP	京都	芝	1800	右	外	18	350	2600	1040	650	390	260		マニー		サポートPt					\n\
+シニア	10	後半	ルミエールオータムダッシュ	OP	新潟	芝	1000	直線		18	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+																									\n\
+シニア	11	前半	エリザベス女王杯	GI	京都	芝	2200	右	外	18	10000	10500	4200	2625	1575	1050	中距離シューズ	マニー	エリザベス女王杯優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	11	前半	JBCレディスクラシック（大井）	GI	大井	ダート	1800	右		16	12000	4100	1640	1025	615	410	ダートシューズ	マニー	JBCレディスクラシック優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	11	前半	JBCレディスクラシック（川崎）	GI	川崎	ダート	1600	左		14	12000	4100	1640	1025	615	410	ダートシューズ	マニー	JBCレディスクラシック優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	11	前半	JBCレディスクラシック（船橋）	GI	船橋	ダート	1600	左		14	12000	4100	1640	1025	615	410	ダートシューズ	マニー	JBCレディスクラシック優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	11	前半	JBCレディスクラシック（盛岡）	GI	盛岡	ダート	1800	左		16	12000	4100	1640	1025	615	410	ダートシューズ	マニー	JBCレディスクラシック優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	11	前半	JBCスプリント（大井）	GI	大井	ダート	1200	右		16	12000	6000	2400	1500	900	600	ダートシューズ	マニー	JBCスプリント優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	11	前半	JBCスプリント（川崎）	GI	川崎	ダート	1400	左		12	12000	6000	2400	1500	900	600	ダートシューズ	マニー	JBCスプリント優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	11	前半	JBCスプリント（船橋）	GI	船橋	ダート	1000	左		14	12000	6000	2400	1500	900	600	ダートシューズ	マニー	JBCスプリント優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	11	前半	JBCスプリント（盛岡）	GI	盛岡	ダート	1200	左		16	12000	6000	2400	1500	900	600	ダートシューズ	マニー	JBCスプリント優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	11	前半	JBCクラシック（大井）	GI	大井	ダート	2000	右		16	12000	8000	3200	2000	1200	800	ダートシューズ	マニー	JBCクラシック優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	11	前半	JBCクラシック（川崎）	GI	川崎	ダート	2100	左		14	12000	8000	3200	2000	1200	800	ダートシューズ	マニー	JBCクラシック優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	11	前半	JBCクラシック（船橋）	GI	船橋	ダート	1800	左		14	12000	8000	3200	2000	1200	800	ダートシューズ	マニー	JBCクラシック優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	11	前半	JBCクラシック（盛岡）	GI	盛岡	ダート	2000	左		16	12000	8000	3200	2000	1200	800	ダートシューズ	マニー	JBCクラシック優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	11	前半	アルゼンチン共和国杯	GII	東京	芝	2500	左		18	1900	5700	2280	1425	855	570	長距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	11	前半	みやこステークス	GIII	京都	ダート	1800	右		16	750	3800	1520	950	570	380	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	11	前半	武蔵野ステークス	GIII	東京	ダート	1600	左		16	1250	3800	1520	950	570	380	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	11	前半	福島記念	GIII	福島	芝	2000	右		16	1500	4100	1640	1025	615	410	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	11	前半	オーロラカップ	OP	東京	芝	1400	左		18	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+																									\n\
+シニア	11	後半	ジャパンカップ	GI	東京	芝	2400	左		18	25000	30000	12000	7500	4500	3000	中距離シューズ	マニー	ジャパンカップ優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	11	後半	マイルチャンピオンシップ	GI	京都	芝	1600	右	外	18	15000	11000	4400	2750	1650	1100	マイルシューズ	マニー	マイルCS優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	11	後半	京阪杯	GIII	京都	芝	1200	右	内	18	1250	3900	1560	975	575	390	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	11	後半	アンドロメダステークス	OP	京都	芝	2000	右	内	18	350	2600	1040	650	390	260		マニー		サポートPt					\n\
+シニア	11	後半	霜月ステークス	OP	東京	ダート	1400	左		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+シニア	11	後半	福島民友カップ	OP	福島	ダート	1700	右		15	350	2300	920	575	345	230		マニー		サポートPt					\n\
+シニア	11	後半	キャピタルステークス	OP	東京	芝	1600	左		18	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+シニア	11	後半	オータムリーフステークス	OP	京都	ダート	1200	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+																									\n\
+シニア	12	前半	チャンピオンズカップ	GI	中京	ダート	1800	左		16	12000	10000	4000	2500	1500	1000	ダートシューズ	マニー	チャンピオンズカップ優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	12	前半	ステイヤーズステークス	GII	中山	芝	3600	右	内	16	2000	6200	2480	1550	930	620	長距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	12	前半	チャレンジカップ	GIII	阪神	芝	2000	右	内	16	1500	4100	1640	1025	615	410	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	12	前半	中日新聞杯	GIII	中京	芝	2000	左		18	1500	4100	1640	1025	615	410	中距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	12	前半	カペラステークス	GIII	中山	ダート	1200	右		16	1000	3600	1440	900	540	360	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	12	前半	ターコイズステークス	GIII	中山	芝	1600	右	外	16	1000	3600	1440	900	540	360	マイルシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	12	前半	クイーン賞	GIII	船橋	ダート	1800	左		14	1000	2100	840	525	315	210	ダートシューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	12	前半	ラピスラズリステークス	OP	中山	芝	1200	右	外	16	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+シニア	12	前半	師走ステークス	OP	中山	ダート	1800	右		16	350	2300	920	575	345	230		マニー		サポートPt					\n\
+シニア	12	前半	リゲルステークス	OP	阪神	芝	1600	右	外	18	350	2500	1000	625	375	250		マニー		サポートPt					\n\
+シニア	12	前半	タンザナイトステークス	OP	阪神	芝	1200	右	内	16	350	2300	920	575	345	230		マニー		サポートPt					\n\
+シニア	12	前半	ディセンバーステークス	OP	中山	芝	1800	右	内	16	350	1600	1040	650	390	260		マニー		サポートPt					\n\
+																									\n\
+シニア	12	後半	有馬記念	GI	中山	芝	2500	右	内	16	25000	30000	12000	7500	4500	3000	長距離シューズ	マニー	有馬記念優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	12	後半	東京大賞典	GI	大井	ダート	2000	右		16	12000	8000	3200	2000	1200	800	ダートシューズ	マニー	東京大賞典優勝レイ	サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	12	後半	阪神カップ	GII	阪神	芝	1400	右	内	18	2000	6700	2680	1675	1005	670	短距離シューズ	マニー		サポートPt	ジュエル	マニー	サポートPt	女神像	\n\
+シニア	12	後半	ギャラクシーステークス	OP	阪神	ダート	1400	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+シニア	12	後半	ベテルギウスステークス	OP	阪神	ダート	1800	右		16	350	2200	880	550	330	220		マニー		サポートPt					\n\
+';
+const RAW_LINES = RAW_RACE.split('\n');
+let races = [];
+RAW_LINES.forEach(line => {
+    let data = line.split('\t');
+    if (data[0]) races.push({
+        name: data[3],
+        class: data[0],
+        month: data[1] - 0,
+        period: data[2],
+        grade: data[4],
+        location: data[5],
+        ground: data[6],
+        length: data[7] - 0,
+        rotation: data[8],
+        side: data[9],
+        fullgate: data[10] - 0,
+        require: data[11] - 0,
+        rewards: [data[12] - 0, data[13] - 0, data[14] - 0, data[15] - 0, data[16] - 0],
+        drops: [data[19]]
+    });
+});
 
 const MAIN_RACES = {
     // キャラごとの必須レース・推奨レースのリスト
     // 'キャラクター名': [[必須レース（address）], [推奨レース（address）]]
+    'アイネスフウジン': [[
+        'ジュニア 朝日杯フューチュリティステークス',
+        'クラシック 皐月賞',
+        'クラシック 日本ダービー 東京優駿',
+        'クラシック 菊花賞',
+        'シニア 大阪杯',
+        'シニア 宝塚記念（京都）',
+        'シニア 天皇賞 秋',
+        'シニア ジャパンカップ',
+        'シニア 有馬記念',
+    ], [
+        'クラシック 有馬記念',
+        'シニア 天皇賞 春',
+    ]],
     'アドマイヤベガ': [[
         'ジュニア ホープフルステークス',
         'クラシック 皐月賞',
         'クラシック 日本ダービー 東京優駿',
         'クラシック 菊花賞',
         'シニア 宝塚記念',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 秋',
         'シニア ジャパンカップ',
     ], [
-        'シニア 天皇賞（春）',
+        'シニア 天皇賞 春',
         'シニア 有馬記念',
     ]],
     'アグネスタキオン': [[
@@ -5667,7 +544,7 @@ const MAIN_RACES = {
         'クラシック 菊花賞',
         'シニア 大阪杯',
         'シニア 宝塚記念',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 秋',
         'シニア 有馬記念',
     ], []],
     'アグネスデジタル': [[
@@ -5675,14 +552,31 @@ const MAIN_RACES = {
         'クラシック NHKマイルカップ',
         'クラシック ジャパンダートダービー',
         'クラシック マイルチャンピオンシップ',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 秋',
     ], [
         'ジュニア 阪神ジュベナイルフィリーズ',
         'ジュニア 朝日杯フューチュリティステークス',
+//        'ジュニア 全日本ジュニア優駿',
         'クラシック 桜花賞',
+        'クラシック 安田記念',
+        'クラシック マイルチャンピオンシップ南部杯',
         'シニア フェブラリーステークス',
         'シニア ヴィクトリアマイル',
         'シニア 安田記念',
+//        'シニア 宝塚記念',
+        'シニア マイルチャンピオンシップ南部杯',
+        'シニア マイルチャンピオンシップ',
+    ]],
+    'イナリワン': [[
+        'クラシック ジャパンダートダービー',
+        'クラシック 東京大賞典',
+        'シニア 天皇賞 春',
+        'シニア 宝塚記念',
+        'シニア 毎日王冠',
+        'シニア 天皇賞 秋',
+        'シニア 有馬記念',
+    ], [
+        'ジュニア ホープフルステークス',
     ]],
     'ウイニングチケット': [[
         'ジュニア ホープフルステークス',
@@ -5703,7 +597,7 @@ const MAIN_RACES = {
         'クラシック 有馬記念',
         'シニア ヴィクトリアマイル',
         'シニア 安田記念',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 秋',
     ], [
         'クラシック 安田記念',
         'シニア エリザベス女王杯',
@@ -5716,20 +610,34 @@ const MAIN_RACES = {
         'シニア 大阪杯',
         'シニア 宝塚記念',
         'シニア 札幌記念',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 秋',
     ], []],
-    'エイシンフラッシュ': [[
+    'エアシャカール': [[
+        'ジュニア ホープフルステークス',
+        'クラシック 皐月賞',
+        'クラシック 日本ダービー 東京優駿',
+        'クラシック 菊花賞',
+        'クラシック ジャパンカップ',
+        'シニア 天皇賞 春',
+        'シニア 宝塚記念',
+        'シニア 天皇賞 秋',
+        'シニア 有馬記念',
+    ], [
+        'シニア 大阪杯',
+        'シニア ジャパンカップ',
+    ]],
+        'エイシンフラッシュ': [[
         'クラシック 京成杯',
         'クラシック 皐月賞',
         'クラシック 日本ダービー 東京優駿',
         'クラシック ジャパンカップ',
         'クラシック 有馬記念',
         'シニア 大阪杯',
-        'シニア 天皇賞（春）',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 春',
+        'シニア 天皇賞 秋',
         'シニア 有馬記念',
     ], [
-        'クラシック 天皇賞（秋）',
+        'クラシック 天皇賞 秋',
         'シニア ジャパンカップ',
     ]],
     'エルコンドルパサー': [[
@@ -5745,10 +653,10 @@ const MAIN_RACES = {
         'クラシック NHKマイルカップ',
         'クラシック マイルチャンピオンシップ',
         'クラシック 有馬記念',
-        'シニア天皇賞（秋）',
+        'シニア天皇賞 秋',
         'シニア 有馬記念',
     ], [
-        'シニア 天皇賞（春）',
+        'シニア 天皇賞 春',
     ]],
     'カレンチャン': [[
         'クラシック フィリーズレビュー',
@@ -5779,9 +687,9 @@ const MAIN_RACES = {
     'キタサンブラック': [[
         'クラシック セントライト記念',
         'シニア 大阪杯',
-        'シニア 天皇賞（春）',
+        'シニア 天皇賞 春',
         'シニア 宝塚記念',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 秋',
         'シニア ジャパンカップ',
         'シニア 有馬記念',
     ], [
@@ -5797,7 +705,7 @@ const MAIN_RACES = {
         'シニア 高松宮記念',
         'シニア 安田記念',
         'シニア スプリンターズステークス',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 秋',
     ], [
         'シニア 有馬記念',
     ]],
@@ -5817,7 +725,7 @@ const MAIN_RACES = {
         'クラシック 菊花賞',
         'クラシック 有馬記念',
         'シニア 大阪杯',
-        'シニア 天皇賞（春）',
+        'シニア 天皇賞 春',
         'シニア 宝塚記念',
         'シニア ジャパンカップ',
     ], []],
@@ -5826,12 +734,31 @@ const MAIN_RACES = {
         'クラシック 皐月賞',
         'クラシック 菊花賞',
         'クラシック 有馬記念',
-        'シニア 天皇賞（春）',
+        'シニア 天皇賞 春',
         'シニア 宝塚記念',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 秋',
         'シニア 有馬記念',
     ], [
         'クラシック 宝塚記念',
+    ]],
+    'コパノリッキー': [[
+        'クラシック 伏竜ステークス',
+        'クラシック チャンピオンズカップ',
+        'シニア フェブラリーステークス',
+        'シニア かしわ記念',
+        'シニア 帝王賞',
+        'シニア マイルチャンピオンシップ南部杯',
+        'シニア JBCクラシック（大井）',
+        'シニア JBCクラシック（川崎）',
+       'シニア JBCクラシック（船橋）',
+        'シニア JBCクラシック（盛岡）',
+        'シニア チャンピオンズカップ',
+        'シニア 東京大賞典',
+    ], [
+        'ジュニア 全日本ジュニア優駿',
+        'クラシック マイルチャンピオンシップ南部杯',
+        'クラシック 東京大賞典',
+        'シニア 川崎記念',
     ]],
     'サイレンススズカ': [[
         'クラシック 弥生賞',
@@ -5839,16 +766,16 @@ const MAIN_RACES = {
         'シニア 金鯱賞',
         'シニア 宝塚記念',
         'シニア 毎日王冠',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 秋',
     ], []],
     'サクラチヨノオー': [[
         'ジュニア 朝日杯フューチュリティステークス',
-        'クラシック 皐月賞',
+        'クラシック 皐月賞（東京）',
         'クラシック 日本ダービー 東京優駿',
-        'クラシック 天皇賞（秋）',
+        'クラシック 天皇賞 秋',
         'シニア 安田記念',
         'シニア 宝塚記念',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 秋',
         'シニア ジャパンカップ',
     ], [
         'シニア 有馬記念',
@@ -5871,9 +798,9 @@ const MAIN_RACES = {
         'クラシック 菊花賞',
         'クラシック 有馬記念',
         'シニア 大阪杯',
-        'シニア 天皇賞（春）',
+        'シニア 天皇賞 春',
         'シニア 京都大賞典',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 秋',
         'シニア 有馬記念',
     ], [
         'ジュニア ホープフルステークス',
@@ -5886,7 +813,7 @@ const MAIN_RACES = {
         'クラシック 日本ダービー 東京優駿',
         'クラシック 菊花賞',
         'クラシック 有馬記念',
-        'シニア 天皇賞（春）',
+        'シニア 天皇賞 春',
         'シニア ジャパンカップ',
         'シニア 有馬記念',
     ], []],
@@ -5895,21 +822,32 @@ const MAIN_RACES = {
         'クラシック 菊花賞',
         'クラシック 有馬記念',
         'シニア 大阪杯',
-        'シニア 天皇賞（春）',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 春',
+        'シニア 天皇賞 秋',
         'シニア 有馬記念',
     ], [
         'クラシック 皐月賞',
         'クラシック 日本ダービー 東京優駿',
     ]],
+    'スイープトウショウ': [[
+        'ジュニア 阪神ジュベナイルフィリーズ',
+        'クラシック 桜花賞',
+        'クラシック オークス',
+        'クラシック 秋華賞',
+        'クラシック エリザベス女王杯',
+        'シニア 安田記念',
+        'シニア 宝塚記念',
+        'シニア 天皇賞 秋',
+        'シニア エリザベス女王杯',
+    ], []],
     'スマートファルコン': [[
         'クラシック 皐月賞',
         'クラシック ジャパンダートダービー',
-        'クラシック JBCクラシック',
+        'クラシック JBCクラシック（大井）',
         'クラシック 東京大賞典',
         'シニア フェブラリーステークス',
         'シニア 帝王賞',
-        'シニア JBCクラシック',
+        'シニア JBCクラシック（大井）',
         'シニア チャンピオンズカップ',
         'シニア 東京大賞典',
     ], []],
@@ -5917,7 +855,7 @@ const MAIN_RACES = {
         'クラシック きさらぎ賞',
         'クラシック 日本ダービー 東京優駿',
         'クラシック 菊花賞',
-        'シニア 天皇賞（春）',
+        'シニア 天皇賞 春',
         'シニア ジャパンカップ',
         'シニア 有馬記念',
     ], []],
@@ -5926,9 +864,9 @@ const MAIN_RACES = {
         'クラシック 日本ダービー 東京優駿',
         'クラシック 菊花賞',
         'クラシック 有馬記念',
-        'シニア 天皇賞（春）',
+        'シニア 天皇賞 春',
         'シニア 宝塚記念',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 秋',
         'シニア 有馬記念',
     ], [
         'クラシック 毎日王冠',
@@ -5951,14 +889,14 @@ const MAIN_RACES = {
         'クラシック 秋華賞',
         'クラシック エリザベス女王杯',
         'シニア 大阪杯',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 秋',
         'シニア 有馬記念',
     ], []],
     'タマモクロス': [[
         'シニア 阪神大賞典',
-        'シニア 天皇賞（春）',
+        'シニア 天皇賞 春',
         'シニア 宝塚記念',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 秋',
         'シニア 有馬記念',
     ], [
         'ジュニア ホープフルステークス',
@@ -5975,21 +913,21 @@ const MAIN_RACES = {
         'クラシック 皐月賞',
         'クラシック 日本ダービー 東京優駿',
         'クラシック 有馬記念',
-        'シニア 天皇賞（春）',
+        'シニア 天皇賞 春',
         'シニア 宝塚記念',
         'シニア ジャパンカップ',
         'シニア 有馬記念',
     ], [
-        'クラシック 天皇賞（秋）',
+        'クラシック 天皇賞 秋',
         'クラシック ジャパンカップ',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 秋',
     ]],
     'トウカイテイオー': [[
         'クラシック 若駒ステークス',
         'クラシック 皐月賞',
         'クラシック 日本ダービー 東京優駿',
         'クラシック 菊花賞',
-        'シニア 天皇賞（春）',
+        'シニア 天皇賞 春',
         'シニア ジャパンカップ',
         'シニア 有馬記念',
     ], [
@@ -6002,7 +940,7 @@ const MAIN_RACES = {
         'クラシック 菊花賞',
         'クラシック 有馬記念',
         'シニア 宝塚記念',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 秋',
         'シニア 中日新聞杯',
         'シニア 有馬記念',
     ], [
@@ -6017,8 +955,8 @@ const MAIN_RACES = {
         'クラシック 日本ダービー 東京優駿',
         'クラシック 菊花賞',
         'シニア 日経賞',
-        'シニア 天皇賞（春）',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 春（阪神）',
+        'シニア 天皇賞 秋',
         'シニア 有馬記念',
     ], []],
     'ナリタブライアン': [[
@@ -6028,8 +966,8 @@ const MAIN_RACES = {
         'クラシック 菊花賞',
         'クラシック 有馬記念',
         'シニア 阪神大賞典',
-        'シニア 天皇賞（春）',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 春',
+        'シニア 天皇賞 秋',
         'シニア ジャパンカップ',
         'シニア 有馬記念',
     ], [
@@ -6045,19 +983,35 @@ const MAIN_RACES = {
         'シニア 安田記念',
         'シニア スプリンターズステークス',
     ], [
-        'クラシック 秋華賞',
         'クラシック エリザベス女王杯',
         'クラシック マイルチャンピオンシップ',
         'シニア 宝塚記念',
+        'シニア エリザベス女王杯',
         'シニア マイルチャンピオンシップ',
     ]],
     'ハルウララ': [[
         'シニア 根岸ステークス',
         'シニア フェブラリーステークス',
         'シニア エルムステークス',
-        'シニア JBCスプリント',
+        'シニア JBCスプリント（大井）',
+        'シニア JBCスプリント（川崎）',
+        'シニア JBCスプリント（船橋）',
+        'シニア JBCスプリント（盛岡）',
         'シニア 有馬記念',
     ], []],
+    'バンブーメモリー': [[
+        'クラシック スワンステークス',
+        'シニア 高松宮記念',
+        'シニア 安田記念',
+        'シニア 宝塚記念',
+        'シニア スプリンターズステークス',
+        'シニア マイルチャンピオンシップ',
+    ], [
+        'ジュニア 朝日杯フューチュリティステークス',
+        'シニア シルクロードステークス', // イベントに必要な短距離重賞で最早
+        'シニア 阪急杯', // イベントに必要な短距離重賞で最早
+        'シニア 有馬記念',
+    ]],
     'ヒシアケボノ': [[
         'クラシック スプリンターズステークス',
         'クラシック スワンステークス',
@@ -6083,8 +1037,8 @@ const MAIN_RACES = {
         'クラシック 皐月賞',
         'クラシック 日本ダービー 東京優駿',
         'クラシック 菊花賞',
-        'シニア 天皇賞（春）',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 春（阪神）',
+        'シニア 天皇賞 秋',
         'シニア 有馬記念',
     ], []],
     'ファインモーション': [[
@@ -6095,7 +1049,7 @@ const MAIN_RACES = {
         'シニア 大阪杯',
         'シニア 宝塚記念',
         'シニア 札幌記念',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 秋',
         'シニア エリザベス女王杯',
         'シニア マイルチャンピオンシップ',
         'シニア 有馬記念',
@@ -6114,7 +1068,7 @@ const MAIN_RACES = {
         'クラシック マイルチャンピオンシップ',
         'シニア 高松宮記念',
         'シニア 安田記念',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 秋',
         'シニア 有馬記念',
     ], []],
     'マチカネタンホイザ': [[
@@ -6122,7 +1076,7 @@ const MAIN_RACES = {
         'クラシック 日本ダービー 東京優駿',
         'クラシック 菊花賞',
         'シニア ダイヤモンドステークス',
-        'シニア 天皇賞（春）',
+        'シニア 天皇賞 春',
         'シニア 宝塚記念',
 //        'シニア ジャパンカップ', // イベントで出走取消、回避する手段は無さそう？
         'シニア 有馬記念',
@@ -6156,7 +1110,7 @@ const MAIN_RACES = {
         'クラシック 有馬記念',
         'シニア 阪神大賞典',
         'シニア 宝塚記念',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 秋',
         'シニア 有馬記念',
     ], []],
     'マルゼンスキー': [[
@@ -6167,7 +1121,7 @@ const MAIN_RACES = {
         'クラシック 有馬記念',
         'シニア 大阪杯',
         'シニア 安田記念',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 秋',
     ], [
         'クラシック ラジオNIKKEI賞'
     ]],
@@ -6176,7 +1130,7 @@ const MAIN_RACES = {
         'クラシック セントライト記念',
         'クラシック 菊花賞',
         'クラシック 有馬記念',
-        'シニア 天皇賞（春）',
+        'シニア 天皇賞 春',
         'シニア 宝塚記念',
         'シニア ジャパンカップ',
         'シニア 有馬記念',
@@ -6187,7 +1141,7 @@ const MAIN_RACES = {
         'クラシック 皐月賞',
         'クラシック 日本ダービー 東京優駿',
         'クラシック 菊花賞',
-        'シニア 天皇賞（春）',
+        'シニア 天皇賞 春',
         'シニア ジャパンカップ',
         'シニア 有馬記念',
     ], []],
@@ -6195,22 +1149,22 @@ const MAIN_RACES = {
         'シニア 日経新春杯',
         'シニア 金鯱賞',
         'シニア 宝塚記念',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 秋',
         'シニア ジャパンカップ',
         'シニア 有馬記念',
     ], [
         'クラシック 皐月賞',
-        'シニア 天皇賞（春）',
+        'シニア 天皇賞 春',
     ]],
     'メジロアルダン': [[
         'クラシック 青葉賞',
         'クラシック 日本ダービー 東京優駿',
         'クラシック 菊花賞',
-        'クラシック 天皇賞（秋）',
+        'クラシック 天皇賞 秋',
         'シニア 大阪杯',
         'シニア 宝塚記念',
         'シニア 毎日王冠',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 秋',
     ], [
         'ジュニア 朝日杯フューチュリティステークス',
         'クラシック 皐月賞',
@@ -6226,8 +1180,19 @@ const MAIN_RACES = {
         'シニア 府中ウマ娘ステークス',
         'シニア エリザベス女王杯',
     ], [
-        'シニア 天皇賞（春）',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 春',
+        'シニア 天皇賞 秋',
+    ]],
+    'メジロパーマー': [[
+        'クラシック 函館記念',
+        'クラシック 日経新春杯',
+        'シニア 天皇賞 春',
+        'シニア 宝塚記念',
+        'シニア 天皇賞 秋',
+        'シニア 有馬記念',
+    ], [
+        'ジュニア ホープフルステークス',
+        'クラシック 有馬記念',
     ]],
     'メジロブライト': [[
         'ジュニア ホープフルステークス',
@@ -6235,8 +1200,8 @@ const MAIN_RACES = {
         'クラシック 日本ダービー 東京優駿',
         'クラシック 菊花賞',
         'クラシック ステイヤーズステークス',
-        'シニア 天皇賞（春）',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 春',
+        'シニア 天皇賞 秋',
         'シニア 有馬記念',
     ], [
         'クラシック エリザベス女王杯',
@@ -6248,9 +1213,9 @@ const MAIN_RACES = {
     'メジロマックイーン': [[
         'クラシック 神戸新聞杯',
         'クラシック 菊花賞',
-        'シニア 天皇賞（春）',
+        'シニア 天皇賞 春',
         'シニア 宝塚記念',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 秋',
     ], [
         'シニア ジャパンカップ',
         'シニア 有馬記念',
@@ -6261,8 +1226,8 @@ const MAIN_RACES = {
         'クラシック 日本ダービー 東京優駿',
         'クラシック 菊花賞',
         'クラシック 有馬記念',
-        'シニア 天皇賞（春）',
-        'シニア 宝塚記念',
+        'シニア 天皇賞 春',
+        'シニア 宝塚記念（京都）',
         'シニア 有馬記念',
     ], []],
     'ライスシャワー': [[
@@ -6270,22 +1235,36 @@ const MAIN_RACES = {
         'クラシック 日本ダービー 東京優駿',
         'クラシック 菊花賞',
         'シニア 日経賞',
-        'シニア 天皇賞（春）',
-        'シニア 宝塚記念',
+        'シニア 天皇賞 春',
+        'シニア 宝塚記念（京都）',
         'シニア 有馬記念',
     ], []],
     'ヤエノムテキ': [[
         'クラシック 毎日杯',
-        'クラシック 皐月賞',
+        'クラシック 皐月賞（東京）',
         'クラシック 日本ダービー 東京優駿',
         'クラシック 菊花賞',
         'シニア 大阪杯',
         'シニア 安田記念',
         'シニア 宝塚記念',
-        'シニア 天皇賞（秋）',
+        'シニア 天皇賞 秋',
     ], [
         'クラシック 有馬記念',
         'シニア 有馬記念',
+    ]],
+    'ユキノビジン': [[
+        'ジュニア 阪神ジュベナイルフィリーズ',
+        'クラシック 桜花賞',
+        'クラシック オークス',
+        'クラシック クイーンステークス',
+        'クラシック 秋華賞',
+        'シニア 大阪杯',
+        'シニア ヴィクトリアマイル',
+        'シニア エリザベス女王杯',
+        'シニア ジャパンカップ',
+    ], [
+        'クラシック マイルチャンピオンシップ',
+        'シニア マイルチャンピオンシップ',
     ]],
     /*
     '': [[], []],
@@ -6308,18 +1287,18 @@ const raceSets = [
     }, {
         '春シニア三冠': [
             'シニア 大阪杯',
-            'シニア 天皇賞（春）',
+            'シニア 天皇賞 春',
             'シニア 宝塚記念',
         ],
         '秋シニア三冠': [
-            'シニア 天皇賞（秋）',
+            'シニア 天皇賞 秋',
             'シニア ジャパンカップ',
             'シニア 有馬記念',
         ],
     }, {
         '天皇賞春秋': [
-            'シニア 天皇賞（春）',
-            'シニア 天皇賞（秋）',
+            'シニア 天皇賞 春',
+            'シニア 天皇賞 秋',
         ],
         '春秋グランプリ': [
             'クラシック 宝塚記念',
